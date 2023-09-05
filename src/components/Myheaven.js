@@ -13,7 +13,7 @@ import Chip from "@mui/material/Chip";
 import { Data } from "./Data";
 import Myscores from "./Myscores";
 import MyItems from "./MyItems.";
-// import Portfolio from "./Portfolio";
+import Portfolio from "./Portfolio";
 import { AthkarAlsbah } from "./Data";
 import { AthkarAlmsaa } from "./Data";
 import Slide from "@mui/material/Slide";
@@ -511,7 +511,7 @@ const Myheaven = () => {
 
   const Items = <MyItems />;
 
-  // const Appinfo = <Portfolio />;
+  const Appinfo = <Portfolio />;
 
   // Condition for each slide in the Header
   let BottomNavigationData = [];
@@ -524,7 +524,7 @@ const Myheaven = () => {
       BottomNavigationData = Items;
       break;
     case "app-info":
-      BottomNavigationData = [];
+      BottomNavigationData = Appinfo;
       break;
     default:
       BottomNavigationData = [];
