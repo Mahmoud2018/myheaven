@@ -1,0 +1,168 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.iconButton {
+  transition: all 0.2s !important;
+}
+
+/* .iconButton:hover {
+  color: #ef9a9a !important;
+
+} */
+
+
+.todoCard {
+  transition: all 0.2s !important;
+  border-radius: 50px !important;
+}
+
+
+/* .Dialog{
+  opacity: 50% !important;
+} */
+
+.todoCard:hover {
+  padding-bottom: 5px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  box-shadow: 1px 2px 2px 1px #fbc02d;
+}
+
+
+/* ===== CUSTOM FONTS ====== */
+
+@font-face {
+  font-family: BakbakOne;
+  src: url("../public/fonts/BakbakOne-Regular.ttf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Alexandria;
+  src: url("../public/fonts/Alexandria-Regular.ttf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Alexandria;
+  src: url("../public/fonts/Alexandria-Bold.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Alexandria;
+  src: url("../public/fonts/Alexandria-Black.ttf");
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: Alexandria;
+  src: url("../public/fonts/Alexandria-Light.ttf");
+  font-weight: 200;
+}
+
+/* =====// CUSTOM FONTS //====== */
+
+
+.css-x3vexg-MuiGrid2-root {
+  align-items: center;
+
+}
+
+.team-member {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+}
+
+.intyg {
+ 
+
+}
+
+.Text1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #4a3b04;
+  border-radius: 10px;
+  background: #fede00;
+  padding: 0px; 
+  width: 200px;
+  height: 30px;
+  margin-left: 10%;
+  font-size: 20px;
+  font-weight: bold;
+  
+}
+
+.Text2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #4a3b04;
+  border-radius: 10px;
+  background: #fede00;
+  padding: 0px; 
+  width: 140px;
+  height: 30px;
+  margin-left:15%;
+  font-size: 20px;
+  font-weight: bold;
+  
+}
+
+.Textlist {
+  text-align: justify;
+  margin-top: 5%;
+  text-align: start;
+  font-size: 14px;
+  font-weight: bold;
+  
+}
+
+.Textend {
+
+  color: #fede00;
+  font-size: 12px;
+  font-weight: bold;
+  
+}
