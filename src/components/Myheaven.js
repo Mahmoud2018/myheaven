@@ -397,6 +397,7 @@ const Myheaven = () => {
               <Typography
                 style={{ fontSize: 15 }}
                 sx={{
+                  display: "flex",
                   textAlign: "center",
                   justifyContent: "center",
                   alignItems: "center",
@@ -653,9 +654,7 @@ const Myheaven = () => {
           <DialogContent dividers>
             <DialogContent>
               <DialogContentText id="alert-dialog-slide-description">
-                <Typography style={{ color: "green" }}>
-                  {AthkarData[currentPage]}
-                </Typography>
+                <Typography>{AthkarData[currentPage]}</Typography>
               </DialogContentText>
             </DialogContent>
           </DialogContent>
