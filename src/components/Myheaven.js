@@ -261,7 +261,7 @@ const Myheaven = () => {
     const timer = setTimeout(() => {
       updateScoreAndCompleted();
       setInterval(updateScoreAndCompleted, interval);
-    }, targetTime);
+    }, timeUntilTarget);
 
     return () => {
       clearTimeout(timer);
