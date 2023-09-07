@@ -9,6 +9,8 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Unstable_Grid2";
 import { green } from "@mui/material/colors";
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
 import Chip from "@mui/material/Chip";
 import { Data } from "./Data";
 import Myscores from "./Myscores";
@@ -17,6 +19,8 @@ import Portfolio from "./Portfolio";
 import { AthkarAlsbah } from "./Data";
 import { AthkarAlmsaa } from "./Data";
 import Slide from "@mui/material/Slide";
+import Info from "./Info";
+import Alawrad from "./Alawrad";
 
 // ICONS
 
@@ -28,6 +32,11 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import MosqueIcon from "@mui/icons-material/Mosque";
 import StoreIcon from "@mui/icons-material/Store";
 import SpeakerNotesIcon from "@mui/icons-material/SpeakerNotes";
+import Brightness7SharpIcon from "@mui/icons-material/Brightness7Sharp";
+import Brightness2SharpIcon from "@mui/icons-material/Brightness2Sharp";
+import ReplayIcon from "@mui/icons-material/Replay";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 // Components
 import { DataContext } from "../contexts/DataContext";
@@ -68,15 +77,32 @@ const Myheaven = () => {
   const [displayedtasksType, setDisplayedtasksType] = useState("salat");
   const [display, setDisplay] = useState("mytasks");
   const { showHideToast } = useContext(DataContext);
-  const [hadethModel, sethadethModel] = useState(false);
-  const [Showhadeth, setShowhadeth] = useState([]);
-  const [AthkarTitel, setAthkarTitel] = useState([]);
+  const [modelTitel, setmodelTitel] = useState([]);
+  const [modelContent, setmodelContent] = useState([]);
+  const [modelstate, setmodelstate] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
-  const [AthkarModel, setAthkarModel] = useState(false);
   const [AthkarData, setAthkarData] = useState([]);
+  const [infomodel, setinfomodel] = useState(false);
+  const [count, setCount] = useState(0);
 
-  const Alsbah = AthkarAlsbah.map((item, index) => `(${index + 1})- ${item}`);
-  const Almsaa = AthkarAlmsaa.map((item, index) => `(${index + 1})- ${item}`);
+  const plus = () => {
+    setCount(count + 1);
+  };
+
+  const minus = () => {
+    if (count === 0) {
+      setCount(0);
+    } else {
+      setCount(count - 1);
+    }
+  };
+
+  const Reset = () => {
+    setCount(0);
+  };
+
+  const Alsbah = AthkarAlsbah.map((item, index) => `${index + 1}- ${item}`);
+  const Almsaa = AthkarAlmsaa.map((item, index) => `${index + 1}- ${item}`);
   // console.log(Alsbah);
 
   /* Get data from localStorage */
@@ -91,28 +117,25 @@ const Myheaven = () => {
     }
   }, []);
 
-  console.log(Data);
-
   /* Athkar Model */
   function AthkarOpen(time) {
     if (time === true) {
-      setAthkarTitel("أذكار الصباح");
+      setmodelContent("");
+      setmodelTitel("أذكار الصباح");
       setAthkarData(Alsbah);
-      setAthkarModel(true);
+      setmodelstate(true);
       setCurrentPage(0);
     } else {
-      setAthkarTitel("أذكار المساء");
+      setmodelContent("");
+      setmodelTitel("أذكار المساء");
       setAthkarData(Almsaa);
-      setAthkarModel(true);
+      setmodelstate(true);
       setCurrentPage(0);
     }
   }
 
-  function AthkarClose() {
-    setAthkarModel(false);
-  }
-
   const handleNextPage = () => {
+    Reset();
     if (currentPage < AthkarData.length - 1) {
       setCurrentPage(currentPage + 1);
     } else {
@@ -133,14 +156,35 @@ const Myheaven = () => {
 
   /* Hadrth Model */
   function hadethOpene(taskId) {
-    tasks.map((obj) => (obj.id === taskId ? setShowhadeth(obj.hadeth) : obj));
-    sethadethModel(true);
-  }
-
-  function hadethClose() {
-    sethadethModel(false);
+    setAthkarData(0);
+    tasks.map((obj) => (obj.id === taskId ? setmodelContent(obj.hadeth) : obj));
+    setmodelstate(true);
+    setmodelTitel("الحديث");
   }
   /*=== Hadrth Model ===*/
+
+  /* Hadrth Model */
+  function WredOpene(taskId) {
+    setAthkarData(0);
+    tasks.map((obj) =>
+      obj.id === taskId ? setmodelContent(<Alawrad />) : obj
+    );
+    setmodelstate(true);
+    setmodelTitel(
+      "الورد اليومي في الصباح والمساء- (اختر احد الاوراد أو أكثر لتكرارها كل يوم)"
+    );
+  }
+  /*=== Hadrth Model ===*/
+
+  function ModelClose() {
+    setmodelstate(false);
+    setinfomodel(false);
+  }
+
+  /* info Model */
+  function infoOpene() {
+    setinfomodel(true);
+  }
 
   // Change tasks to completed
   const completeTask = (taskId) => {
@@ -340,7 +384,6 @@ const Myheaven = () => {
     }
   }
 
-  // console.log(Alltasks);
   // Show data for each slide in the Header
   function changeDisplay(e) {
     setDisplay(e.target.value);
@@ -392,20 +435,37 @@ const Myheaven = () => {
             marginTop: 1,
           }}
         >
-          <Grid container spacing={2}>
-            <Grid xs={7}>
-              <Typography
-                style={{ fontSize: 15 }}
-                sx={{
-                  display: "flex",
-                  textAlign: "center",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  color: "#fff",
-                }}
-              >
+          <Grid container spacing={0}>
+            <Grid
+              xs={7}
+              display="flex"
+              textAlign="center"
+              justifyContent="center"
+              alignItems="center"
+              color="#fff"
+              // style={{
+              //   display: "flex",
+              //   textAlign: "center",
+              //   justifyContent: "center",
+              //   alignItems: "center",
+              // }}
+            >
+              <Typography style={{ fontSize: 14 }}>
                 {task.titel}
-
+                {/* Wred ICON BUTTON */}
+                {task.werd ? (
+                  <IconButton
+                    onClick={() => WredOpene(task.id)}
+                    className="iconButton"
+                    aria-label="delete"
+                    style={{
+                      color: "white",
+                    }}
+                  >
+                    <SpeakerNotesIcon sx={{ color: "#0288d1", fontSize: 30 }} />
+                  </IconButton>
+                ) : null}
+                {/*== Wred ICON BUTTON ==*/}
                 {/* Athkar ICON BUTTON */}
                 {task.Athkar ? (
                   <IconButton
@@ -416,7 +476,9 @@ const Myheaven = () => {
                       color: "white",
                     }}
                   >
-                    <SpeakerNotesIcon sx={{ color: "#0288d1", fontSize: 30 }} />
+                    <Brightness7SharpIcon
+                      sx={{ color: "#0288d1", fontSize: 30 }}
+                    />
                   </IconButton>
                 ) : null}
                 {/*== Athkar ICON BUTTON ==*/}
@@ -431,7 +493,9 @@ const Myheaven = () => {
                       color: "white",
                     }}
                   >
-                    <SpeakerNotesIcon sx={{ color: "#0288d1", fontSize: 30 }} />
+                    <Brightness2SharpIcon
+                      sx={{ color: "#0288d1", fontSize: 30 }}
+                    />
                   </IconButton>
                 ) : null}
                 {/*== Athkar ICON BUTTON ==*/}
@@ -442,10 +506,10 @@ const Myheaven = () => {
             <Grid
               xs={4}
               display="flex"
-              justifyContent="space-around"
+              justifyContent="center"
               alignItems="center"
             >
-              {/* info ICON BUTTON */}
+              {/* hadeth ICON BUTTON */}
               {task.hadeth ? (
                 <IconButton
                   onClick={() => hadethOpene(task.id)}
@@ -455,10 +519,10 @@ const Myheaven = () => {
                     color: "white",
                   }}
                 >
-                  <InfoIcon sx={{ color: "#0288d1", fontSize: 30 }} />
+                  <SpeakerNotesIcon sx={{ color: "#0288d1", fontSize: 30 }} />
                 </IconButton>
               ) : null}
-              {/*== info ICON BUTTON ==*/}
+              {/*== hadeth ICON BUTTON ==*/}
 
               {/* Points info  */}
               <Stack direction="row" container spacing={2}>
@@ -531,6 +595,18 @@ const Myheaven = () => {
       BottomNavigationData = [];
   }
 
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fbc02d",
+    ...theme.typography.body2,
+    // padding: theme.spacing(1),
+    borderRadius: "20px",
+    maxWidth: 120,
+    textAlign: "center",
+    fontFamily: "BakbakOne",
+    marginTop: 20,
+    color: theme.palette.text.secondary,
+  }));
+
   return (
     <Card
       maxWidth="sm"
@@ -569,16 +645,28 @@ const Myheaven = () => {
           style={{ fontWeight: "bold", marginTop: "20px" }}
         >
           جنتي
+          <IconButton
+            onClick={infoOpene}
+            color="primary"
+            aria-label="add to shopping cart"
+          >
+            <img
+              src={"Info/infoicon.gif"}
+              alt="Logo"
+              style={{ width: "60%" }}
+            />
+          </IconButton>
         </Typography>
-        {/* ==HEADER== */}
         <Divider style={{ marginTop: "20px", color: "#5456454" }} />
+
+        {/* ==HEADER== */}
+
         {/* FILTER BUTTONS */}
         {BottomNavigationData}
         {/* ==== FILTER BUTTON ==== */}
         {/* ALL TODOS */}
         {/* === ALL TODOS === */}
         {/* FILTER BUTTONS */}
-
         <ToggleButtonGroup
           sx={{
             position: "fixed",
@@ -613,75 +701,93 @@ const Myheaven = () => {
             العبادات
           </ToggleButton>
         </ToggleButtonGroup>
-
         {/* ==== FILTER BUTTON ==== */}
-
         {/* info DIALOG */}
         <Dialog
           className="Dialog"
-          onClose={hadethClose}
-          style={{ direction: "rtl" }}
-          open={hadethModel}
-          TransitionComponent={Transition}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle>معلومة</DialogTitle>
-          <DialogContent dividers>
-            <DialogContent>
-              <DialogContentText id="alert-dialog-slide-description">
-                {Showhadeth}
-              </DialogContentText>
-            </DialogContent>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={hadethClose}>إغلاق</Button>
-          </DialogActions>
-        </Dialog>
-        {/* === info DIALOG === */}
-
-        {/* Athkar DIALOG */}
-        <Dialog
-          className="Dialog"
+          maxWidth="md"
           // onClose={AthkarClose}
           style={{ direction: "rtl" }}
-          open={AthkarModel}
+          open={modelstate}
           TransitionComponent={Transition}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle>{AthkarTitel}</DialogTitle>
+          <DialogTitle>{modelTitel}</DialogTitle>
           <DialogContent dividers>
-            <DialogContent>
+            <DialogContent style={{ padding: 0 }}>
               <DialogContentText id="alert-dialog-slide-description">
+                <Typography>{modelContent}</Typography>
                 <Typography>{AthkarData[currentPage]}</Typography>
+                <Item item xs={1}>
+                  <Typography>{count}</Typography>
+                  <IconButton aria-label="reste" onClick={Reset}>
+                    <ReplayIcon />
+                  </IconButton>
+                  <IconButton aria-label="plus" onClick={plus}>
+                    <AddIcon />
+                  </IconButton>
+                  <IconButton aria-label="minus" onClick={minus}>
+                    <RemoveIcon />
+                  </IconButton>
+                </Item>
               </DialogContentText>
             </DialogContent>
           </DialogContent>
           <DialogActions>
-            <Button
-              variant="contained"
-              onClick={handleNextPage}
-              disabled={currentPage === 27}
-            >
-              التالي
-            </Button>
-            <DialogContent dividers>
-              <Button
-                variant="contained"
-                onClick={handlePrevPage}
-                disabled={currentPage === 0}
-              >
-                السابق
-              </Button>
-            </DialogContent>
+            {AthkarData === 0 ? (
+              []
+            ) : (
+              <>
+                <Button
+                  variant="contained"
+                  onClick={handleNextPage}
+                  disabled={currentPage === 27}
+                >
+                  التالي
+                </Button>
+                <DialogContent>
+                  <Button
+                    variant="contained"
+                    onClick={handlePrevPage}
+                    disabled={currentPage === 0}
+                  >
+                    السابق
+                  </Button>
+                </DialogContent>
+              </>
+            )}
 
-            <Button variant="contained" onClick={AthkarClose}>
+            <Button variant="contained" onClick={ModelClose}>
               إغلاق
             </Button>
           </DialogActions>
         </Dialog>
-        {/* === Athkar DIALOG === */}
+        {/* === info DIALOG === */}
+
+        {/* info DIALOG */}
+        <Dialog
+          // maxWidth="md"
+          className="Dialog"
+          // onClose={infoModelClose}
+          style={{ direction: "rtl" }}
+          open={infomodel}
+          TransitionComponent={Transition}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle>شرح استخدام التطبيق </DialogTitle>
+
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              <Info />
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={ModelClose}>إغلاق</Button>
+          </DialogActions>
+        </Dialog>
+        {/* === info DIALOG === */}
       </CardContent>
     </Card>
   );
