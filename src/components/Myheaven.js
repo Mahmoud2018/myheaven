@@ -18,9 +18,11 @@ import MyItems from "./MyItems.";
 import Portfolio from "./Portfolio";
 import { AthkarAlsbah } from "./Data";
 import { AthkarAlmsaa } from "./Data";
+import { number } from "./Data";
 import Slide from "@mui/material/Slide";
 import Info from "./Info";
 import Alawrad from "./Alawrad";
+import Avatar from "@mui/material/Avatar";
 
 // ICONS
 
@@ -84,25 +86,13 @@ const Myheaven = () => {
   const [AthkarData, setAthkarData] = useState([]);
   const [infomodel, setinfomodel] = useState(false);
   const [count, setCount] = useState(0);
-
-  const plus = () => {
-    setCount(count + 1);
-  };
-
-  const minus = () => {
-    if (count === 0) {
-      setCount(0);
-    } else {
-      setCount(count - 1);
-    }
-  };
-
-  const Reset = () => {
-    setCount(0);
-  };
+  const [num, setnumb] = useState(0);
 
   const Alsbah = AthkarAlsbah.map((item, index) => `${index + 1}- ${item}`);
   const Almsaa = AthkarAlmsaa.map((item, index) => `${index + 1}- ${item}`);
+  const numbers = number.map((item) => {
+    return item;
+  });
   // console.log(Alsbah);
 
   /* Get data from localStorage */
@@ -123,6 +113,7 @@ const Myheaven = () => {
       setmodelContent("");
       setmodelTitel("أذكار الصباح");
       setAthkarData(Alsbah);
+      setnumb(numbers);
       setmodelstate(true);
       setCurrentPage(0);
     } else {
@@ -138,10 +129,29 @@ const Myheaven = () => {
     Reset();
     if (currentPage < AthkarData.length - 1) {
       setCurrentPage(currentPage + 1);
+    }
+    if (currentPage < numbers.length - 1) {
+      setCurrentPage(currentPage + 1);
     } else {
       // If we reach the end, loop back to the first page
       setCurrentPage(0);
     }
+  };
+
+  const plus = () => {
+    setCount(count + 1);
+  };
+
+  const minus = () => {
+    if (count === 0) {
+      setCount(0);
+    } else {
+      setCount(count - 1);
+    }
+  };
+
+  const Reset = () => {
+    setCount(0);
   };
 
   const handlePrevPage = () => {
@@ -435,7 +445,7 @@ const Myheaven = () => {
             marginTop: 1,
           }}
         >
-          <Grid container spacing={0}>
+          <Grid container spacing={2}>
             <Grid
               xs={7}
               display="flex"
@@ -504,7 +514,7 @@ const Myheaven = () => {
 
             {/* ACTION BUTTONS */}
             <Grid
-              xs={4}
+              xs={3}
               display="flex"
               justifyContent="center"
               alignItems="center"
@@ -517,6 +527,7 @@ const Myheaven = () => {
                   aria-label="delete"
                   style={{
                     color: "white",
+                    paddingRight: 25,
                   }}
                 >
                   <SpeakerNotesIcon sx={{ color: "#0288d1", fontSize: 30 }} />
@@ -527,11 +538,75 @@ const Myheaven = () => {
               {/* Points info  */}
               <Stack direction="row" container spacing={2}>
                 <Chip
-                  label={task.points + " " + task.detils}
-                  style={{ background: "#fbc02d", fontSize: "11px" }}
+                  label={task.points}
+                  style={{
+                    // background: "#fbc02d",
+                    color: "white",
+                    fontSize: "18px",
+                    fontFamily: "BakbakOne",
+                  }}
                 />
+                {/* Points icons  */}
+                {task.gold ? (
+                  <Avatar
+                    alt="Remy Sharp"
+                    src="scores/1.png"
+                    sx={{ width: 30, height: 30 }}
+                  />
+                ) : null}
+                {task.tree ? (
+                  <Avatar
+                    alt="Remy Sharp"
+                    src="scores/2.png"
+                    sx={{ width: 30, height: 30 }}
+                  />
+                ) : null}
+                {task.Palm ? (
+                  <Avatar
+                    alt="Remy Sharp"
+                    src="scores/3.png"
+                    sx={{ width: 30, height: 30 }}
+                  />
+                ) : null}
+                {task.Box ? (
+                  <Avatar
+                    alt="Remy Sharp"
+                    src="scores/4.png"
+                    sx={{ width: 30, height: 30 }}
+                  />
+                ) : null}
+                {task.home ? (
+                  <Avatar
+                    alt="Remy Sharp"
+                    src="scores/5.png"
+                    sx={{ width: 30, height: 30 }}
+                  />
+                ) : null}
+                {task.castle ? (
+                  <Avatar
+                    alt="Remy Sharp"
+                    src="scores/6.png"
+                    sx={{ width: 30, height: 30 }}
+                  />
+                ) : null}
+                {/*== Points icons == */}
               </Stack>
               {/* ==Points info==  */}
+              {/* Counte ICON BUTTON */}
+              <IconButton
+                onClick={() => counter(task.id)}
+                className="iconButton"
+                aria-label="delete"
+                style={{
+                  color: "white",
+                  // border: "solid #8bc34a 3px",
+                }}
+              >
+                {task.counter === true ? (
+                  <AddReactionIcon sx={{ color: "#fbc02d", fontSize: 30 }} />
+                ) : null}
+              </IconButton>
+              {/*== Counte ICON BUTTON ==*/}
 
               {/* CHECK ICON BUTTON */}
               <IconButton
@@ -550,22 +625,6 @@ const Myheaven = () => {
                 )}
               </IconButton>
               {/*== CHECK ICON BUTTON ==*/}
-
-              {/* Counte ICON BUTTON */}
-              <IconButton
-                onClick={() => counter(task.id)}
-                className="iconButton"
-                aria-label="delete"
-                style={{
-                  color: "white",
-                  // border: "solid #8bc34a 3px",
-                }}
-              >
-                {task.counter === true ? (
-                  <AddReactionIcon sx={{ color: "#fbc02d", fontSize: 30 }} />
-                ) : null}
-              </IconButton>
-              {/*== Counte ICON BUTTON ==*/}
             </Grid>
             {/*== ACTION BUTTONS ==*/}
           </Grid>
@@ -598,12 +657,11 @@ const Myheaven = () => {
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fbc02d",
     ...theme.typography.body2,
-    // padding: theme.spacing(1),
-    borderRadius: "20px",
+    borderRadius: "10px",
     maxWidth: 120,
     textAlign: "center",
     fontFamily: "BakbakOne",
-    marginTop: 20,
+    marginLeft: 10,
     color: theme.palette.text.secondary,
   }));
 
@@ -688,7 +746,7 @@ const Myheaven = () => {
           <ToggleButton value="app-info">
             <InfoIcon />
             <Divider flexItem orientation="vertical" sx={{ mx: 0.5, my: 2 }} />
-            عن التطبيق
+            عن المطور
           </ToggleButton>
           <ToggleButton value="presnt">
             <StoreIcon />
@@ -719,26 +777,47 @@ const Myheaven = () => {
               <DialogContentText id="alert-dialog-slide-description">
                 <Typography>{modelContent}</Typography>
                 <Typography>{AthkarData[currentPage]}</Typography>
-                <Item item xs={1}>
-                  <Typography>{count}</Typography>
-                  <IconButton aria-label="reste" onClick={Reset}>
-                    <ReplayIcon />
-                  </IconButton>
-                  <IconButton aria-label="plus" onClick={plus}>
-                    <AddIcon />
-                  </IconButton>
-                  <IconButton aria-label="minus" onClick={minus}>
-                    <RemoveIcon />
-                  </IconButton>
-                </Item>
               </DialogContentText>
             </DialogContent>
           </DialogContent>
+
           <DialogActions>
             {AthkarData === 0 ? (
               []
             ) : (
               <>
+                <Item
+                  item
+                  xs={1}
+                  style={{ background: "black", color: "white", padding: 8 }}
+                >
+                  <Typography>{count + "  " + "المنجز"}</Typography>
+                </Item>
+
+                <Item item xs={1}>
+                  <IconButton
+                    aria-label="plus"
+                    onClick={plus}
+                    disabled={count == num[currentPage] ? true : false}
+                  >
+                    <AddIcon />
+                  </IconButton>
+                  <IconButton aria-label="minus" onClick={minus}>
+                    <RemoveIcon />
+                  </IconButton>
+                  <IconButton aria-label="reste" onClick={Reset}>
+                    <ReplayIcon />
+                  </IconButton>
+                </Item>
+
+                <Item
+                  item
+                  xs={1}
+                  style={{ background: "red", color: "white", padding: 8 }}
+                >
+                  <Typography> {num[currentPage] + " مرات"}</Typography>
+                </Item>
+
                 <Button
                   variant="contained"
                   onClick={handleNextPage}

@@ -88,7 +88,7 @@ export default function Info() {
       </Item>
 
       <Item item xs={1}>
-        <img src={"Info/infoicons.png"} alt="Logo" />
+        <img src={"Info/info.png"} alt="Logo" />
         <Typography style={{ fontFamily: "BakbakOne" }}></Typography>
         <Typography style={{ fontSize: 15 }}>شرح استخدام التطبيق</Typography>
       </Item>
