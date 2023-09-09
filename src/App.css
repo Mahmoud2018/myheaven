@@ -45,12 +45,10 @@
 
 } */
 
-
 .todoCard {
   transition: all 0.2s !important;
   border-radius: 50px !important;
 }
-
 
 /* .Dialog{
   opacity: 50% !important;
@@ -63,7 +61,6 @@
   padding-right: 5px;
   box-shadow: 1px 2px 2px 1px #fbc02d;
 }
-
 
 /* ===== CUSTOM FONTS ====== */
 
@@ -99,10 +96,8 @@
 
 /* =====// CUSTOM FONTS //====== */
 
-
 .css-x3vexg-MuiGrid2-root {
   align-items: center;
-
 }
 
 .team-member {
@@ -110,12 +105,9 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-
 }
 
 .intyg {
- 
-
 }
 
 .Text1 {
@@ -125,13 +117,13 @@
   color: #4a3b04;
   border-radius: 10px;
   background: #fede00;
-  padding: 0px; 
+  padding: 0px;
   width: 200px;
   height: 30px;
   margin-left: 10%;
   font-size: 20px;
   font-weight: bold;
-  
+  margin-bottom: 10px;
 }
 
 .Text2 {
@@ -141,13 +133,13 @@
   color: #4a3b04;
   border-radius: 10px;
   background: #fede00;
-  padding: 0px; 
+  padding: 0px;
   width: 140px;
   height: 30px;
-  margin-left:15%;
+  margin-left: 15%;
   font-size: 20px;
   font-weight: bold;
-  
+  margin-bottom: 10px;
 }
 
 .Textlist {
@@ -156,13 +148,10 @@
   text-align: start;
   font-size: 14px;
   font-weight: bold;
-  
 }
 
 .Textend {
-
   color: #fede00;
   font-size: 12px;
   font-weight: bold;
-  
 }

@@ -139,7 +139,11 @@ const Myheaven = () => {
   };
 
   const plus = () => {
-    setCount(count + 1);
+    if (count == num[currentPage]) {
+      setCount(count);
+    } else {
+      setCount(count + 1);
+    }
   };
 
   const minus = () => {
@@ -551,7 +555,7 @@ const Myheaven = () => {
                   <Avatar
                     alt="Remy Sharp"
                     src="scores/1.png"
-                    sx={{ width: 30, height: 30 }}
+                    sx={{ width: 32, height: 32 }}
                   />
                 ) : null}
                 {task.tree ? (
@@ -658,7 +662,7 @@ const Myheaven = () => {
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fbc02d",
     ...theme.typography.body2,
     borderRadius: "10px",
-    maxWidth: 120,
+    maxWidth: 100,
     textAlign: "center",
     fontFamily: "BakbakOne",
     marginLeft: 10,
@@ -763,7 +767,7 @@ const Myheaven = () => {
         {/* info DIALOG */}
         <Dialog
           className="Dialog"
-          maxWidth="md"
+          // maxWidth="md"
           // onClose={AthkarClose}
           style={{ direction: "rtl" }}
           open={modelstate}
@@ -774,9 +778,92 @@ const Myheaven = () => {
           <DialogTitle>{modelTitel}</DialogTitle>
           <DialogContent dividers>
             <DialogContent style={{ padding: 0 }}>
-              <DialogContentText id="alert-dialog-slide-description">
-                <Typography>{modelContent}</Typography>
-                <Typography>{AthkarData[currentPage]}</Typography>
+              <DialogContentText
+                display="flex"
+                textAlign="center"
+                justifyContent="center"
+                alignItems="center"
+                // flexDirection="row"
+                // style={{
+                //   display: "flex",
+                //   textAlign: "center",
+                //   justifyContent: "center",
+                //   alignItems: "center",
+                //   flexDirection: "row",
+                // }}
+                id="alert-dialog-slide-description"
+              >
+                <Grid>
+                  <Grid item xs={8}>
+                    <Typography>{modelContent}</Typography>
+                    <Typography>{AthkarData[currentPage]}</Typography>
+                  </Grid>
+                  <Item
+                    item
+                    xs={1}
+                    style={{
+                      background: "red",
+                      color: "white",
+                      padding: 5,
+                      marginTop: 20,
+                      marginRight: 80,
+                    }}
+                  >
+                    <Typography> {num[currentPage]}</Typography>
+                    <Typography>
+                      {" "}
+                      {num[currentPage] <= 1 ? " مرة" : "مرات"}
+                    </Typography>
+                  </Item>
+                  <Grid
+                    style={{ marginTop: 30 }}
+                    item
+                    xs={8}
+                    container
+                    rowSpacing={2}
+                    display="flex"
+                    textAlign="center"
+                    justifyContent="center"
+                    alignItems="center"
+                    flexDirection="row"
+                  >
+                    {AthkarData === 0 ? (
+                      []
+                    ) : (
+                      <>
+                        <Item item xs={1}>
+                          <IconButton
+                            aria-label="plus"
+                            onClick={plus}
+                            // disabled={count == num[currentPage] ? true : null}
+                          >
+                            <AddIcon />
+                          </IconButton>
+                          <Item item xs={1}></Item>
+                          <IconButton aria-label="minus" onClick={minus}>
+                            <RemoveIcon />
+                          </IconButton>
+                        </Item>
+                        <Item item xs={1}>
+                          <IconButton aria-label="reste" onClick={Reset}>
+                            <ReplayIcon />
+                          </IconButton>
+                        </Item>
+                        <Item
+                          item
+                          xs={1}
+                          style={{
+                            background: "black",
+                            color: "white",
+                            padding: 8,
+                          }}
+                        >
+                          <Typography>{count + "  " + "المنجز"}</Typography>
+                        </Item>
+                      </>
+                    )}
+                  </Grid>
+                </Grid>
               </DialogContentText>
             </DialogContent>
           </DialogContent>
@@ -786,38 +873,6 @@ const Myheaven = () => {
               []
             ) : (
               <>
-                <Item
-                  item
-                  xs={1}
-                  style={{ background: "black", color: "white", padding: 8 }}
-                >
-                  <Typography>{count + "  " + "المنجز"}</Typography>
-                </Item>
-
-                <Item item xs={1}>
-                  <IconButton
-                    aria-label="plus"
-                    onClick={plus}
-                    disabled={count == num[currentPage] ? true : false}
-                  >
-                    <AddIcon />
-                  </IconButton>
-                  <IconButton aria-label="minus" onClick={minus}>
-                    <RemoveIcon />
-                  </IconButton>
-                  <IconButton aria-label="reste" onClick={Reset}>
-                    <ReplayIcon />
-                  </IconButton>
-                </Item>
-
-                <Item
-                  item
-                  xs={1}
-                  style={{ background: "red", color: "white", padding: 8 }}
-                >
-                  <Typography> {num[currentPage] + " مرات"}</Typography>
-                </Item>
-
                 <Button
                   variant="contained"
                   onClick={handleNextPage}
