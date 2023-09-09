@@ -798,23 +798,28 @@ const Myheaven = () => {
                     <Typography>{modelContent}</Typography>
                     <Typography>{AthkarData[currentPage]}</Typography>
                   </Grid>
-                  <Item
-                    item
-                    xs={1}
-                    style={{
-                      background: "red",
-                      color: "white",
-                      padding: 5,
-                      marginTop: 20,
-                      marginRight: 80,
-                    }}
-                  >
-                    <Typography> {num[currentPage]}</Typography>
-                    <Typography>
-                      {" "}
-                      {num[currentPage] <= 1 ? " مرة" : "مرات"}
-                    </Typography>
-                  </Item>
+                  {AthkarData === 0 ? (
+                    []
+                  ) : (
+                    <Item
+                      item
+                      xs={1}
+                      style={{
+                        background: "red",
+                        color: "white",
+                        padding: 5,
+                        marginTop: 20,
+                        marginRight: 80,
+                      }}
+                    >
+                      <Typography> {num[currentPage]}</Typography>
+                      <Typography>
+                        {" "}
+                        {num[currentPage] <= 1 ? " مرة" : "مرات"}
+                      </Typography>
+                    </Item>
+                  )}
+
                   <Grid
                     style={{ marginTop: 30 }}
                     item
