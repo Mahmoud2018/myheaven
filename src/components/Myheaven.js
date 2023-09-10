@@ -18,7 +18,8 @@ import MyItems from "./MyItems.";
 import Portfolio from "./Portfolio";
 import { AthkarAlsbah } from "./Data";
 import { AthkarAlmsaa } from "./Data";
-import { number } from "./Data";
+import { Alsbahnumber } from "./Data";
+import { Almsanumber } from "./Data";
 import Slide from "@mui/material/Slide";
 import Info from "./Info";
 import Alawrad from "./Alawrad";
@@ -90,7 +91,10 @@ const Myheaven = () => {
 
   const Alsbah = AthkarAlsbah.map((item, index) => `${index + 1}- ${item}`);
   const Almsaa = AthkarAlmsaa.map((item, index) => `${index + 1}- ${item}`);
-  const numbers = number.map((item) => {
+  const Alsbahnumbers = Alsbahnumber.map((item) => {
+    return item;
+  });
+  const Almsanumbers = Almsanumber.map((item) => {
     return item;
   });
   // console.log(Alsbah);
@@ -113,13 +117,14 @@ const Myheaven = () => {
       setmodelContent("");
       setmodelTitel("أذكار الصباح");
       setAthkarData(Alsbah);
-      setnumb(numbers);
+      setnumb(Alsbahnumbers);
       setmodelstate(true);
       setCurrentPage(0);
     } else {
       setmodelContent("");
       setmodelTitel("أذكار المساء");
       setAthkarData(Almsaa);
+      setnumb(Almsanumbers);
       setmodelstate(true);
       setCurrentPage(0);
     }
@@ -130,7 +135,10 @@ const Myheaven = () => {
     if (currentPage < AthkarData.length - 1) {
       setCurrentPage(currentPage + 1);
     }
-    if (currentPage < numbers.length - 1) {
+    if (currentPage < Alsbahnumbers.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+    if (currentPage < Almsanumbers.length - 1) {
       setCurrentPage(currentPage + 1);
     } else {
       // If we reach the end, loop back to the first page
