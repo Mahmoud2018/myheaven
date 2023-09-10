@@ -88,6 +88,7 @@ const Myheaven = () => {
   const [infomodel, setinfomodel] = useState(false);
   const [count, setCount] = useState(0);
   const [num, setnumb] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(0);
 
   const Alsbah = AthkarAlsbah.map((item, index) => `${index + 1}- ${item}`);
   const Almsaa = AthkarAlmsaa.map((item, index) => `${index + 1}- ${item}`);
@@ -322,6 +323,7 @@ const Myheaven = () => {
 
     // eslint-disable-next-line no-unused-vars
     const timeUntilTarget = targetTime - currentDate;
+    setTimeLeft(timeUntilTarget);
     const interval = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
     const timer = setTimeout(() => {
@@ -727,8 +729,21 @@ const Myheaven = () => {
             />
           </IconButton>
         </Typography>
-        <Divider style={{ marginTop: "20px", color: "#5456454" }} />
-
+        <Divider
+          style={{
+            marginTop: "30px",
+            color: "#5456454",
+          }}
+        />
+        <Typography style={{ fontSize: 10, marginBottom: 6 }}>
+          الوقت المتبقي لحساب المهام المنجزة
+        </Typography>
+        <Paper className="progress-bar">
+          <Typography
+            className="progress-bar-fill"
+            style={{ width: `${(timeLeft / (24 * 60 * 60 * 1000)) * 100}%` }}
+          ></Typography>
+        </Paper>
         {/* ==HEADER== */}
 
         {/* FILTER BUTTONS */}
