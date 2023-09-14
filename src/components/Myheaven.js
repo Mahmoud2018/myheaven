@@ -24,6 +24,7 @@ import Slide from "@mui/material/Slide";
 import Info from "./Info";
 import Alawrad from "./Alawrad";
 import Avatar from "@mui/material/Avatar";
+import LinearProgress from "@mui/material/LinearProgress";
 
 // ICONS
 
@@ -69,7 +70,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const Myheaven = () => {
+let H24 = 24 * 60 * 60 * 1000;
+let M2 = 1 * 60 * 1000;
+
+const Myheaven = ({ activationInterval = M2 }) => {
   const [tasks, setTasks] = useState(Data);
   const { score, setScore } = useContext(DataContext);
   const [tree, setTree] = useState(stordtree);
@@ -88,6 +92,8 @@ const Myheaven = () => {
   const [infomodel, setinfomodel] = useState(false);
   const [count, setCount] = useState(0);
   const [num, setnumb] = useState(0);
+
+  const [isActive, setIsActive] = useState(true);
   const [timeLeft, setTimeLeft] = useState(0);
 
   const Alsbah = AthkarAlsbah.map((item, index) => `${index + 1}- ${item}`);
@@ -268,74 +274,98 @@ const Myheaven = () => {
     );
   };
   // Counte all points and reset scores
-  useEffect(() => {
-    const updateScoreAndCompleted = () => {
-      // Check if tasks is null or undefined and handle it accordingly
-      if (tasks === null || tasks === undefined) {
-        return;
-      }
-
-      const scoreUpdates = {
-        scoretree: setScore,
-        // tree: setTree,
-        // Palm: setPalm, // Typo: Should be setPalm
-        // Box: setBox,
-        home: sethome, // Typo: Should be setHome
-        castle: setCastle,
-      };
-
-      const updatedTasks = tasks.map((obj) => {
-        if (obj.isCompleted === true) {
-          if (obj.points >= 20) {
-            setScore((prevScore) => prevScore + obj.points);
-          }
-
-          for (const prop in scoreUpdates) {
-            if (obj[prop] === true) {
-              scoreUpdates[prop]((prevScore) => prevScore + obj.points);
-            }
-          }
-
-          return { ...obj, isCompleted: false };
-        }
-        return obj;
-      });
-
-      setTasks(updatedTasks);
-      localStorage.setItem("todos", JSON.stringify(updatedTasks));
-    };
-
-    const currentDate = new Date();
-    const targetTime = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth(),
-      currentDate.getDate(),
-      6, // Set the hours to 6 for 06:00 AM
-      0, // Minutes
-      0 // Seconds
-    );
-
-    // Calculate the time until the next 06:00 AM
-    if (currentDate > targetTime) {
-      // If it's already past 06:00 AM today, schedule for 06:00 AM tomorrow
-      targetTime.setDate(targetTime.getDate() + 1);
+  const updateScoreAndCompleted = () => {
+    // Check if tasks is null or undefined and handle it accordingly
+    if (tasks === null || tasks === undefined) {
+      return;
     }
 
-    // eslint-disable-next-line no-unused-vars
-    const timeUntilTarget = targetTime - currentDate;
-    setTimeLeft(timeUntilTarget);
-    const interval = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-
-    const timer = setTimeout(() => {
-      updateScoreAndCompleted();
-      setInterval(updateScoreAndCompleted, interval);
-    }, timeUntilTarget);
-
-    return () => {
-      clearTimeout(timer);
-      clearInterval(interval);
+    const scoreUpdates = {
+      scoretree: setScore,
+      // tree: setTree,
+      // Palm: setPalm, // Typo: Should be setPalm
+      // Box: setBox,
+      home: sethome, // Typo: Should be setHome
+      castle: setCastle,
     };
-  }, [setScore, tasks]);
+
+    const updatedTasks = tasks.map((obj) => {
+      if (obj.isCompleted === true) {
+        if (obj.points >= 20) {
+          setScore((prevScore) => prevScore + obj.points);
+        }
+
+        for (const prop in scoreUpdates) {
+          if (obj[prop] === true) {
+            scoreUpdates[prop]((prevScore) => prevScore + obj.points);
+          }
+        }
+
+        return { ...obj, isCompleted: false };
+      }
+      return obj;
+    });
+
+    setTasks(updatedTasks);
+    localStorage.setItem("todos", JSON.stringify(updatedTasks));
+  };
+
+  useEffect(() => {
+    // Retrieve data from localStorage
+    const lastActivation = localStorage.getItem("lastActivation");
+    const buttonState = localStorage.getItem("buttonState");
+
+    if (lastActivation && buttonState) {
+      const timeSinceLastActivation =
+        Date.now() - new Date(lastActivation).getTime();
+      if (
+        timeSinceLastActivation < activationInterval &&
+        buttonState === "inactive"
+      ) {
+        // Button should still be inactive, calculate time left
+        const timeRemaining = activationInterval - timeSinceLastActivation;
+        startTimer(timeRemaining);
+      }
+    }
+  }, [activationInterval]);
+
+  const startTimer = (duration) => {
+    setIsActive(false);
+    setTimeLeft(duration);
+
+    const timer = setInterval(() => {
+      setTimeLeft((prevTimeLeft) => prevTimeLeft - 1000);
+    }, 1000);
+
+    setTimeout(() => {
+      clearInterval(timer);
+      setIsActive(true);
+      localStorage.setItem("lastActivation", new Date().toISOString());
+      localStorage.setItem("buttonState", "active");
+    }, duration);
+  };
+
+  const handleButtonClick = () => {
+    if (isActive) {
+      // Perform the test function here
+      updateScoreAndCompleted();
+
+      // Disable the button
+      setIsActive(false);
+      localStorage.setItem("buttonState", "inactive");
+      localStorage.setItem("lastActivation", new Date().toISOString());
+
+      // Start the timer for the next activation
+      startTimer(activationInterval);
+    }
+  };
+
+  const formatTime = (milliseconds) => {
+    const seconds = Math.floor((milliseconds / 1000) % 60);
+    const minutes = Math.floor((milliseconds / (1000 * 60)) % 60);
+    const hours = Math.floor((milliseconds / (1000 * 60 * 60)) % 24);
+    return `${hours}0: ${minutes}0: ${seconds}`;
+  };
 
   // Save score on local storage
   const stateMappings = [
@@ -735,15 +765,18 @@ const Myheaven = () => {
             color: "#5456454",
           }}
         />
-        <Typography style={{ fontSize: 10, marginBottom: 6 }}>
-          الوقت المتبقي لحساب المهام المنجزة
-        </Typography>
-        <Paper className="progress-bar">
-          <Typography
-            className="progress-bar-fill"
-            style={{ width: `${(timeLeft / (24 * 60 * 60 * 1000)) * 100}%` }}
-          ></Typography>
-        </Paper>
+
+        <Button onClick={handleButtonClick} disabled={!isActive}>
+          {isActive ? "إجمع الذهب 😍" : `🕒 ${formatTime(timeLeft)}`}
+        </Button>
+
+        {isActive || (
+          <LinearProgress
+            variant="determinate"
+            value={(timeLeft / activationInterval) * 100}
+            // sx={{ marginTop: 2 }}
+          />
+        )}
         {/* ==HEADER== */}
 
         {/* FILTER BUTTONS */}
