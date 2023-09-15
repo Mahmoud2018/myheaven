@@ -366,7 +366,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
     const seconds = Math.floor((milliseconds / 1000) % 60);
     const minutes = Math.floor((milliseconds / (1000 * 60)) % 60);
     const hours = Math.floor((milliseconds / (1000 * 60 * 60)) % 24);
-    return `${hours}:س ${minutes}: د${seconds}ث`;
+    return `${hours}:س ${minutes}:د ${seconds}ث`;
   };
 
   // Save score on local storage
