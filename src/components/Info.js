@@ -31,9 +31,10 @@ export default function Info() {
     >
       <Item item xs={1}>
         <Typography style={{ fontSize: 12 }}>
-          يتم حساب النقاط لجميع المهام المنجزة يوميا الساعة 6 صباحا في رصيدك
-          واليوم التالي تعود المهام بشكل تلقائي لغير منجزة لإنجازها من جديد
-          وهكذا تستطيع أن تداوم على عبادتك وتلتزم فيها بشكل أسهل
+          يتم حساب النقاط لجميع المهام المنجزة كل 24 ساعة يظهر زر (اجمع النقاط)
+          عند النقر عليه يضاف الذهب لجميع العبادات المنجزة إلى رصيدك وتعود
+          المهام بشكل تلقائي لغير منجزة لإنجازها من جديد وهكذا تستطيع أن تداوم
+          على عبادتك وتلتزم فيها بشكل أسهل
         </Typography>
       </Item>
 
@@ -88,7 +89,13 @@ export default function Info() {
       </Item>
 
       <Item item xs={1}>
-        <img src={"Info/info.png"} alt="Logo" />
+        <img src={"Info/earn.png"} alt="Logo" />
+        <Typography style={{ fontFamily: "BakbakOne" }}></Typography>
+        <Typography style={{ fontSize: 15 }}> عند النقر يجمع الذهب </Typography>
+      </Item>
+
+      <Item item xs={1}>
+        <img src={"Info/infoicon.gif"} alt="Logo" />
         <Typography style={{ fontFamily: "BakbakOne" }}></Typography>
         <Typography style={{ fontSize: 15 }}>شرح استخدام التطبيق</Typography>
       </Item>

@@ -25,6 +25,7 @@ import Info from "./Info";
 import Alawrad from "./Alawrad";
 import Avatar from "@mui/material/Avatar";
 import LinearProgress from "@mui/material/LinearProgress";
+import Container from "@mui/material/Container";
 
 // ICONS
 
@@ -73,7 +74,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 let H24 = 24 * 60 * 60 * 1000;
 let M2 = 1 * 60 * 1000;
 
-const Myheaven = ({ activationInterval = M2 }) => {
+const Myheaven = ({ activationInterval = H24 }) => {
   const [tasks, setTasks] = useState(Data);
   const { score, setScore } = useContext(DataContext);
   const [tree, setTree] = useState(stordtree);
@@ -275,11 +276,6 @@ const Myheaven = ({ activationInterval = M2 }) => {
   };
   // Counte all points and reset scores
   const updateScoreAndCompleted = () => {
-    // Check if tasks is null or undefined and handle it accordingly
-    if (tasks === null || tasks === undefined) {
-      return;
-    }
-
     const scoreUpdates = {
       scoretree: setScore,
       // tree: setTree,
@@ -364,7 +360,7 @@ const Myheaven = ({ activationInterval = M2 }) => {
     const seconds = Math.floor((milliseconds / 1000) % 60);
     const minutes = Math.floor((milliseconds / (1000 * 60)) % 60);
     const hours = Math.floor((milliseconds / (1000 * 60 * 60)) % 24);
-    return `${hours}0: ${minutes}0: ${seconds}`;
+    return `${hours}: ${minutes}: ${seconds}`;
   };
 
   // Save score on local storage
@@ -467,7 +463,7 @@ const Myheaven = ({ activationInterval = M2 }) => {
       maxWidth="sm"
       style={{
         // marginTop: 0,
-        maxHeight: "60.5vh",
+        maxHeight: "58vh",
         // maxWidth: "60.5vh",
         // background: "green",
 
@@ -580,7 +576,7 @@ const Myheaven = ({ activationInterval = M2 }) => {
               {/*== hadeth ICON BUTTON ==*/}
 
               {/* Points info  */}
-              <Stack direction="row" container spacing={2}>
+              <Stack direction="row" container spacing={1}>
                 <Chip
                   label={task.points}
                   style={{
@@ -742,41 +738,108 @@ const Myheaven = ({ activationInterval = M2 }) => {
         />
         {/* == Avatar == */}
         {/* HEADER */}
-        <Typography
-          variant="h3"
-          style={{ fontWeight: "bold", marginTop: "20px" }}
-        >
-          جنتي
-          <IconButton
-            onClick={infoOpene}
-            color="primary"
-            aria-label="add to shopping cart"
-          >
-            <img
-              src={"Info/infoicon.gif"}
-              alt="Logo"
-              style={{ width: "60%" }}
-            />
-          </IconButton>
-        </Typography>
-        <Divider
+        <Container
+          direction="row"
           style={{
-            marginTop: "30px",
-            color: "#5456454",
+            marginTop: 10,
+            marginBottom: 10,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            // flexDirection: "column",
           }}
-        />
+        >
+          <Typography variant="h3" style={{ fontWeight: "bold" }}>
+            جنتي
+          </Typography>
+          <Paper
+            style={{
+              padding: 5,
+              marginRight: 20,
+              marginTop: 15,
+              display: "flex",
+              fontSize: 10,
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
+            }}
+          >
+            {isActive ? (
+              <Button
+                class="button"
+                onClick={handleButtonClick}
+                variant="contained"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  // marginTop: "15px",
+                }}
+                // disabled={!isActive}
+              >
+                إجمع الذهب
+                <img
+                  src={"scores/1.png"}
+                  style={{ width: 30, height: 30, marginRight: 10 }}
+                  alt="Logo"
+                />
+              </Button>
+            ) : (
+              <>
+                <Typography
+                  style={{
+                    display: "flex",
+                    // marginTop: 15,
+                    // marginBottom: 10,
+                    alignItems: "center",
+                    direction: "ltr",
+                  }}
+                >
+                  <img
+                    src={"clock.gif"}
+                    alt="Logo"
+                    style={{ width: 40, height: 40, marginRight: 6 }}
+                  />
+                  {formatTime(timeLeft)}
+                  <IconButton
+                    onClick={infoOpene}
+                    color="primary"
+                    aria-label="add to shopping cart"
+                  >
+                    <img
+                      src={"Info/infoicon.gif"}
+                      alt="Logo"
+                      style={{ width: "60%" }}
+                    />
+                  </IconButton>
+                </Typography>
 
-        <Button onClick={handleButtonClick} disabled={!isActive}>
-          {isActive ? "إجمع الذهب 😍" : `🕒 ${formatTime(timeLeft)}`}
-        </Button>
-
-        {isActive || (
-          <LinearProgress
-            variant="determinate"
-            value={(timeLeft / activationInterval) * 100}
-            // sx={{ marginTop: 2 }}
-          />
-        )}
+                <Typography
+                  style={{
+                    display: "flex",
+                    fontSize: 10,
+                    alignItems: "center",
+                  }}
+                >
+                  الوقت المتبقي لجمع الذهب
+                  <img
+                    src={"scores/1.png"}
+                    alt="Logo"
+                    style={{ width: 20, height: 20, marginRight: 6 }}
+                  />
+                </Typography>
+                <LinearProgress
+                  style={{ width: "70%", marginTop: 5, marginLeft: 25 }}
+                  variant="determinate"
+                  // value={(1 - timeLeft / (activationInterval * 1000)) * 100}
+                  value={(timeLeft / activationInterval) * 100}
+                />
+              </>
+            )}
+          </Paper>
+          {/* {isActive || (
+            
+          )} */}
+        </Container>
         {/* ==HEADER== */}
 
         {/* FILTER BUTTONS */}

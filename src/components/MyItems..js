@@ -108,7 +108,7 @@ export default function MyItems() {
     <Container
       maxWidth="sm"
       style={{
-        marginTop: 20,
+        // marginTop: 5,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -120,7 +120,7 @@ export default function MyItems() {
         style={{
           // width: 10,
           // background: "green",
-          maxHeight: "65vh",
+          maxHeight: "64.5vh",
           overflow: "scroll",
         }}
         sx={{
