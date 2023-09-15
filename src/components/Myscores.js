@@ -63,7 +63,7 @@ export default function Myscores({ score, tree, Plam, Box, home, castle }) {
         />
         <Typography style={{ fontFamily: "BakbakOne" }}> {Box + 0}</Typography>
         <Typography color="primary" style={{ fontSize: 10 }}>
-          صندوق ذهب
+          كنز
         </Typography>
       </Item>
 

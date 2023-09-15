@@ -42,6 +42,11 @@ import Brightness2SharpIcon from "@mui/icons-material/Brightness2Sharp";
 import ReplayIcon from "@mui/icons-material/Replay";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import CheckIcon from "@mui/icons-material/Check";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import CircleIcon from "@mui/icons-material/Circle";
+import Brightness1OutlinedIcon from "@mui/icons-material/Brightness1Outlined";
 
 // Components
 import { DataContext } from "../contexts/DataContext";
@@ -72,9 +77,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 let H24 = 24 * 60 * 60 * 1000;
-let M2 = 1 * 60 * 1000;
+let H20 = 20 * 60 * 60 * 1000;
+let M2 = 2 * 60 * 1000;
 
-const Myheaven = ({ activationInterval = H24 }) => {
+const Myheaven = ({ activationInterval = H20 }) => {
   const [tasks, setTasks] = useState(Data);
   const { score, setScore } = useContext(DataContext);
   const [tree, setTree] = useState(stordtree);
@@ -360,7 +366,7 @@ const Myheaven = ({ activationInterval = H24 }) => {
     const seconds = Math.floor((milliseconds / 1000) % 60);
     const minutes = Math.floor((milliseconds / (1000 * 60)) % 60);
     const hours = Math.floor((milliseconds / (1000 * 60 * 60)) % 24);
-    return `${hours}: ${minutes}: ${seconds}`;
+    return `${hours}: س ${minutes}: د ${seconds} ث`;
   };
 
   // Save score on local storage
@@ -441,7 +447,7 @@ const Myheaven = ({ activationInterval = H24 }) => {
 
   const tabs = (
     <ToggleButtonGroup
-      style={{ direction: "ltr", marginTop: "15px" }}
+      style={{ direction: "ltr", marginTop: "5px" }}
       value={displayedtasksType}
       exclusive
       color="primary"
@@ -463,7 +469,7 @@ const Myheaven = ({ activationInterval = H24 }) => {
       maxWidth="sm"
       style={{
         // marginTop: 0,
-        maxHeight: "58vh",
+        maxHeight: "59vh",
         // maxWidth: "60.5vh",
         // background: "green",
 
@@ -472,7 +478,7 @@ const Myheaven = ({ activationInterval = H24 }) => {
       sx={{
         minWidth: 380,
         // width: "100%"
-        marginTop: 1,
+        // marginTop: 1,
       }}
     >
       {Alltasks.map((task) => (
@@ -661,7 +667,7 @@ const Myheaven = ({ activationInterval = H24 }) => {
                 {task.isCompleted ? (
                   <CheckCircleIcon sx={{ color: green[500], fontSize: 30 }} />
                 ) : task.counter ? null : (
-                  <OutletIcon sx={{ fontSize: 30 }} />
+                  <Brightness1OutlinedIcon sx={{ fontSize: 30 }} />
                 )}
               </IconButton>
               {/*== CHECK ICON BUTTON ==*/}
@@ -749,14 +755,11 @@ const Myheaven = ({ activationInterval = H24 }) => {
             // flexDirection: "column",
           }}
         >
-          <Typography variant="h3" style={{ fontWeight: "bold" }}>
-            جنتي
-          </Typography>
           <Paper
             style={{
               padding: 5,
-              marginRight: 20,
-              marginTop: 15,
+              marginLeft: 20,
+              marginTop: 5,
               display: "flex",
               fontSize: 10,
               alignItems: "center",
@@ -765,54 +768,48 @@ const Myheaven = ({ activationInterval = H24 }) => {
             }}
           >
             {isActive ? (
-              <Button
-                class="button"
-                onClick={handleButtonClick}
-                variant="contained"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  // marginTop: "15px",
-                }}
-                // disabled={!isActive}
-              >
-                إجمع الذهب
-                <img
-                  src={"scores/1.png"}
-                  style={{ width: 30, height: 30, marginRight: 10 }}
-                  alt="Logo"
-                />
-              </Button>
-            ) : (
               <>
                 <Typography
                   style={{
-                    display: "flex",
-                    // marginTop: 15,
-                    // marginBottom: 10,
-                    alignItems: "center",
-                    direction: "ltr",
+                    // display: "flex",
+                    fontSize: 10,
+                    fontWeight: "bold",
+                    marginBottom: 5,
+                    // alignItems: "center",
                   }}
                 >
-                  <img
-                    src={"clock.gif"}
-                    alt="Logo"
-                    style={{ width: 40, height: 40, marginRight: 6 }}
-                  />
-                  {formatTime(timeLeft)}
-                  <IconButton
-                    onClick={infoOpene}
-                    color="primary"
-                    aria-label="add to shopping cart"
+                  وقت جمع الذهب من العبادات المنجزة
+                  <strong
+                    style={{
+                      fontSize: 20,
+                      marginRight: 10,
+                    }}
                   >
-                    <img
-                      src={"Info/infoicon.gif"}
-                      alt="Logo"
-                      style={{ width: "60%" }}
-                    />
-                  </IconButton>
+                    😍
+                  </strong>
                 </Typography>
 
+                <Button
+                  class="button"
+                  onClick={handleButtonClick}
+                  variant="contained"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginBottom: 5,
+                    fontWeight: "bold",
+                  }}
+                >
+                  إجمع الذهب
+                  <img
+                    src={"scores/1.png"}
+                    style={{ width: 25, height: 25, marginRight: 10 }}
+                    alt="Logo"
+                  />
+                </Button>
+              </>
+            ) : (
+              <>
                 <Typography
                   style={{
                     display: "flex",
@@ -827,8 +824,26 @@ const Myheaven = ({ activationInterval = H24 }) => {
                     style={{ width: 20, height: 20, marginRight: 6 }}
                   />
                 </Typography>
+                <Typography
+                  style={{
+                    display: "flex",
+                    fontSize: 10,
+                    // marginBottom: 10,
+                    alignItems: "center",
+                    // direction: "ltr",
+                  }}
+                >
+                  <img
+                    src={"clock.gif"}
+                    alt="Logo"
+                    style={{ width: 40, height: 40, marginLeft: 5 }}
+                  />
+
+                  {formatTime(timeLeft)}
+                </Typography>
+
                 <LinearProgress
-                  style={{ width: "70%", marginTop: 5, marginLeft: 25 }}
+                  style={{ width: "80%", marginTop: 2 }}
                   variant="determinate"
                   // value={(1 - timeLeft / (activationInterval * 1000)) * 100}
                   value={(timeLeft / activationInterval) * 100}
@@ -836,6 +851,20 @@ const Myheaven = ({ activationInterval = H24 }) => {
               </>
             )}
           </Paper>
+          <Typography variant="h3" style={{ fontWeight: "bold" }}>
+            جنتي
+          </Typography>
+          <IconButton
+            onClick={infoOpene}
+            color="primary"
+            aria-label="add to shopping cart"
+          >
+            <img
+              src={"Info/infoicon.gif"}
+              alt="Logo"
+              style={{ width: "70%", marginTop: 20 }}
+            />
+          </IconButton>
           {/* {isActive || (
             
           )} */}
@@ -845,9 +874,7 @@ const Myheaven = ({ activationInterval = H24 }) => {
         {/* FILTER BUTTONS */}
         {BottomNavigationData}
         {/* ==== FILTER BUTTON ==== */}
-        {/* ALL TODOS */}
-        {/* === ALL TODOS === */}
-        {/* FILTER BUTTONS */}
+
         <ToggleButtonGroup
           sx={{
             position: "fixed",
