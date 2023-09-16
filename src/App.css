@@ -63,6 +63,10 @@
 }
 
 /* ===== CUSTOM FONTS ====== */
+@font-face {
+  font-family: Rocher;
+  src: url("../public/fonts/RocherColorGX.woff2");
+}
 
 @font-face {
   font-family: BakbakOne;

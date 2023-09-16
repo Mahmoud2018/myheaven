@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
+import React, { useState, useContext } from "react";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -9,6 +7,7 @@ import Paper from "@mui/material/Paper";
 import { Card } from "@mui/material";
 import Container from "@mui/material/Container";
 import { DataContext } from "../contexts/DataContext";
+import Divider from "@mui/material/Divider";
 
 // DIALOG IMPORTS
 import IconButton from "@mui/material/IconButton";
@@ -157,17 +156,14 @@ export default function MyItems() {
                   color="primary"
                 >
                   {obj.prise}
-                </Typography>
-
-                <Typography>
                   <img
                     src={"scores/1.png"}
-                    style={{ width: 30, height: 30 }}
+                    style={{ marginRight: 5, width: 20, height: 20 }}
                     alt="Logo"
                   />
                 </Typography>
 
-                <Typography>{obj.Item}</Typography>
+                <Typography></Typography>
                 <IconButton
                   color="primary"
                   aria-label="add to shopping cart"
@@ -176,6 +172,15 @@ export default function MyItems() {
                   <AddIcon />
                   <Typography>شراء</Typography>
                 </IconButton>
+                {/* <Divider
+                  style={{ background: "#fbc02d" }}
+                  sx={{ borderBottomWidth: "2px" }}
+                /> */}
+                <Typography
+                  style={{ fontSize: 35, fontFamily: "Rocher", color: "red" }}
+                >
+                  {obj.Item}
+                </Typography>
               </Item>
             );
           })}

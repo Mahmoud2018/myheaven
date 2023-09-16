@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useMemo } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
@@ -111,7 +111,6 @@ const Myheaven = ({ activationInterval = H20 }) => {
   const Almsanumbers = Almsanumber.map((item) => {
     return item;
   });
-  // console.log(Alsbah);
 
   /* Get data from localStorage */
   useEffect(() => {
@@ -384,29 +383,20 @@ const Myheaven = ({ activationInterval = H20 }) => {
   });
 
   // filter all non completed tasks
-  const nonCompleted = () => {
-    const incompleteObjects = [];
-    for (const obj of tasks) {
-      if (!obj.isCompleted) {
-        incompleteObjects.push(obj);
-      }
-    }
 
-    return incompleteObjects;
-  };
+  const completed = useMemo(() => {
+    return tasks.filter((t) => {
+      console.log("calling completed todos");
+      return t.isCompleted;
+    });
+  }, [tasks]);
 
-  // filter all completed tasks
-  const Completed = () => {
-    const completeObjects = [];
-
-    for (const obj of tasks) {
-      if (obj.isCompleted === true) {
-        completeObjects.push(obj);
-      }
-    }
-
-    return completeObjects;
-  };
+  const notCompleted = useMemo(() => {
+    return tasks.filter((t) => {
+      console.log("calling not completed todos");
+      return !t.isCompleted;
+    });
+  }, [tasks]);
 
   // Show data for each slide in the Header
   function changeDisplayedType(e) {
@@ -418,10 +408,10 @@ const Myheaven = ({ activationInterval = H20 }) => {
   if (tasks !== null) {
     switch (displayedtasksType) {
       case "completed":
-        Alltasks = Completed();
+        Alltasks = completed;
         break;
       case "non-completed":
-        Alltasks = nonCompleted();
+        Alltasks = notCompleted;
         break;
       case "salat":
         Alltasks = tasks.slice(0, 5);
