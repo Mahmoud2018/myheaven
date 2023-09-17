@@ -31,7 +31,7 @@ export default function Info() {
     >
       <Item item xs={1}>
         <Typography style={{ fontSize: 12 }}>
-          يتم حساب النقاط لجميع المهام المنجزة كل 20 ساعة يظهر زر (اجمع النقاط)
+          يتم حساب الذهب لجميع المهام المنجزة كل 20 ساعة يظهر زر (اجمع الذهب)
           عند النقر عليه يضاف الذهب لجميع العبادات المنجزة إلى رصيدك وتعود
           المهام بشكل تلقائي لغير منجزة لإنجازها من جديد وهكذا تستطيع أن تداوم
           على عبادتك وتلتزم فيها بشكل أسهل
@@ -41,7 +41,7 @@ export default function Info() {
       <Item item xs={1}>
         <img src={"Info/Scorse.png"} alt="Logo" style={{ width: "100%" }} />
         <Typography style={{ fontSize: 15 }}>
-          النقاط التي اكتسبها من انجاز جميع العبادات
+          الذهب التي اكتسبها من انجاز جميع العبادات
         </Typography>
         <Typography color="primary" style={{ fontSize: 10 }}></Typography>
       </Item>

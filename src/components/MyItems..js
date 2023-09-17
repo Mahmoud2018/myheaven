@@ -150,8 +150,11 @@ export default function MyItems() {
 
                 <Typography
                   style={{
+                    marginRight: 12,
                     fontFamily: "BakbakOne",
                     fontSize: 20,
+                    display: "flex",
+                    alignItems: "center",
                   }}
                   color="primary"
                 >
@@ -163,7 +166,6 @@ export default function MyItems() {
                   />
                 </Typography>
 
-                <Typography></Typography>
                 <IconButton
                   color="primary"
                   aria-label="add to shopping cart"
