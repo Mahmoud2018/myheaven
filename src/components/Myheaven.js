@@ -160,8 +160,10 @@ const Myheaven = ({ activationInterval = H20 }) => {
   };
 
   const plus = () => {
-    if (count == num[currentPage]) {
+    if (count == num[currentPage] - 1) {
       setCount(count);
+      setCurrentPage(currentPage + 1);
+      setCount(0);
     } else {
       setCount(count + 1);
     }
@@ -957,7 +959,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
                   )}
 
                   <Grid
-                    style={{ marginTop: 30 }}
+                    style={{ marginTop: 10 }}
                     item
                     xs={8}
                     container
@@ -968,6 +970,12 @@ const Myheaven = ({ activationInterval = H20 }) => {
                     alignItems="center"
                     flexDirection="row"
                   >
+                    <Typography
+                      style={{ fontSize: 10, color: "red", marginBottom: 10 }}
+                    >
+                      سيتم الانتقال تلقائيا للذكر التالي عند اكتمال المرات
+                      المنجزة
+                    </Typography>
                     {AthkarData === 0 ? (
                       []
                     ) : (
