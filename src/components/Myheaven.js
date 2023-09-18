@@ -970,16 +970,20 @@ const Myheaven = ({ activationInterval = H20 }) => {
                     alignItems="center"
                     flexDirection="row"
                   >
-                    <Typography
-                      style={{ fontSize: 10, color: "red", marginBottom: 10 }}
-                    >
-                      سيتم الانتقال تلقائيا للذكر التالي عند اكتمال المرات
-                      المنجزة
-                    </Typography>
                     {AthkarData === 0 ? (
                       []
                     ) : (
                       <>
+                        <Typography
+                          style={{
+                            fontSize: 10,
+                            color: "red",
+                            marginBottom: 10,
+                          }}
+                        >
+                          سيتم الانتقال تلقائيا للذكر التالي عند اكتمال المرات
+                          المنجزة
+                        </Typography>
                         <Item item xs={1}>
                           <IconButton
                             aria-label="plus"
