@@ -126,6 +126,31 @@ const Myheaven = ({ activationInterval = H20 }) => {
   /* Get data from localStorage */
   useEffect(() => {
     console.log("Get Data by calling useEffect ");
+
+    // Retrieve the existing saveCar array from local storage
+    const existingSaveCar = JSON.parse(localStorage.getItem("todos")) || [];
+
+    // Iterate through the car array
+    const updatedNewTasks = tasks.map((carObj) => {
+      // Find a matching object in the existing saveCar array by id
+      const existingCarObj = existingSaveCar.find(
+        (existingObj) => existingObj.id === carObj.id
+      );
+
+      // If a matching object is found, update its capacity property
+      if (existingCarObj) {
+        return {
+          ...existingCarObj,
+          capacity: carObj.capacity || false, // Set capacity to false if it doesn't exist in the car object
+        };
+      } else {
+        return carObj; // If no matching object is found, use the original car object
+      }
+    });
+
+    // Save the updated saveCar array back to local storage
+    localStorage.setItem("todos", JSON.stringify(updatedNewTasks));
+
     const storageTodos = JSON.parse(localStorage.getItem("todos"));
     if (storageTodos === null) {
       // Use === for comparison, not =
