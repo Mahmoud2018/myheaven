@@ -4,6 +4,9 @@ import Myheaven from "./components/Myheaven";
 import { DataContext } from "./contexts/DataContext";
 import { useState } from "react";
 import MySnackBar from "./components/MySnackBar";
+import Quran from "./components/Quran";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Tafseer from "./components/Tafseer";
 
 const theme = createTheme({
   typography: {
@@ -47,12 +50,24 @@ function App() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            background: "#191b1f",
+            // background: "#191b1f",
             height: "100vh",
             direction: "rtl",
           }}
         >
-          <Myheaven />
+          <Router>
+            <Switch>
+              <Route path="/Tafseer">
+                <Tafseer />
+              </Route>
+              <Route path="/Quran">
+                <Quran />
+              </Route>
+              <Route path="/">
+                <Myheaven />
+              </Route>
+            </Switch>
+          </Router>
         </div>
       </DataContext.Provider>
     </ThemeProvider>

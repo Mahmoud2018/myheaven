@@ -26,7 +26,7 @@ import Alawrad from "./Alawrad";
 import Avatar from "@mui/material/Avatar";
 import LinearProgress from "@mui/material/LinearProgress";
 import Container from "@mui/material/Container";
-
+import { useHistory } from "react-router-dom";
 // ICONS
 
 import OutletIcon from "@mui/icons-material/Outlet";
@@ -47,6 +47,9 @@ import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CircleIcon from "@mui/icons-material/Circle";
 import Brightness1OutlinedIcon from "@mui/icons-material/Brightness1Outlined";
+import ListAltIcon from "@mui/icons-material/ListAlt";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+import ReceiptIcon from "@mui/icons-material/Receipt";
 
 // Components
 import { DataContext } from "../contexts/DataContext";
@@ -57,6 +60,14 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+
+// Sound IMPORTS
+
+import done from "../Sounds/done.mp3";
+import notdone from "../Sounds/notdone.mp3";
+import point from "../Sounds/add.mp3";
+import bell from "../Sounds/bell.mp3";
+import add from "../Sounds/add.mp3";
 
 // let storageTodos = [];
 let stordtree = 0;
@@ -78,7 +89,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 let H24 = 24 * 60 * 60 * 1000;
 let H20 = 20 * 60 * 60 * 1000;
-let M2 = 2 * 60 * 1000;
+let M2 = 1 * 60 * 1000;
 
 const Myheaven = ({ activationInterval = H20 }) => {
   const [tasks, setTasks] = useState(Data);
@@ -223,6 +234,17 @@ const Myheaven = ({ activationInterval = H20 }) => {
     setinfomodel(true);
   }
 
+  // Create a Howl instance for the sound effect
+  const Done = new Audio(done);
+  const Notdone = new Audio(notdone);
+  const Add = new Audio(add);
+  const Bell = new Audio(bell);
+
+  // Function to play the sound effect
+  const playSound = (effect) => {
+    effect.loop = false;
+    effect.play();
+  };
   // Change tasks to completed
   const completeTask = (taskId) => {
     // Ensure tasks is initialized and not null
@@ -245,8 +267,10 @@ const Myheaven = ({ activationInterval = H20 }) => {
         });
         if (newIsCompleted) {
           showHideToast("الحمد لله..اللهم تقبل يارب", "success"); // Call function when isCompleted becomes true
+          playSound(Done);
         } else {
           showHideToast("لا تجعل الشيطان يلهيك", "error");
+          playSound(Notdone);
         }
       }
 
@@ -280,6 +304,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
         ? setCastle((prevScore) => prevScore + obj.points)
         : obj
     );
+    playSound(Add);
   };
   // Counte all points and reset scores
   const updateScoreAndCompleted = () => {
@@ -345,6 +370,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
       setIsActive(true);
       localStorage.setItem("lastActivation", new Date().toISOString());
       localStorage.setItem("buttonState", "active");
+      playSound(Bell);
     }, duration);
   };
 
@@ -387,15 +413,17 @@ const Myheaven = ({ activationInterval = H20 }) => {
   // filter all non completed tasks
 
   const completed = useMemo(() => {
+    console.log("calling completed");
+
     return tasks.filter((t) => {
-      console.log("calling completed todos");
       return t.isCompleted;
     });
   }, [tasks]);
 
   const notCompleted = useMemo(() => {
+    console.log("calling not completed");
+
     return tasks.filter((t) => {
-      console.log("calling not completed todos");
       return !t.isCompleted;
     });
   }, [tasks]);
@@ -510,10 +538,35 @@ const Myheaven = ({ activationInterval = H20 }) => {
                       color: "white",
                     }}
                   >
-                    <SpeakerNotesIcon sx={{ color: "#0288d1", fontSize: 30 }} />
+                    <MenuBookIcon sx={{ color: "#00a152", fontSize: 30 }} />
                   </IconButton>
                 ) : null}
                 {/*== Wred ICON BUTTON ==*/}
+                {task.quran ? (
+                  <IconButton
+                    onClick={() => quranOpene(task.id)}
+                    className="iconButton"
+                    aria-label="delete"
+                    style={{
+                      color: "white",
+                    }}
+                  >
+                    <MenuBookIcon sx={{ color: "#00a152", fontSize: 30 }} />
+                  </IconButton>
+                ) : null}
+                {task.tfser ? (
+                  <IconButton
+                    onClick={() => TafseerOpen(task.id)}
+                    className="iconButton"
+                    aria-label="delete"
+                    style={{
+                      color: "white",
+                    }}
+                  >
+                    <ReceiptIcon sx={{ color: "#d500f9", fontSize: 30 }} />
+                  </IconButton>
+                ) : null}
+
                 {/* Athkar ICON BUTTON */}
                 {task.Athkar ? (
                   <IconButton
@@ -525,7 +578,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
                     }}
                   >
                     <Brightness7SharpIcon
-                      sx={{ color: "#0288d1", fontSize: 30 }}
+                      sx={{ color: "#fbc02d", fontSize: 30 }}
                     />
                   </IconButton>
                 ) : null}
@@ -542,7 +595,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
                     }}
                   >
                     <Brightness2SharpIcon
-                      sx={{ color: "#0288d1", fontSize: 30 }}
+                      sx={{ color: "#fbc02d", fontSize: 30 }}
                     />
                   </IconButton>
                 ) : null}
@@ -702,6 +755,15 @@ const Myheaven = ({ activationInterval = H20 }) => {
     marginLeft: 10,
     color: theme.palette.text.secondary,
   }));
+
+  const history = useHistory();
+  function quranOpene() {
+    history.push("/Quran");
+  }
+
+  function TafseerOpen() {
+    history.push("/Tafseer");
+  }
 
   return (
     <Card
@@ -933,8 +995,9 @@ const Myheaven = ({ activationInterval = H20 }) => {
               >
                 <Grid>
                   <Grid item xs={8}>
-                    <Typography>{modelContent}</Typography>
-                    <Typography>{AthkarData[currentPage]}</Typography>
+                    <Typography style={{ fontFamily: "kitab", fontSize: 20 }}>
+                      {modelContent} {AthkarData[currentPage]}
+                    </Typography>
                   </Grid>
                   {AthkarData === 0 ? (
                     []

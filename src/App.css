@@ -98,6 +98,10 @@
   font-weight: 200;
 }
 
+@font-face {
+  font-family: kitab;
+  src: url("../public/fonts/Kitab\ Bold.ttf");
+}
 /* =====// CUSTOM FONTS //====== */
 
 .css-x3vexg-MuiGrid2-root {
@@ -263,4 +267,58 @@
       110% 10%;
     background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
   }
+}
+
+.outer-border {
+  border: 2px solid #0d0500;
+  height: 98vh;
+  width: 97%;
+  padding: 2px;
+  margin: auto;
+  border-radius: 20px;
+}
+
+.mid-border {
+  border: 6px solid #0d0500;
+  height: 95vh;
+  width: 95%;
+  padding: 4px;
+  margin: auto;
+  border-radius: 20px;
+}
+
+.inner-border {
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  border: 2px solid #0d0500;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  overflow: scroll;
+  border-radius: 20px;
+}
+
+.suranumber {
+  display: inline-flex;
+
+  width: 20px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #4a3b04;
+  border-radius: 20px;
+  background: #fbc02d;
+}
+
+.suraname {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #4a3b04;
+  border-radius: 10px;
+  background: #fbc02d;
+  height: 30px;
 }
