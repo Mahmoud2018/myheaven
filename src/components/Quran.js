@@ -91,7 +91,7 @@ function Quran() {
     const source2 = axios.CancelToken.source(); // Create a new cancel token source for the surah request
 
     const request1 = axios.get(
-      `https://api.alquran.cloud/v1/quran/quran-uthmani`,
+      `http://api.alquran.cloud/v1/quran/quran-uthmani`,
       {
         cancelToken: source1.token, // Use the cancel token from the source
       }

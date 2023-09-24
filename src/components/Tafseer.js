@@ -50,7 +50,7 @@ function Tafseer() {
     });
 
     const request3 = axios.get(
-      `https://raw.githubusercontent.com/penggguna/QuranJSON/master/quran.json`,
+      `http://raw.githubusercontent.com/penggguna/QuranJSON/master/quran.json`,
       {
         cancelToken: source3.token, // Use the cancel token from the source
       }
