@@ -782,6 +782,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
   }));
 
   const history = useHistory();
+
   function quranOpene() {
     history.push("/Quran");
   }

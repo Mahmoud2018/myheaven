@@ -56,7 +56,7 @@ export const Data = [
     points: 20,
     isCompleted: false,
     detils: "قطعة ذهب",
-    // quran: true,
+    quran: true,
     gold: true,
   },
   {
@@ -65,7 +65,7 @@ export const Data = [
     points: 20,
     isCompleted: false,
     detils: "قطعة ذهب",
-    // quran: true,
+    quran: true,
     gold: true,
   },
   {
@@ -74,7 +74,7 @@ export const Data = [
     points: 20,
     isCompleted: false,
     detils: "قطعة ذهب",
-    // quran: true,
+    quran: true,
     gold: true,
   },
   {
@@ -84,7 +84,7 @@ export const Data = [
     isCompleted: false,
     detils: "قطعة ذهب",
     gold: true,
-    // tfser: true,
+    tfser: true,
   },
   {
     id: uuidv4(),
@@ -92,7 +92,7 @@ export const Data = [
     points: 10000,
     isCompleted: false,
     detils: "قطعة ذهب",
-    // quran: true,
+    quran: true,
     gold: true,
   },
   {
