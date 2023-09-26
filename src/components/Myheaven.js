@@ -767,7 +767,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
       BottomNavigationData = <Portfolio />;
       break;
     case "Quran&Tafser":
-      BottomNavigationData = <Quran show={display} />;
+      BottomNavigationData = <Quran />;
       break;
     default:
       BottomNavigationData = [];
@@ -964,6 +964,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
+          // background: "green",
         }}
       >
         <ToggleButtonGroup

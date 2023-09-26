@@ -52,280 +52,246 @@ function Quran({ show }) {
   // console.log(filterAya);
 
   return (
-    <Card
-      maxWidth="sm"
-      style={{
-        width: 450,
-        // background: "green",
-        height: "93vh",
-        borderRadius: "20px",
-      }}
-      sx={{ minWidth: 250 }}
-    >
-      <CardContent
-        // sx={{ border: 3, borderColor: "primary.main", borderRadius: "20px" }}
-        container
-        maxWidth="sm"
-        spacing={2}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          padding: "0px",
-          flexDirection: "column",
-
-          // overflow: "scroll",
-        }}
+    <>
+      <div style={{ marginBottom: "20px" }}></div>
+      <Button
+        variant="outlined"
+        startIcon={<MenuBookIcon style={{ marginLeft: 10 }} />}
+        onClick={suralistOpene}
       >
-        <CardContent style={{ padding: "0px" }}>
-          <div style={{ marginBottom: "10px" }}></div>
-          {/* <Button
-            // style={{ marginBottom: "30px" }}
-            variant="outlined"
-            startIcon={<HomeIcon style={{ marginLeft: 10 }} />}
-            onClick={homeOpene}
+        القرآن
+      </Button>
+      <Button
+        variant="outlined"
+        startIcon={<ListAltIcon style={{ marginLeft: 10 }} />}
+        onClick={TafseerOpen}
+      >
+        التفسير
+      </Button>
+      <List aria-label="surahs">
+        {display === 1 ? (
+          <Typography
+            className="titel-text"
+            style={{
+              color: "white",
+              fontFamily: "kitab",
+              fontWeight: "bold",
+              fontSize: 20,
+              marginBottom: 10,
+            }}
           >
-            الرئيسية
-          </Button> */}
-          <Button
-            variant="outlined"
-            startIcon={<MenuBookIcon style={{ marginLeft: 10 }} />}
-            onClick={suralistOpene}
+            ﴿ فهرس القرآن ﴾
+          </Typography>
+        ) : null}
+
+        {display === 2 ? (
+          <Typography
+            className="titel-text"
+            style={{
+              color: "white",
+              fontFamily: "kitab",
+              fontWeight: "bold",
+              fontSize: 20,
+              marginBottom: 10,
+            }}
           >
-            القرآن
-          </Button>
-          <Button
-            variant="outlined"
-            startIcon={<ListAltIcon style={{ marginLeft: 10 }} />}
-            onClick={TafseerOpen}
+            {" ﴿ ⁠" + selectedItem.name + " ﴾ "}
+          </Typography>
+        ) : null}
+
+        {display === 3 ? (
+          <Typography
+            className="titel-text"
+            style={{
+              color: "white",
+              fontFamily: "kitab",
+              fontWeight: "bold",
+              fontSize: 20,
+              marginBottom: 10,
+            }}
           >
-            التفسير
-          </Button>
+            ﴿ فهرس التفسير ﴾
+          </Typography>
+        ) : null}
 
-          <List aria-label="surahs">
-            {display === 1 ? (
-              <Typography
-                className="titel-text"
-                style={{
-                  color: "white",
-                  fontFamily: "kitab",
-                  fontWeight: "bold",
-                  fontSize: 20,
-                  marginBottom: 10,
-                }}
-              >
-                ﴿ فهرس القرآن ﴾
-              </Typography>
-            ) : null}
+        {display === 4 ? (
+          <Typography
+            className="titel-text"
+            style={{
+              color: "white",
+              fontFamily: "kitab",
+              fontWeight: "bold",
+              fontSize: 20,
+              marginBottom: 10,
+            }}
+          >
+            ⁠ تفسير سورة ﴿ {QuranData[selectedItem - 1].name} ﴾
+          </Typography>
+        ) : null}
 
-            {display === 2 ? (
-              <Typography
-                className="titel-text"
-                style={{
-                  color: "white",
-                  fontFamily: "kitab",
-                  fontWeight: "bold",
-                  fontSize: 20,
-                  marginBottom: 10,
-                }}
-              >
-                {" ﴿ ⁠" + selectedItem.name + " ﴾ "}
-              </Typography>
-            ) : null}
-
-            {display === 3 ? (
-              <Typography
-                className="titel-text"
-                style={{
-                  color: "white",
-                  fontFamily: "kitab",
-                  fontWeight: "bold",
-                  fontSize: 20,
-                  marginBottom: 10,
-                }}
-              >
-                ﴿ فهرس التفسير ﴾
-              </Typography>
-            ) : null}
-
-            {display === 4 ? (
-              <Typography
-                className="titel-text"
-                style={{
-                  color: "white",
-                  fontFamily: "kitab",
-                  fontWeight: "bold",
-                  fontSize: 20,
-                  marginBottom: 10,
-                }}
-              >
-                ⁠ تفسير سورة ﴿ {QuranData[selectedItem - 1].name} ﴾
-              </Typography>
-            ) : null}
-
-            <CardContent
-              sx={{
-                border: 3,
-                borderColor: "primary.main",
-                // borderRadius: "20px",
-              }}
-              container
-              maxWidth="sm"
-              spacing={2}
+        <CardContent
+          sx={{
+            border: 3,
+            borderColor: "primary.main",
+            minWidth: 250,
+            // borderRadius: "20px",
+          }}
+          container
+          maxWidth="sm"
+          spacing={2}
+          style={{
+            width: 450,
+            // display: "flex",
+            justifyContent: "center",
+            // alignItems: "center",
+            // flexDirection: "column",
+            // background: "green",
+            padding: "5px",
+            height: "77.5vh",
+            borderRadius: "20px",
+            overflow: "scroll",
+          }}
+        >
+          {display === 1
+            ? QuranData.map((data) => (
+                <ListItem disablePadding key={data.id}>
+                  <ListItemButton
+                    style={{
+                      display: "flex",
+                      // justifyContent: "center",
+                      // alignItems: "center",
+                      textAlign: "center",
+                      alignItems: "baseline",
+                    }}
+                    onClick={() => handleItemClick(data.id)}
+                  >
+                    <Typography
+                      className="suraname"
+                      style={{
+                        fontFamily: "kitab",
+                        fontWeight: "bold",
+                        fontSize: 18,
+                        marginLeft: 10,
+                      }}
+                    >
+                      {" ﴿⁠" + data.id + "﴾ "}
+                    </Typography>
+                    <Typography
+                      // className="suraname"
+                      style={{ fontFamily: "kitab", fontSize: 20 }}
+                      // variant="body1"
+                      align="right"
+                    >
+                      {data.name}
+                    </Typography>
+                  </ListItemButton>
+                  <Typography
+                    className="suraname"
+                    style={{
+                      fontFamily: "kitab",
+                      fontWeight: "bold",
+                      fontSize: 18,
+                      // marginBottom: 10,
+                    }}
+                  >
+                    {data.type}
+                  </Typography>
+                </ListItem>
+              ))
+            : null}
+          {display === 2 ? (
+            <Typography
+              variant="string"
               style={{
-                // display: "flex",
-                justifyContent: "center",
-                // alignItems: "center",
-                // flexDirection: "column",
-                // background: "green",
-
-                padding: "5px",
-                height: "77.5vh",
-                borderRadius: "20px",
-                overflow: "scroll",
+                fontFamily: "kitab",
+                fontSize: 20,
               }}
             >
-              {display === 1
-                ? QuranData.map((data) => (
-                    <ListItem disablePadding key={data.id}>
-                      <ListItemButton
-                        style={{
-                          display: "flex",
-                          // justifyContent: "center",
-                          // alignItems: "center",
-                          textAlign: "center",
-                          alignItems: "baseline",
-                        }}
-                        onClick={() => handleItemClick(data.id)}
-                      >
-                        <Typography
-                          className="suraname"
-                          style={{
-                            fontFamily: "kitab",
-                            fontWeight: "bold",
-                            fontSize: 18,
-                            marginLeft: 10,
-                          }}
-                        >
-                          {" ﴿⁠" + data.id + "﴾ "}
-                        </Typography>
-                        <Typography
-                          // className="suraname"
-                          style={{ fontFamily: "kitab", fontSize: 20 }}
-                          // variant="body1"
-                          align="right"
-                        >
-                          {data.name}
-                        </Typography>
-                      </ListItemButton>
-                      <Typography
-                        className="suraname"
-                        style={{
-                          fontFamily: "kitab",
-                          fontWeight: "bold",
-                          fontSize: 18,
-                          // marginBottom: 10,
-                        }}
-                      >
-                        {data.type}
-                      </Typography>
-                    </ListItem>
-                  ))
-                : null}
-              {display === 2 ? (
+              {selectedItem.array.map((arItem) => (
                 <Typography
                   variant="string"
-                  style={{
-                    fontFamily: "kitab",
-                    fontSize: 20,
-                  }}
+                  style={{ fontFamily: "kitab", fontSize: 20 }}
+                  key={arItem.id}
                 >
-                  {selectedItem.array.map((arItem) => (
-                    <Typography
-                      variant="string"
-                      style={{ fontFamily: "kitab", fontSize: 20 }}
-                      key={arItem.id}
-                    >
-                      {arItem.ar}
-                      <span
-                        style={{ paddingLeft: 10, paddingRight: 10 }}
-                        className="suranumber"
-                      >
-                        ﴿{arItem.id}﴾
-                      </span>
-                    </Typography>
-                  ))}
+                  {arItem.ar}
+                  <span
+                    style={{ paddingLeft: 10, paddingRight: 10 }}
+                    className="suranumber"
+                  >
+                    ﴿{arItem.id}﴾
+                  </span>
                 </Typography>
-              ) : null}
+              ))}
+            </Typography>
+          ) : null}
 
-              {display === 3
-                ? QuranData.map((data) => (
-                    <ListItem disablePadding key={data.id}>
-                      <ListItemButton
-                        style={{
-                          display: "flex",
-                          // justifyContent: "center",
-                          // alignItems: "center",
-                          textAlign: "center",
-                          alignItems: "baseline",
-                        }}
-                        onClick={() => TafeserShow(data.id)}
-                      >
-                        <Typography
-                          className="suraname"
-                          style={{
-                            fontFamily: "kitab",
-                            fontWeight: "bold",
-                            fontSize: 18,
-                            marginLeft: 10,
-                          }}
-                        >
-                          {" ﴿⁠" + data.id + "﴾ "}
-                        </Typography>
-                        <Typography
-                          style={{ fontFamily: "kitab", fontSize: 20 }}
-                          // variant="body1"
-                          align="right"
-                        >
-                          {data.name}
-                        </Typography>
-                      </ListItemButton>
-                      <Typography
-                        className="suraname"
-                        style={{
-                          fontFamily: "kitab",
-                          fontWeight: "bold",
-                          fontSize: 18,
-                          // marginBottom: 10,
-                        }}
-                      >
-                        {data.type}
-                      </Typography>
-                    </ListItem>
-                  ))
-                : null}
-              {display === 4
-                ? filterAya.map((arItem) => (
+          {display === 3
+            ? QuranData.map((data) => (
+                <ListItem disablePadding key={data.id}>
+                  <ListItemButton
+                    style={{
+                      display: "flex",
+                      // justifyContent: "center",
+                      // alignItems: "center",
+                      textAlign: "center",
+                      alignItems: "baseline",
+                    }}
+                    onClick={() => TafeserShow(data.id)}
+                  >
                     <Typography
-                      variant="string"
-                      style={{ fontFamily: "kitab", fontSize: 18 }}
-                      key={arItem.number}
+                      className="suraname"
+                      style={{
+                        fontFamily: "kitab",
+                        fontWeight: "bold",
+                        fontSize: 18,
+                        marginLeft: 10,
+                      }}
                     >
-                      <span
-                        key={arItem.number}
-                        style={{ paddingLeft: 10, paddingRight: 10 }}
-                        className="suraname"
-                      >
-                        تفسير الآية رقم ﴿{arItem.aya}﴾
-                      </span>
-                      {arItem.text}
+                      {" ﴿⁠" + data.id + "﴾ "}
                     </Typography>
-                  ))
-                : null}
-            </CardContent>
-          </List>
+                    <Typography
+                      style={{ fontFamily: "kitab", fontSize: 20 }}
+                      // variant="body1"
+                      align="right"
+                    >
+                      {data.name}
+                    </Typography>
+                  </ListItemButton>
+                  <Typography
+                    className="suraname"
+                    style={{
+                      fontFamily: "kitab",
+                      fontWeight: "bold",
+                      fontSize: 18,
+                      // marginBottom: 10,
+                    }}
+                  >
+                    {data.type}
+                  </Typography>
+                </ListItem>
+              ))
+            : null}
+          {display === 4
+            ? filterAya.map((arItem) => (
+                <Typography
+                  variant="string"
+                  style={{ fontFamily: "kitab", fontSize: 18 }}
+                  key={arItem.number}
+                >
+                  <span
+                    key={arItem.number}
+                    style={{ paddingLeft: 10, paddingRight: 10 }}
+                    className="suraname"
+                  >
+                    تفسير الآية رقم ﴿{arItem.aya}﴾
+                  </span>
+                  {arItem.text}
+                </Typography>
+              ))
+            : null}
         </CardContent>
-      </CardContent>
-    </Card>
+      </List>
+    </>
   );
 }
 

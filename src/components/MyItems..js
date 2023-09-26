@@ -123,12 +123,24 @@ export default function MyItems() {
         flexDirection: "column",
       }}
     >
+      <Typography
+        style={{
+          marginRight: 12,
+          fontFamily: "Rocher",
+          fontSize: 30,
+          // display: "flex",
+          // alignItems: "center",
+        }}
+        color="primary"
+      >
+        My Stor
+      </Typography>
       <Card
         maxWidth="sm"
         style={{
           // width: 10,
           // background: "green",
-          maxHeight: "92.5vh",
+          maxHeight: "88.5vh",
           overflow: "scroll",
         }}
         sx={{
@@ -137,18 +149,6 @@ export default function MyItems() {
           marginTop: 1,
         }}
       >
-        <Typography
-          style={{
-            marginRight: 12,
-            fontFamily: "Rocher",
-            fontSize: 30,
-            // display: "flex",
-            // alignItems: "center",
-          }}
-          color="primary"
-        >
-          My Stor
-        </Typography>
         <Grid
           container
           spacing={2}
