@@ -53,12 +53,14 @@ function Tafseer() {
     setDisplay(2);
   };
 
+  const TafeserShow = (itemId) => {
+    setSelectedItem(itemId);
+    setDisplay(3);
+  };
+
   const number2Objects = TafseerData.filter(
     (item) => item.number == selectedItem
   );
-
-  console.log(number2Objects);
-  console.log(selectedItem);
 
   return (
     <Card
@@ -110,17 +112,31 @@ function Tafseer() {
           <List aria-label="surahs">
             {display === 1 ? (
               <Typography
-                className="suraname"
+                className="titel-text"
                 style={{
+                  color: "white",
                   fontFamily: "kitab",
                   fontWeight: "bold",
-                  fontSize: 18,
+                  fontSize: 20,
                   marginBottom: 10,
                 }}
               >
-                التفسير
+                ﴿ ⁠فهرس التفسير ﴾
               </Typography>
-            ) : {number2Objects.name}}
+            ) : (
+              <Typography
+                className="titel-text"
+                style={{
+                  color: "white",
+                  fontFamily: "kitab",
+                  fontWeight: "bold",
+                  fontSize: 20,
+                  marginBottom: 10,
+                }}
+              >
+                ﴿⁠ تفسير سورة {QuranData[selectedItem - 1].name} ﴾
+              </Typography>
+            )}
 
             <CardContent
               // Tafeser page 1
@@ -198,7 +214,7 @@ function Tafseer() {
                   {number2Objects.map((arItem) => (
                     <Typography
                       variant="string"
-                      style={{ fontFamily: "kitab", fontSize: 20 }}
+                      style={{ fontFamily: "kitab", fontSize: 18 }}
                       key={arItem.number}
                     >
                       <span

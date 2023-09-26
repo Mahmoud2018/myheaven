@@ -20,6 +20,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import AddIcon from "@mui/icons-material/Add";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import cash from "../Sounds/cash.mp3";
 
 const Items = [
   { id: uuidv4(), Item: 0, pic: "Fruits/1.png", prise: 500 },
@@ -81,11 +82,19 @@ export default function MyItems() {
     return parsedItems ? parsedItems : Items;
   });
 
+  const Cash = new Audio(cash);
+
+  const playSound = (effect) => {
+    effect.loop = false;
+    effect.play();
+  };
+
   const ShopItmes = (taskId) => {
     setdata((prevData) =>
       prevData.map((obj) => {
         if (obj.id === taskId && score >= obj.prise) {
           const newScore = score - obj.prise;
+          playSound(Cash);
           setScore(newScore);
           showHideToast("تم شراء الهدية", "success");
           let updatedItems = { ...obj, Item: obj.Item + 1 };
@@ -119,7 +128,7 @@ export default function MyItems() {
         style={{
           // width: 10,
           // background: "green",
-          maxHeight: "64.5vh",
+          maxHeight: "92.5vh",
           overflow: "scroll",
         }}
         sx={{
@@ -128,6 +137,18 @@ export default function MyItems() {
           marginTop: 1,
         }}
       >
+        <Typography
+          style={{
+            marginRight: 12,
+            fontFamily: "Rocher",
+            fontSize: 30,
+            // display: "flex",
+            // alignItems: "center",
+          }}
+          color="primary"
+        >
+          My Stor
+        </Typography>
         <Grid
           container
           spacing={2}
@@ -136,7 +157,7 @@ export default function MyItems() {
             justifyContent: "center",
             alignItems: "center",
             fontWeight: "bold",
-            // marginTop: "10px",
+            marginTop: "5px",
           }}
         >
           {data.map((obj) => {

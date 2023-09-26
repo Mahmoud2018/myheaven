@@ -271,7 +271,7 @@
 
 .outer-border {
   border: 2px solid #0d0500;
-  height: 98vh;
+  height: 80vh;
   width: 97%;
   padding: 2px;
   margin: auto;
@@ -280,7 +280,7 @@
 
 .mid-border {
   border: 6px solid #0d0500;
-  height: 95vh;
+  height: 80vh;
   width: 95%;
   padding: 4px;
   margin: auto;
@@ -292,16 +292,27 @@
   /* justify-content: center; */
   flex-direction: column;
   border: 2px solid #0d0500;
-  height: 100%;
+  height: 80%;
   width: 100%;
   margin: auto;
   overflow: scroll;
   border-radius: 20px;
 }
 
+.titel-text {
+  display: flex;
+  padding: 2px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #0d0500;
+  border-radius: 10px;
+  background: hsl(42, 42%, 9%);
+  height: 30px;
+}
+
 .suranumber {
   display: inline-flex;
-
   width: 20px;
   height: 30px;
   justify-content: center;

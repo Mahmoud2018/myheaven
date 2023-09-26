@@ -5,8 +5,9 @@ import { DataContext } from "./contexts/DataContext";
 import { useState } from "react";
 import MySnackBar from "./components/MySnackBar";
 import Quran from "./components/Quran";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Tafseer from "./components/Tafseer";
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const theme = createTheme({
   typography: {

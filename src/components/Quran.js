@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import QuranData from "./QuranData.json";
+import TafseerData from "./TafseerData.json";
 import { useHistory } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
+
 import {
   Card,
   CardContent,
@@ -19,24 +22,24 @@ import ArticleIcon from "@mui/icons-material/Article";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 // import QuranAudioPlayer from "./QuranAudioPlayer";
 
-function Quran() {
+function Quran({ show }) {
   const [selectedItem, setSelectedItem] = useState(null);
-
+  const [Tafsee, setTafsee] = useState([]);
   const [display, setDisplay] = useState(1);
-
-  const history = useHistory();
-
   function suralistOpene() {
     setDisplay(1);
   }
 
   function TafseerOpen() {
-    history.push("/Tafseer");
+    setDisplay(3);
   }
 
-  function homeOpene() {
-    history.push("/");
-  }
+  function homeOpene() {}
+
+  const TafeserShow = (itemId) => {
+    setSelectedItem(itemId);
+    setDisplay(4);
+  };
 
   const handleItemClick = (itemId) => {
     const selected = QuranData.find((item) => item.id === itemId);
@@ -44,38 +47,45 @@ function Quran() {
     setDisplay(2);
   };
 
+  const filterAya = TafseerData.filter((item) => item.number == selectedItem);
+
+  // console.log(filterAya);
+
   return (
     <Card
       maxWidth="sm"
       style={{
         width: 450,
         // background: "green",
-        height: "100vh",
+        height: "93vh",
         borderRadius: "20px",
       }}
       sx={{ minWidth: 250 }}
     >
       <CardContent
-        sx={{ border: 3, borderColor: "primary.main", borderRadius: "20px" }}
+        // sx={{ border: 3, borderColor: "primary.main", borderRadius: "20px" }}
         container
         maxWidth="sm"
         spacing={2}
         style={{
           display: "flex",
           justifyContent: "center",
-          // alignItems: "center",
+          padding: "0px",
           flexDirection: "column",
+
           // overflow: "scroll",
         }}
       >
         <CardContent style={{ padding: "0px" }}>
-          <Button
+          <div style={{ marginBottom: "10px" }}></div>
+          {/* <Button
+            // style={{ marginBottom: "30px" }}
             variant="outlined"
             startIcon={<HomeIcon style={{ marginLeft: 10 }} />}
             onClick={homeOpene}
           >
             الرئيسية
-          </Button>
+          </Button> */}
           <Button
             variant="outlined"
             startIcon={<MenuBookIcon style={{ marginLeft: 10 }} />}
@@ -94,20 +104,24 @@ function Quran() {
           <List aria-label="surahs">
             {display === 1 ? (
               <Typography
-                className="suraname"
+                className="titel-text"
                 style={{
+                  color: "white",
                   fontFamily: "kitab",
                   fontWeight: "bold",
-                  fontSize: 18,
+                  fontSize: 20,
                   marginBottom: 10,
                 }}
               >
-                الفهرس
+                ﴿ فهرس القرآن ﴾
               </Typography>
-            ) : (
+            ) : null}
+
+            {display === 2 ? (
               <Typography
-                className="suraname"
+                className="titel-text"
                 style={{
+                  color: "white",
                   fontFamily: "kitab",
                   fontWeight: "bold",
                   fontSize: 20,
@@ -116,7 +130,38 @@ function Quran() {
               >
                 {" ﴿ ⁠" + selectedItem.name + " ﴾ "}
               </Typography>
-            )}
+            ) : null}
+
+            {display === 3 ? (
+              <Typography
+                className="titel-text"
+                style={{
+                  color: "white",
+                  fontFamily: "kitab",
+                  fontWeight: "bold",
+                  fontSize: 20,
+                  marginBottom: 10,
+                }}
+              >
+                ﴿ فهرس التفسير ﴾
+              </Typography>
+            ) : null}
+
+            {display === 4 ? (
+              <Typography
+                className="titel-text"
+                style={{
+                  color: "white",
+                  fontFamily: "kitab",
+                  fontWeight: "bold",
+                  fontSize: 20,
+                  marginBottom: 10,
+                }}
+              >
+                ⁠ تفسير سورة ﴿ {QuranData[selectedItem - 1].name} ﴾
+              </Typography>
+            ) : null}
+
             <CardContent
               sx={{
                 border: 3,
@@ -131,58 +176,62 @@ function Quran() {
                 justifyContent: "center",
                 // alignItems: "center",
                 // flexDirection: "column",
+                // background: "green",
+
                 padding: "5px",
-                height: "83vh",
+                height: "77.5vh",
+                borderRadius: "20px",
                 overflow: "scroll",
               }}
             >
-              {display === 1 ? (
-                QuranData.map((data) => (
-                  <ListItem disablePadding key={data.id}>
-                    <ListItemButton
-                      style={{
-                        display: "flex",
-                        // justifyContent: "center",
-                        // alignItems: "center",
-                        textAlign: "center",
-                        alignItems: "baseline",
-                      }}
-                      onClick={() => handleItemClick(data.id)}
-                    >
+              {display === 1
+                ? QuranData.map((data) => (
+                    <ListItem disablePadding key={data.id}>
+                      <ListItemButton
+                        style={{
+                          display: "flex",
+                          // justifyContent: "center",
+                          // alignItems: "center",
+                          textAlign: "center",
+                          alignItems: "baseline",
+                        }}
+                        onClick={() => handleItemClick(data.id)}
+                      >
+                        <Typography
+                          className="suraname"
+                          style={{
+                            fontFamily: "kitab",
+                            fontWeight: "bold",
+                            fontSize: 18,
+                            marginLeft: 10,
+                          }}
+                        >
+                          {" ﴿⁠" + data.id + "﴾ "}
+                        </Typography>
+                        <Typography
+                          // className="suraname"
+                          style={{ fontFamily: "kitab", fontSize: 20 }}
+                          // variant="body1"
+                          align="right"
+                        >
+                          {data.name}
+                        </Typography>
+                      </ListItemButton>
                       <Typography
                         className="suraname"
                         style={{
                           fontFamily: "kitab",
                           fontWeight: "bold",
                           fontSize: 18,
-                          marginLeft: 10,
+                          // marginBottom: 10,
                         }}
                       >
-                        {" ﴿⁠" + data.id + "﴾ "}
+                        {data.type}
                       </Typography>
-                      <Typography
-                        // className="suraname"
-                        style={{ fontFamily: "kitab", fontSize: 20 }}
-                        // variant="body1"
-                        align="right"
-                      >
-                        {data.name}
-                      </Typography>
-                    </ListItemButton>
-                    <Typography
-                      className="suraname"
-                      style={{
-                        fontFamily: "kitab",
-                        fontWeight: "bold",
-                        fontSize: 18,
-                        // marginBottom: 10,
-                      }}
-                    >
-                      {data.type}
-                    </Typography>
-                  </ListItem>
-                ))
-              ) : (
+                    </ListItem>
+                  ))
+                : null}
+              {display === 2 ? (
                 <Typography
                   variant="string"
                   style={{
@@ -206,7 +255,72 @@ function Quran() {
                     </Typography>
                   ))}
                 </Typography>
-              )}
+              ) : null}
+
+              {display === 3
+                ? QuranData.map((data) => (
+                    <ListItem disablePadding key={data.id}>
+                      <ListItemButton
+                        style={{
+                          display: "flex",
+                          // justifyContent: "center",
+                          // alignItems: "center",
+                          textAlign: "center",
+                          alignItems: "baseline",
+                        }}
+                        onClick={() => TafeserShow(data.id)}
+                      >
+                        <Typography
+                          className="suraname"
+                          style={{
+                            fontFamily: "kitab",
+                            fontWeight: "bold",
+                            fontSize: 18,
+                            marginLeft: 10,
+                          }}
+                        >
+                          {" ﴿⁠" + data.id + "﴾ "}
+                        </Typography>
+                        <Typography
+                          style={{ fontFamily: "kitab", fontSize: 20 }}
+                          // variant="body1"
+                          align="right"
+                        >
+                          {data.name}
+                        </Typography>
+                      </ListItemButton>
+                      <Typography
+                        className="suraname"
+                        style={{
+                          fontFamily: "kitab",
+                          fontWeight: "bold",
+                          fontSize: 18,
+                          // marginBottom: 10,
+                        }}
+                      >
+                        {data.type}
+                      </Typography>
+                    </ListItem>
+                  ))
+                : null}
+              {display === 4
+                ? filterAya.map((arItem) => (
+                    <Typography
+                      variant="string"
+                      style={{ fontFamily: "kitab", fontSize: 18 }}
+                      key={arItem.number}
+                    >
+                      <span
+                        key={arItem.number}
+                        style={{ paddingLeft: 10, paddingRight: 10 }}
+                        className="suraname"
+                      >
+                        تفسير الآية رقم ﴿{arItem.aya}﴾
+                      </span>
+                      {arItem.text}
+                    </Typography>
+                  ))
+                : null}
             </CardContent>
           </List>
         </CardContent>

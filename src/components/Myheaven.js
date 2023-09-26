@@ -27,6 +27,7 @@ import Avatar from "@mui/material/Avatar";
 import LinearProgress from "@mui/material/LinearProgress";
 import Container from "@mui/material/Container";
 import { useHistory } from "react-router-dom";
+import Quran from "./Quran";
 // ICONS
 
 import OutletIcon from "@mui/icons-material/Outlet";
@@ -75,6 +76,7 @@ let stordPlam = 0;
 let stordBox = 0;
 let stordHome = 0;
 let stordcastle = 0;
+let statoftask = "salat";
 // Get data score from local storage
 // storageTodos = JSON.parse(localStorage.getItem("tasks"));
 stordtree = JSON.parse(localStorage.getItem("tree"));
@@ -82,6 +84,7 @@ stordPlam = JSON.parse(localStorage.getItem("plam"));
 stordBox = JSON.parse(localStorage.getItem("Box"));
 stordHome = JSON.parse(localStorage.getItem("home"));
 stordcastle = JSON.parse(localStorage.getItem("castle"));
+statoftask = JSON.parse(localStorage.getItem("statoftask"));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -99,7 +102,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
   const [Box, setBox] = useState(stordBox);
   const [home, sethome] = useState(stordHome);
   const [castle, setCastle] = useState(stordcastle);
-  const [displayedtasksType, setDisplayedtasksType] = useState("salat");
+  const [displayedtasksType, setDisplayedtasksType] = useState(statoftask);
   const [display, setDisplay] = useState("mytasks");
   const { showHideToast } = useContext(DataContext);
   const [modelTitel, setmodelTitel] = useState([]);
@@ -456,6 +459,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
   // Show data for each slide in the Header
   function changeDisplayedType(e) {
     setDisplayedtasksType(e.target.value);
+    localStorage.setItem("statoftask", JSON.stringify(e.target.value));
   }
 
   // Condition for each slide in the Header
@@ -749,10 +753,6 @@ const Myheaven = ({ activationInterval = H20 }) => {
     </Card>
   );
 
-  const Items = <MyItems />;
-
-  const Appinfo = <Portfolio />;
-
   // Condition for each slide in the Header
   let BottomNavigationData = [];
 
@@ -761,10 +761,13 @@ const Myheaven = ({ activationInterval = H20 }) => {
       BottomNavigationData = [tabs, Lists];
       break;
     case "presnt":
-      BottomNavigationData = Items;
+      BottomNavigationData = <MyItems />;
       break;
     case "app-info":
-      BottomNavigationData = Appinfo;
+      BottomNavigationData = <Portfolio />;
+      break;
+    case "Quran&Tafser":
+      BottomNavigationData = <Quran show={display} />;
       break;
     default:
       BottomNavigationData = [];
@@ -781,14 +784,12 @@ const Myheaven = ({ activationInterval = H20 }) => {
     color: theme.palette.text.secondary,
   }));
 
-  const history = useHistory();
-
   function quranOpene() {
-    history.push("/Quran");
+    setDisplay("Quran&Tafser");
   }
 
   function TafseerOpen() {
-    history.push("/Tafseer");
+    setDisplay("Quran&Tafser");
   }
 
   return (
@@ -802,6 +803,158 @@ const Myheaven = ({ activationInterval = H20 }) => {
       }}
       sx={{ minWidth: 250 }}
     >
+      {/* HEADER */}
+      {display === "mytasks" ? (
+        <>
+          <CardContent
+            container
+            maxWidth="sm"
+            spacing={2}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <Myscores
+              score={score}
+              tree={tree}
+              Plam={Plam}
+              Box={Box}
+              home={home}
+              castle={castle}
+            />
+            <Container
+              direction="row"
+              style={{
+                marginTop: 10,
+                marginBottom: 10,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                // flexDirection: "column",
+              }}
+            >
+              <Paper
+                style={{
+                  padding: 5,
+                  marginLeft: 20,
+                  marginTop: 5,
+                  display: "flex",
+                  fontSize: 10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                }}
+              >
+                {isActive ? (
+                  <>
+                    <Typography
+                      style={{
+                        // display: "flex",
+                        fontSize: 10,
+                        fontWeight: "bold",
+                        marginBottom: 5,
+                        // alignItems: "center",
+                      }}
+                    >
+                      وقت جمع الذهب من العبادات المنجزة
+                      <strong
+                        style={{
+                          fontSize: 20,
+                          marginRight: 10,
+                        }}
+                      >
+                        😍
+                      </strong>
+                    </Typography>
+
+                    <Button
+                      class="button"
+                      onClick={handleButtonClick}
+                      variant="contained"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        marginBottom: 5,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      إجمع الذهب
+                      <img
+                        src={"scores/1.png"}
+                        style={{ width: 25, height: 25, marginRight: 10 }}
+                        alt="Logo"
+                      />
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Typography
+                      style={{
+                        display: "flex",
+                        fontSize: 10,
+                        alignItems: "center",
+                      }}
+                    >
+                      الوقت المتبقي لجمع الذهب
+                      <img
+                        src={"scores/1.png"}
+                        alt="Logo"
+                        style={{ width: 20, height: 20, marginRight: 6 }}
+                      />
+                    </Typography>
+                    <Typography
+                      style={{
+                        display: "flex",
+                        fontSize: 10,
+                        // marginBottom: 10,
+                        alignItems: "center",
+                        // direction: "ltr",
+                      }}
+                    >
+                      <img
+                        src={"clock.gif"}
+                        alt="Logo"
+                        style={{ width: 40, height: 40, marginLeft: 2 }}
+                      />
+
+                      {formatTime(timeLeft)}
+                    </Typography>
+
+                    <LinearProgress
+                      style={{ width: "80%", marginTop: 2 }}
+                      variant="determinate"
+                      // value={(1 - timeLeft / (activationInterval * 1000)) * 100}
+                      value={(timeLeft / activationInterval) * 100}
+                    />
+                  </>
+                )}
+              </Paper>
+              <Typography variant="h3" style={{ fontWeight: "bold" }}>
+                جنتي
+              </Typography>
+              <IconButton
+                onClick={infoOpene}
+                color="primary"
+                aria-label="add to shopping cart"
+              >
+                <img
+                  src={"Info/infoicon.gif"}
+                  alt="Logo"
+                  style={{ width: "70%", marginTop: 20 }}
+                />
+              </IconButton>
+            </Container>
+          </CardContent>
+        </>
+      ) : null}
+
+      {/* ==HEADER== */}
+      {/* FILTER BUTTONS */}
+      {BottomNavigationData}
+      {/* ==== FILTER BUTTON ==== */}
       <CardContent
         container
         maxWidth="sm"
@@ -813,148 +966,6 @@ const Myheaven = ({ activationInterval = H20 }) => {
           flexDirection: "column",
         }}
       >
-        {/* Avatar */}
-        <Myscores
-          score={score}
-          tree={tree}
-          Plam={Plam}
-          Box={Box}
-          home={home}
-          castle={castle}
-        />
-        {/* == Avatar == */}
-        {/* HEADER */}
-        <Container
-          direction="row"
-          style={{
-            marginTop: 10,
-            marginBottom: 10,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            // flexDirection: "column",
-          }}
-        >
-          <Paper
-            style={{
-              padding: 5,
-              marginLeft: 20,
-              marginTop: 5,
-              display: "flex",
-              fontSize: 10,
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
-            }}
-          >
-            {isActive ? (
-              <>
-                <Typography
-                  style={{
-                    // display: "flex",
-                    fontSize: 10,
-                    fontWeight: "bold",
-                    marginBottom: 5,
-                    // alignItems: "center",
-                  }}
-                >
-                  وقت جمع الذهب من العبادات المنجزة
-                  <strong
-                    style={{
-                      fontSize: 20,
-                      marginRight: 10,
-                    }}
-                  >
-                    😍
-                  </strong>
-                </Typography>
-
-                <Button
-                  class="button"
-                  onClick={handleButtonClick}
-                  variant="contained"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    marginBottom: 5,
-                    fontWeight: "bold",
-                  }}
-                >
-                  إجمع الذهب
-                  <img
-                    src={"scores/1.png"}
-                    style={{ width: 25, height: 25, marginRight: 10 }}
-                    alt="Logo"
-                  />
-                </Button>
-              </>
-            ) : (
-              <>
-                <Typography
-                  style={{
-                    display: "flex",
-                    fontSize: 10,
-                    alignItems: "center",
-                  }}
-                >
-                  الوقت المتبقي لجمع الذهب
-                  <img
-                    src={"scores/1.png"}
-                    alt="Logo"
-                    style={{ width: 20, height: 20, marginRight: 6 }}
-                  />
-                </Typography>
-                <Typography
-                  style={{
-                    display: "flex",
-                    fontSize: 10,
-                    // marginBottom: 10,
-                    alignItems: "center",
-                    // direction: "ltr",
-                  }}
-                >
-                  <img
-                    src={"clock.gif"}
-                    alt="Logo"
-                    style={{ width: 40, height: 40, marginLeft: 2 }}
-                  />
-
-                  {formatTime(timeLeft)}
-                </Typography>
-
-                <LinearProgress
-                  style={{ width: "80%", marginTop: 2 }}
-                  variant="determinate"
-                  // value={(1 - timeLeft / (activationInterval * 1000)) * 100}
-                  value={(timeLeft / activationInterval) * 100}
-                />
-              </>
-            )}
-          </Paper>
-          <Typography variant="h3" style={{ fontWeight: "bold" }}>
-            جنتي
-          </Typography>
-          <IconButton
-            onClick={infoOpene}
-            color="primary"
-            aria-label="add to shopping cart"
-          >
-            <img
-              src={"Info/infoicon.gif"}
-              alt="Logo"
-              style={{ width: "70%", marginTop: 20 }}
-            />
-          </IconButton>
-          {/* {isActive || (
-            
-          )} */}
-        </Container>
-        {/* ==HEADER== */}
-
-        {/* FILTER BUTTONS */}
-        {BottomNavigationData}
-        {/* ==== FILTER BUTTON ==== */}
-
         <ToggleButtonGroup
           sx={{
             position: "fixed",
@@ -977,6 +988,11 @@ const Myheaven = ({ activationInterval = H20 }) => {
             <InfoIcon />
             <Divider flexItem orientation="vertical" sx={{ mx: 0.5, my: 2 }} />
             عن المطور
+          </ToggleButton>
+          <ToggleButton value="Quran&Tafser">
+            <ReceiptIcon />
+            <Divider flexItem orientation="vertical" sx={{ mx: 0.5, my: 2 }} />
+            القرآن و التفسير
           </ToggleButton>
           <ToggleButton value="presnt">
             <StoreIcon />

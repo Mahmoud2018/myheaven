@@ -22,7 +22,7 @@ const Portfolio = () => {
       style={{
         // width: 10,
         // background: "green",
-        maxHeight: "65vh",
+        maxHeight: "94vh",
         overflow: "scroll",
       }}
       sx={{
