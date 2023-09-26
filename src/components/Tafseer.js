@@ -120,7 +120,7 @@ function Tafseer() {
               >
                 التفسير
               </Typography>
-            ) : null}
+            ) : {number2Objects.name}}
 
             <CardContent
               // Tafeser page 1
