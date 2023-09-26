@@ -133,14 +133,14 @@ function Quran({ show }) {
           sx={{
             border: 3,
             borderColor: "primary.main",
-            minWidth: 250,
+            // minWidth: 250,
             // borderRadius: "20px",
           }}
           container
           maxWidth="sm"
           spacing={2}
           style={{
-            width: 450,
+            // width: 450,
             // display: "flex",
             justifyContent: "center",
             // alignItems: "center",
