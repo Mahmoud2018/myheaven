@@ -928,6 +928,8 @@ const Myheaven = ({ activationInterval = H20 }) => {
     sethome(0);
     setCastle(0);
     setmodelstate(false);
+    setIsActive(true);
+    localStorage.removeItem("todos");
 
     // Save score on local storage
     const stateMappings = [
