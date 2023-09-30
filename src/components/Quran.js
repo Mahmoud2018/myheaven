@@ -3,6 +3,8 @@ import QuranData from "./QuranData.json";
 import TafseerData from "./TafseerData.json";
 import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import SoundPlayer from "./SoundPlayer";
+import ReactAudioPlayer from "react-audio-player";
 
 import {
   Card,
@@ -22,10 +24,12 @@ import ArticleIcon from "@mui/icons-material/Article";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 // import QuranAudioPlayer from "./QuranAudioPlayer";
 
-function Quran({ show }) {
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [Tafsee, setTafsee] = useState([]);
+function Quran() {
+  const [selectedItem, setSelectedItem] = useState(0);
   const [display, setDisplay] = useState(1);
+
+  const [isPlaying, setIsPlaying] = useState(false);
+
   function suralistOpene() {
     setDisplay(1);
   }
@@ -41,19 +45,19 @@ function Quran({ show }) {
     setDisplay(4);
   };
 
-  const handleItemClick = (itemId) => {
+  const ShowQuran = (itemId) => {
     const selected = QuranData.find((item) => item.id === itemId);
     setSelectedItem(selected);
     setDisplay(2);
   };
 
   const filterAya = TafseerData.filter((item) => item.number == selectedItem);
+  const AudioUrl = `http://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${selectedItem.id}.mp3`;
 
-  // console.log(filterAya);
-
+  console.log(selectedItem);
   return (
     <>
-      <div style={{ marginBottom: "20px" }}></div>
+      <div style={{ marginBottom: "5px" }}></div>
       <Button
         variant="outlined"
         startIcon={<MenuBookIcon style={{ marginLeft: 10 }} />}
@@ -68,6 +72,19 @@ function Quran({ show }) {
       >
         التفسير
       </Button>
+      {display === 2 ? (
+        <>
+          <ReactAudioPlayer
+            src={AudioUrl}
+            autoPlay={false}
+            controls
+            volume={1.0}
+            loop={false}
+            onPause={() => setIsPlaying(false)}
+            onEnded={() => setIsPlaying(false)}
+          />
+        </>
+      ) : null}
       <List aria-label="surahs">
         {display === 1 ? (
           <Typography
@@ -85,18 +102,20 @@ function Quran({ show }) {
         ) : null}
 
         {display === 2 ? (
-          <Typography
-            className="titel-text"
-            style={{
-              color: "white",
-              fontFamily: "kitab",
-              fontWeight: "bold",
-              fontSize: 20,
-              marginBottom: 10,
-            }}
-          >
-            {" ﴿ ⁠" + selectedItem.name + " ﴾ "}
-          </Typography>
+          <>
+            <Typography
+              className="titel-text"
+              style={{
+                color: "white",
+                fontFamily: "kitab",
+                fontWeight: "bold",
+                fontSize: 20,
+                marginBottom: 10,
+              }}
+            >
+              {" ﴿ ⁠" + selectedItem.name + " ﴾ "}
+            </Typography>
+          </>
         ) : null}
 
         {display === 3 ? (
@@ -147,7 +166,7 @@ function Quran({ show }) {
             // flexDirection: "column",
             // background: "green",
             padding: "5px",
-            height: "77.5vh",
+            height: "73vh",
             borderRadius: "20px",
             overflow: "scroll",
           }}
@@ -163,7 +182,7 @@ function Quran({ show }) {
                       textAlign: "center",
                       alignItems: "baseline",
                     }}
-                    onClick={() => handleItemClick(data.id)}
+                    onClick={() => ShowQuran(data.id)}
                   >
                     <Typography
                       className="suraname"
@@ -200,29 +219,35 @@ function Quran({ show }) {
               ))
             : null}
           {display === 2 ? (
-            <Typography
-              variant="string"
-              style={{
-                fontFamily: "kitab",
-                fontSize: 20,
-              }}
-            >
-              {selectedItem.array.map((arItem) => (
-                <Typography
-                  variant="string"
-                  style={{ fontFamily: "kitab", fontSize: 20 }}
-                  key={arItem.id}
-                >
-                  {arItem.ar}
-                  <span
-                    style={{ paddingLeft: 10, paddingRight: 10 }}
-                    className="suranumber"
+            <>
+              <Typography
+                variant="string"
+                style={{
+                  fontFamily: "kitab",
+                  fontSize: 20,
+                }}
+              >
+                {selectedItem.array.map((arItem) => (
+                  <Typography
+                    variant="string"
+                    style={{
+                      fontFamily: "othmani",
+                      fontSize: 22,
+                      fontWeight: "600",
+                    }}
+                    key={arItem.id}
                   >
-                    ﴿{arItem.id}﴾
-                  </span>
-                </Typography>
-              ))}
-            </Typography>
+                    {arItem.ar}
+                    <span
+                      style={{ paddingLeft: 10, paddingRight: 10 }}
+                      className="suranumber"
+                    >
+                      ﴿{arItem.id}﴾
+                    </span>
+                  </Typography>
+                ))}
+              </Typography>
+            </>
           ) : null}
 
           {display === 3

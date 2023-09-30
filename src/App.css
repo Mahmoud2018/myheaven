@@ -102,6 +102,31 @@
   font-family: kitab;
   src: url("../public/fonts/Kitab\ Bold.ttf");
 }
+
+@font-face {
+  font-family: qalam1;
+  src: url("../public/fonts/W_qalam\ Regular.ttf");
+}
+
+@font-face {
+  font-family: qalam2;
+  src: url("../public/fonts/Al\ Qalam\ Quran\ Majeed\ Web\ Regular.ttf");
+}
+
+@font-face {
+  font-family: othmani;
+  src: url("../public/fonts/UthmanicHafs1\ Ver13.otf");
+}
+
+@font-face {
+  font-family: droid;
+  src: url("../public/fonts/ArbFONTS-Droid-Naskh-Regular.ttf");
+}
+
+@font-face {
+  font-family: hafs;
+  src: url("../public/fonts/HafsNastaleeq\ Ver10.otf");
+}
 /* =====// CUSTOM FONTS //====== */
 
 .css-x3vexg-MuiGrid2-root {

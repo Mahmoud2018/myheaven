@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Unstable_Grid2";
 import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -26,9 +27,14 @@ export default function Myscores({ score, tree, Plam, Box, home, castle }) {
           style={{ width: 30, height: 30 }}
           alt="Logo"
         />
-        <Typography style={{ fontFamily: "BakbakOne" }}>{score + 0}</Typography>
+        <Typography
+          color="primary"
+          style={{ fontFamily: "Rocher", fontSize: 20 }}
+        >
+          {score + 0}
+        </Typography>
         <Typography color="primary" style={{ fontSize: 10 }}>
-          قطعة ذهب
+          ذهب
         </Typography>
       </Item>
       <Item item xs={1}>
@@ -37,7 +43,12 @@ export default function Myscores({ score, tree, Plam, Box, home, castle }) {
           style={{ width: 30, height: 30 }}
           alt="Logo"
         />
-        <Typography style={{ fontFamily: "BakbakOne" }}>{tree + 0}</Typography>
+        <Typography
+          color="primary"
+          style={{ fontFamily: "Rocher", fontSize: 20 }}
+        >
+          {tree + 0}
+        </Typography>
         <Typography color="primary" style={{ fontSize: 10 }}>
           شجرة
         </Typography>
@@ -49,7 +60,12 @@ export default function Myscores({ score, tree, Plam, Box, home, castle }) {
           style={{ width: 30, height: 30 }}
           alt="Logo"
         />
-        <Typography style={{ fontFamily: "BakbakOne" }}>{Plam + 0}</Typography>
+        <Typography
+          color="primary"
+          style={{ fontFamily: "Rocher", fontSize: 20 }}
+        >
+          {Plam + 0}
+        </Typography>
         <Typography color="primary" style={{ fontSize: 10 }}>
           نخلة
         </Typography>
@@ -61,7 +77,13 @@ export default function Myscores({ score, tree, Plam, Box, home, castle }) {
           style={{ width: 30, height: 30 }}
           alt="Logo"
         />
-        <Typography style={{ fontFamily: "BakbakOne" }}> {Box + 0}</Typography>
+        <Typography
+          color="primary"
+          style={{ fontFamily: "Rocher", fontSize: 20 }}
+        >
+          {" "}
+          {Box + 0}
+        </Typography>
         <Typography color="primary" style={{ fontSize: 10 }}>
           كنز
         </Typography>
@@ -73,19 +95,28 @@ export default function Myscores({ score, tree, Plam, Box, home, castle }) {
           style={{ width: 30, height: 30 }}
           alt="Logo"
         />
-        <Typography style={{ fontFamily: "BakbakOne" }}>{home + 0}</Typography>
+        <Typography
+          color="primary"
+          style={{ fontFamily: "Rocher", fontSize: 20 }}
+        >
+          {home + 0}
+        </Typography>
         <Typography color="primary" style={{ fontSize: 10 }}>
           بيت
         </Typography>
       </Item>
 
       <Item item xs={1}>
+        {" "}
         <img
           src={"scores/6.png"}
           style={{ width: 30, height: 30 }}
           alt="Logo"
         />
-        <Typography style={{ fontFamily: "BakbakOne" }}>
+        <Typography
+          color="primary"
+          style={{ fontFamily: "Rocher", fontSize: 20 }}
+        >
           {castle + 0}
         </Typography>
         <Typography color="primary" style={{ fontSize: 10 }}>

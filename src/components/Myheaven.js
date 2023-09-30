@@ -28,6 +28,8 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Container from "@mui/material/Container";
 import { useHistory } from "react-router-dom";
 import Quran from "./Quran";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 // ICONS
 
 import OutletIcon from "@mui/icons-material/Outlet";
@@ -64,11 +66,11 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 // Sound IMPORTS
 
-import done from "../Sounds/done.mp3";
+import done from "../Sounds/done2.mp3";
 import notdone from "../Sounds/notdone.mp3";
-import point from "../Sounds/add.mp3";
 import bell from "../Sounds/bell.mp3";
 import add from "../Sounds/add.mp3";
+import reset from "../Sounds/reset.mp3";
 
 // let storageTodos = [];
 let stordtree = 0;
@@ -103,7 +105,9 @@ const Myheaven = ({ activationInterval = H20 }) => {
   const [home, sethome] = useState(stordHome);
   const [castle, setCastle] = useState(stordcastle);
   const [displayedtasksType, setDisplayedtasksType] = useState(statoftask);
-  const [display, setDisplay] = useState("mytasks");
+
+  const [display, setDisplay] = useState(0);
+
   const { showHideToast } = useContext(DataContext);
   const [modelTitel, setmodelTitel] = useState([]);
   const [modelContent, setmodelContent] = useState([]);
@@ -113,6 +117,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
   const [infomodel, setinfomodel] = useState(false);
   const [count, setCount] = useState(0);
   const [num, setnumb] = useState(0);
+  const [delet, setdelet] = useState(0);
 
   const [isActive, setIsActive] = useState(true);
   const [timeLeft, setTimeLeft] = useState(0);
@@ -128,32 +133,6 @@ const Myheaven = ({ activationInterval = H20 }) => {
 
   /* Get data from localStorage */
   useEffect(() => {
-    console.log("Get Data by calling useEffect ");
-
-    // Retrieve the existing saveCar array from local storage
-    const existingSaveCar = JSON.parse(localStorage.getItem("todos")) || [];
-
-    // Iterate through the car array
-    const updatedNewTasks = tasks.map((carObj) => {
-      // Find a matching object in the existing saveCar array by id
-      const existingCarObj = existingSaveCar.find(
-        (existingObj) => existingObj.id === carObj.id
-      );
-
-      // If a matching object is found, update its capacity property
-      if (existingCarObj) {
-        return {
-          ...existingCarObj,
-          capacity: carObj.capacity || false, // Set capacity to false if it doesn't exist in the car object
-        };
-      } else {
-        return carObj; // If no matching object is found, use the original car object
-      }
-    });
-
-    // Save the updated saveCar array back to local storage
-    localStorage.setItem("todos", JSON.stringify(updatedNewTasks));
-
     const storageTodos = JSON.parse(localStorage.getItem("todos"));
     if (storageTodos === null) {
       // Use === for comparison, not =
@@ -161,6 +140,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
     } else {
       setTasks(storageTodos);
     }
+    console.log("Get Data by calling useEffect ");
   }, []);
 
   /* Athkar Model */
@@ -180,6 +160,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
       setmodelstate(true);
       setCurrentPage(0);
     }
+    setdelet(0);
   }
 
   const handleNextPage = () => {
@@ -230,8 +211,21 @@ const Myheaven = ({ activationInterval = H20 }) => {
   };
   /*=== Athkar Model ===*/
 
+  /* Delete score Model */
+  function DeletscoreOpene() {
+    setAthkarData(0);
+    setdelet(1);
+    setmodelstate(true);
+    setmodelTitel("حذف و تصفير جميع الأرصدة !!");
+    setmodelContent(
+      "هل أنت متأكد من حذف  و تصفير جميع الارصدة والبدء من جديد!؟"
+    );
+  }
+  /*=== Delete score Model ===*/
+
   /* Hadrth Model */
   function hadethOpene(taskId) {
+    setdelet(0);
     setAthkarData(0);
     tasks.map((obj) => (obj.id === taskId ? setmodelContent(obj.hadeth) : obj));
     setmodelstate(true);
@@ -267,12 +261,14 @@ const Myheaven = ({ activationInterval = H20 }) => {
   const Notdone = new Audio(notdone);
   const Add = new Audio(add);
   const Bell = new Audio(bell);
+  const resets = new Audio(reset);
 
   // Function to play the sound effect
   const playSound = (effect) => {
     effect.loop = false;
     effect.play();
   };
+
   // Change tasks to completed
   const completeTask = (taskId) => {
     // Ensure tasks is initialized and not null
@@ -489,14 +485,166 @@ const Myheaven = ({ activationInterval = H20 }) => {
     }
   }
 
-  // Show data for each slide in the Header
-  function changeDisplay(e) {
-    setDisplay(e.target.value);
-  }
+  const homePage = (
+    <CardContent
+      container
+      maxWidth="sm"
+      spacing={2}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
+      <Myscores
+        score={score}
+        tree={tree}
+        Plam={Plam}
+        Box={Box}
+        home={home}
+        castle={castle}
+        Reset={ResetMyScores}
+      />
+      <Container
+        direction="row"
+        style={{
+          marginTop: 10,
+          marginBottom: 0,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          // flexDirection: "column",
+        }}
+      >
+        <Paper
+          style={{
+            padding: 5,
+            marginLeft: 20,
+            marginTop: 5,
+            display: "flex",
+            fontSize: 10,
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
+          {isActive ? (
+            <>
+              <Typography
+                style={{
+                  // display: "flex",
+                  fontSize: 10,
+                  fontWeight: "bold",
+                  marginBottom: 5,
+                  // alignItems: "center",
+                }}
+              >
+                وقت جمع الذهب من العبادات المنجزة
+                <strong
+                  style={{
+                    fontSize: 20,
+                    marginRight: 10,
+                  }}
+                >
+                  😍
+                </strong>
+              </Typography>
 
+              <Button
+                class="button"
+                onClick={handleButtonClick}
+                variant="contained"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginBottom: 5,
+                  fontWeight: "bold",
+                }}
+              >
+                إجمع الذهب
+                <img
+                  src={"scores/1.png"}
+                  style={{ width: 25, height: 25, marginRight: 10 }}
+                  alt="Logo"
+                />
+              </Button>
+            </>
+          ) : (
+            <>
+              <Typography
+                style={{
+                  display: "flex",
+                  fontSize: 10,
+                  alignItems: "center",
+                }}
+              >
+                الوقت المتبقي لجمع الذهب
+                <img
+                  src={"scores/1.png"}
+                  alt="Logo"
+                  style={{ width: 20, height: 20, marginRight: 6 }}
+                />
+              </Typography>
+              <Typography
+                style={{
+                  display: "flex",
+                  fontSize: 10,
+                  // marginBottom: 10,
+                  alignItems: "center",
+                  // direction: "ltr",
+                }}
+              >
+                <img
+                  src={"clock.gif"}
+                  alt="Logo"
+                  style={{ width: 40, height: 40, marginLeft: 2 }}
+                />
+
+                {formatTime(timeLeft)}
+              </Typography>
+
+              <LinearProgress
+                style={{ width: "80%", marginTop: 2 }}
+                variant="determinate"
+                // value={(1 - timeLeft / (activationInterval * 1000)) * 100}
+                value={(timeLeft / activationInterval) * 100}
+              />
+            </>
+          )}
+          <Button
+            style={{ marginTop: 10, fontSize: 10 }}
+            size="small"
+            onClick={DeletscoreOpene}
+            variant="contained"
+            color="error"
+          >
+            {/* تصفير جميع النقاط والبدء من جديد */}
+            Reset
+          </Button>
+        </Paper>
+
+        <Typography variant="h3" style={{ fontWeight: "bold" }}>
+          جنتي
+        </Typography>
+
+        <IconButton
+          onClick={infoOpene}
+          color="primary"
+          aria-label="add to shopping cart"
+        >
+          <img
+            src={"Info/infoicon.gif"}
+            alt="Logo"
+            style={{ width: "70%", marginTop: 20 }}
+          />
+        </IconButton>
+      </Container>
+    </CardContent>
+  );
   const tabs = (
     <ToggleButtonGroup
-      style={{ direction: "ltr", marginTop: "5px" }}
+      style={{ direction: "ltr", marginTop: "0px" }}
       value={displayedtasksType}
       exclusive
       color="primary"
@@ -753,26 +901,6 @@ const Myheaven = ({ activationInterval = H20 }) => {
     </Card>
   );
 
-  // Condition for each slide in the Header
-  let BottomNavigationData = [];
-
-  switch (display) {
-    case "mytasks":
-      BottomNavigationData = [tabs, Lists];
-      break;
-    case "presnt":
-      BottomNavigationData = <MyItems />;
-      break;
-    case "app-info":
-      BottomNavigationData = <Portfolio />;
-      break;
-    case "Quran&Tafser":
-      BottomNavigationData = <Quran />;
-      break;
-    default:
-      BottomNavigationData = [];
-  }
-
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fbc02d",
     ...theme.typography.body2,
@@ -785,11 +913,36 @@ const Myheaven = ({ activationInterval = H20 }) => {
   }));
 
   function quranOpene() {
-    setDisplay("Quran&Tafser");
+    setDisplay(2);
   }
 
   function TafseerOpen() {
-    setDisplay("Quran&Tafser");
+    setDisplay(2);
+  }
+
+  function ResetMyScores() {
+    setScore(0);
+    setTree(0);
+    setPlam(0);
+    setBox(0);
+    sethome(0);
+    setCastle(0);
+    setmodelstate(false);
+
+    // Save score on local storage
+    const stateMappings = [
+      { state: score, key: "score" },
+      { state: tree, key: "tree" },
+      { state: Plam, key: "plam" },
+      { state: Box, key: "Box" },
+      { state: home, key: "home" },
+      { state: castle, key: "castle" },
+    ];
+
+    stateMappings.forEach((mapping) => {
+      localStorage.setItem(mapping.key, JSON.stringify(mapping.state));
+    });
+    playSound(resets);
   }
 
   return (
@@ -803,158 +956,18 @@ const Myheaven = ({ activationInterval = H20 }) => {
       }}
       sx={{ minWidth: 250 }}
     >
-      {/* HEADER */}
-      {display === "mytasks" ? (
-        <>
-          <CardContent
-            container
-            maxWidth="sm"
-            spacing={2}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-            }}
-          >
-            <Myscores
-              score={score}
-              tree={tree}
-              Plam={Plam}
-              Box={Box}
-              home={home}
-              castle={castle}
-            />
-            <Container
-              direction="row"
-              style={{
-                marginTop: 10,
-                marginBottom: 10,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                // flexDirection: "column",
-              }}
-            >
-              <Paper
-                style={{
-                  padding: 5,
-                  marginLeft: 20,
-                  marginTop: 5,
-                  display: "flex",
-                  fontSize: 10,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexDirection: "column",
-                }}
-              >
-                {isActive ? (
-                  <>
-                    <Typography
-                      style={{
-                        // display: "flex",
-                        fontSize: 10,
-                        fontWeight: "bold",
-                        marginBottom: 5,
-                        // alignItems: "center",
-                      }}
-                    >
-                      وقت جمع الذهب من العبادات المنجزة
-                      <strong
-                        style={{
-                          fontSize: 20,
-                          marginRight: 10,
-                        }}
-                      >
-                        😍
-                      </strong>
-                    </Typography>
-
-                    <Button
-                      class="button"
-                      onClick={handleButtonClick}
-                      variant="contained"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        marginBottom: 5,
-                        fontWeight: "bold",
-                      }}
-                    >
-                      إجمع الذهب
-                      <img
-                        src={"scores/1.png"}
-                        style={{ width: 25, height: 25, marginRight: 10 }}
-                        alt="Logo"
-                      />
-                    </Button>
-                  </>
-                ) : (
-                  <>
-                    <Typography
-                      style={{
-                        display: "flex",
-                        fontSize: 10,
-                        alignItems: "center",
-                      }}
-                    >
-                      الوقت المتبقي لجمع الذهب
-                      <img
-                        src={"scores/1.png"}
-                        alt="Logo"
-                        style={{ width: 20, height: 20, marginRight: 6 }}
-                      />
-                    </Typography>
-                    <Typography
-                      style={{
-                        display: "flex",
-                        fontSize: 10,
-                        // marginBottom: 10,
-                        alignItems: "center",
-                        // direction: "ltr",
-                      }}
-                    >
-                      <img
-                        src={"clock.gif"}
-                        alt="Logo"
-                        style={{ width: 40, height: 40, marginLeft: 2 }}
-                      />
-
-                      {formatTime(timeLeft)}
-                    </Typography>
-
-                    <LinearProgress
-                      style={{ width: "80%", marginTop: 2 }}
-                      variant="determinate"
-                      // value={(1 - timeLeft / (activationInterval * 1000)) * 100}
-                      value={(timeLeft / activationInterval) * 100}
-                    />
-                  </>
-                )}
-              </Paper>
-              <Typography variant="h3" style={{ fontWeight: "bold" }}>
-                جنتي
-              </Typography>
-              <IconButton
-                onClick={infoOpene}
-                color="primary"
-                aria-label="add to shopping cart"
-              >
-                <img
-                  src={"Info/infoicon.gif"}
-                  alt="Logo"
-                  style={{ width: "70%", marginTop: 20 }}
-                />
-              </IconButton>
-            </Container>
-          </CardContent>
-        </>
-      ) : null}
-
-      {/* ==HEADER== */}
-      {/* FILTER BUTTONS */}
-      {BottomNavigationData}
       {/* ==== FILTER BUTTON ==== */}
+      {display === 0 ? (
+        [homePage, tabs, Lists]
+      ) : display === 1 ? (
+        <MyItems />
+      ) : display === 2 ? (
+        <Quran />
+      ) : (
+        <Portfolio />
+      )}
+      {/* {[homePage, tabs, Lists]} */}
+
       <CardContent
         container
         maxWidth="sm"
@@ -967,46 +980,6 @@ const Myheaven = ({ activationInterval = H20 }) => {
           // background: "green",
         }}
       >
-        <ToggleButtonGroup
-          sx={{
-            position: "fixed",
-            bottom: 0,
-          }}
-          elevation={3}
-          style={{
-            direction: "ltr",
-            marginTop: "20px",
-            background: "white ",
-          }}
-          value={display}
-          exclusive
-          color="primary"
-          onChange={changeDisplay}
-          aria-label="text alignment"
-          size="small"
-        >
-          <ToggleButton value="app-info">
-            <InfoIcon />
-            <Divider flexItem orientation="vertical" sx={{ mx: 0.5, my: 2 }} />
-            عن المطور
-          </ToggleButton>
-          <ToggleButton value="Quran&Tafser">
-            <ReceiptIcon />
-            <Divider flexItem orientation="vertical" sx={{ mx: 0.5, my: 2 }} />
-            القرآن و التفسير
-          </ToggleButton>
-          <ToggleButton value="presnt">
-            <StoreIcon />
-            <Divider flexItem orientation="vertical" sx={{ mx: 0.5, my: 2 }} />
-            شراء الجوائز
-          </ToggleButton>
-          <ToggleButton value="mytasks">
-            <MosqueIcon />
-            <Divider flexItem orientation="vertical" sx={{ mx: 0.5, my: 2 }} />
-            العبادات
-          </ToggleButton>
-        </ToggleButtonGroup>
-        {/* ==== FILTER BUTTON ==== */}
         {/* info DIALOG */}
         <Dialog
           className="Dialog"
@@ -1127,7 +1100,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
             </DialogContent>
           </DialogContent>
 
-          <DialogActions>
+          <DialogActions style={{ direction: "ltr" }}>
             {AthkarData === 0 ? (
               []
             ) : (
@@ -1150,6 +1123,12 @@ const Myheaven = ({ activationInterval = H20 }) => {
                 </DialogContent>
               </>
             )}
+
+            {delet === 1 ? (
+              <Button color="error" variant="contained" onClick={ResetMyScores}>
+                نعم
+              </Button>
+            ) : null}
 
             <Button variant="contained" onClick={ModelClose}>
               إغلاق
@@ -1181,7 +1160,29 @@ const Myheaven = ({ activationInterval = H20 }) => {
           </DialogActions>
         </Dialog>
         {/* === info DIALOG === */}
+        {/* <NavigationBottom /> */}
+        {/* <Typography variant="body1" align="center"></Typography> */}
       </CardContent>
+      <Paper
+        sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
+        elevation={3}
+      >
+        <BottomNavigation
+          showLabels
+          value={display}
+          onChange={(event, newValue) => {
+            setDisplay(newValue);
+          }}
+        >
+          <BottomNavigationAction label=" العبادات" icon={<MosqueIcon />} />
+          <BottomNavigationAction label="شراء الجوائز" icon={<StoreIcon />} />
+          <BottomNavigationAction
+            label=" القرآن و التفسير"
+            icon={<MenuBookIcon />}
+          />
+          <BottomNavigationAction label="عن المطور" icon={<InfoIcon />} />
+        </BottomNavigation>
+      </Paper>
     </Card>
   );
 };

@@ -140,7 +140,7 @@ export default function MyItems() {
         style={{
           // width: 10,
           // background: "green",
-          maxHeight: "88.5vh",
+          maxHeight: "87vh",
           overflow: "scroll",
         }}
         sx={{
