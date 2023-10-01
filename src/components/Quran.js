@@ -197,7 +197,7 @@ function Quran() {
                 ? "82vh"
                 : display === 4
                 ? "82vh"
-                : "69vh",
+                : "67vh",
             borderRadius: "20px",
             overflow: "scroll",
           }}
