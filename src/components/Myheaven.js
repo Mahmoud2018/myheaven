@@ -488,7 +488,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
   const homePage = (
     <CardContent
       container
-      maxWidth="sm"
+      // maxWidth="sm"
       spacing={2}
       style={{
         display: "flex",
@@ -551,8 +551,8 @@ const Myheaven = ({ activationInterval = H20 }) => {
                 </strong>
               </Typography>
 
-              <Button
-                class="button"
+              <button
+                className="button"
                 onClick={handleButtonClick}
                 variant="contained"
                 style={{
@@ -568,7 +568,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
                   style={{ width: 25, height: 25, marginRight: 10 }}
                   alt="Logo"
                 />
-              </Button>
+              </button>
             </>
           ) : (
             <>
@@ -663,7 +663,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
 
   const Lists = (
     <Card
-      maxWidth="sm"
+      // maxWidth="sm"
       style={{
         // marginTop: 0,
         maxHeight: "59vh",
@@ -949,7 +949,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
 
   return (
     <Card
-      maxWidth="sm"
+      // maxWidth="sm"
       style={{
         width: 450,
         // background: "green",
@@ -972,7 +972,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
 
       <CardContent
         container
-        maxWidth="sm"
+        // maxWidth="sm"
         spacing={2}
         style={{
           display: "flex",

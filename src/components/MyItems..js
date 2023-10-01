@@ -114,7 +114,7 @@ export default function MyItems() {
 
   return (
     <Container
-      maxWidth="sm"
+      // maxWidth="sm"
       style={{
         // marginTop: 5,
         display: "flex",
@@ -136,7 +136,7 @@ export default function MyItems() {
         My Stor
       </Typography>
       <Card
-        maxWidth="sm"
+        // maxWidth="sm"
         style={{
           // width: 10,
           // background: "green",

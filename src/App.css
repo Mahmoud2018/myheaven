@@ -359,3 +359,16 @@
   background: #fbc02d;
   height: 30px;
 }
+
+/* Light Mode Styles */
+
+/* Dark Mode Styles */
+.dark-mode {
+  background-color: #363636;
+  color: #ffffff;
+}
+
+.dark-mode button {
+  background-color: #363636;
+  color: #ffffff;
+}

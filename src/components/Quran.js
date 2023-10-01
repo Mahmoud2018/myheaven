@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import QuranData from "./QuranData.json";
-import TafseerData from "./TafseerData.json";
-import { useHistory } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
-import SoundPlayer from "./SoundPlayer";
 import ReactAudioPlayer from "react-audio-player";
-
+import { TafseerData } from "./TafseerData";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import Box from "@mui/material/Box";
+import { AllQurra } from "./AllQurra";
 import {
   Card,
   CardContent,
@@ -27,7 +29,7 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 function Quran() {
   const [selectedItem, setSelectedItem] = useState(0);
   const [display, setDisplay] = useState(1);
-
+  const [quraa, setquraa] = useState("ar.alafasy");
   const [isPlaying, setIsPlaying] = useState(false);
 
   function suralistOpene() {
@@ -37,8 +39,6 @@ function Quran() {
   function TafseerOpen() {
     setDisplay(3);
   }
-
-  function homeOpene() {}
 
   const TafeserShow = (itemId) => {
     setSelectedItem(itemId);
@@ -52,9 +52,12 @@ function Quran() {
   };
 
   const filterAya = TafseerData.filter((item) => item.number == selectedItem);
-  const AudioUrl = `http://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${selectedItem.id}.mp3`;
+  const AudioUrl = `http://cdn.islamic.network/quran/audio-surah/128/${quraa}/${selectedItem.id}.mp3`;
 
-  console.log(selectedItem);
+  const handleChange = (event) => {
+    setquraa(event.target.value);
+  };
+
   return (
     <>
       <div style={{ marginBottom: "5px" }}></div>
@@ -63,15 +66,16 @@ function Quran() {
         startIcon={<MenuBookIcon style={{ marginLeft: 10 }} />}
         onClick={suralistOpene}
       >
-        القرآن
+        فهرس القرآن
       </Button>
       <Button
         variant="outlined"
         startIcon={<ListAltIcon style={{ marginLeft: 10 }} />}
         onClick={TafseerOpen}
       >
-        التفسير
+        فهرس التفسير
       </Button>
+
       {display === 2 ? (
         <>
           <ReactAudioPlayer
@@ -103,6 +107,26 @@ function Quran() {
 
         {display === 2 ? (
           <>
+            <FormControl sx={{ m: 1, minWidth: 80 }} size="small">
+              <InputLabel id="demo-simple-select-label">
+                المزيد من القرآء
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={quraa}
+                label="Age"
+                onChange={handleChange}
+              >
+                {AllQurra.map((data) => {
+                  return (
+                    <MenuItem key={data.id} value={data.identifier}>
+                      {data.name}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
             <Typography
               className="titel-text"
               style={{
@@ -156,7 +180,7 @@ function Quran() {
             // borderRadius: "20px",
           }}
           container
-          maxWidth="sm"
+          // maxWidth="sm"
           spacing={2}
           style={{
             // width: 450,
@@ -166,7 +190,14 @@ function Quran() {
             // flexDirection: "column",
             // background: "green",
             padding: "5px",
-            height: "73vh",
+            height:
+              display === 1
+                ? "82vh"
+                : display === 3
+                ? "82vh"
+                : display === 4
+                ? "82vh"
+                : "69vh",
             borderRadius: "20px",
             overflow: "scroll",
           }}
@@ -233,7 +264,7 @@ function Quran() {
                     style={{
                       fontFamily: "othmani",
                       fontSize: 22,
-                      fontWeight: "600",
+                      // fontWeight: "600",
                     }}
                     key={arItem.id}
                   >
@@ -301,10 +332,10 @@ function Quran() {
                 <Typography
                   variant="string"
                   style={{ fontFamily: "kitab", fontSize: 18 }}
-                  key={arItem.number}
+                  key={arItem.id}
                 >
                   <span
-                    key={arItem.number}
+                    key={arItem.id}
                     style={{ paddingLeft: 10, paddingRight: 10 }}
                     className="suraname"
                   >

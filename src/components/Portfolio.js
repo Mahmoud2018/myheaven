@@ -18,7 +18,7 @@ import ProgressBar from "./ProgressBar";
 const Portfolio = () => {
   return (
     <Card
-      maxWidth="sm"
+      // maxWidth="sm"
       style={{
         // width: 10,
         // background: "green",
