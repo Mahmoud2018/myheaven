@@ -78,7 +78,7 @@ let stordPlam = 0;
 let stordBox = 0;
 let stordHome = 0;
 let stordcastle = 0;
-let statoftask = "salat";
+
 // Get data score from local storage
 // storageTodos = JSON.parse(localStorage.getItem("tasks"));
 stordtree = JSON.parse(localStorage.getItem("tree"));
@@ -86,7 +86,8 @@ stordPlam = JSON.parse(localStorage.getItem("plam"));
 stordBox = JSON.parse(localStorage.getItem("Box"));
 stordHome = JSON.parse(localStorage.getItem("home"));
 stordcastle = JSON.parse(localStorage.getItem("castle"));
-statoftask = JSON.parse(localStorage.getItem("statoftask"));
+let statoftask = JSON.parse(localStorage.getItem("statoftask"));
+let statofNavgatin = JSON.parse(localStorage.getItem("statofNavgatin"));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -104,9 +105,13 @@ const Myheaven = ({ activationInterval = H20 }) => {
   const [Box, setBox] = useState(stordBox);
   const [home, sethome] = useState(stordHome);
   const [castle, setCastle] = useState(stordcastle);
-  const [displayedtasksType, setDisplayedtasksType] = useState(statoftask);
+  const [displayedtasksType, setDisplayedtasksType] = useState(
+    statoftask === null ? "salat" : statoftask
+  );
 
-  const [display, setDisplay] = useState(0);
+  const [display, setDisplay] = useState(
+    statofNavgatin === null ? 0 : statofNavgatin
+  );
 
   const { showHideToast } = useContext(DataContext);
   const [modelTitel, setmodelTitel] = useState([]);
@@ -680,6 +685,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
     >
       {Alltasks.map((task) => (
         <Card
+          key={task.id}
           container
           className="todoCard"
           sx={{
@@ -914,10 +920,12 @@ const Myheaven = ({ activationInterval = H20 }) => {
 
   function quranOpene() {
     setDisplay(2);
+    localStorage.setItem("statofNavgatin", JSON.stringify(statofNavgatin));
   }
 
   function TafseerOpen() {
     setDisplay(2);
+    localStorage.setItem("statofNavgatin", JSON.stringify(statofNavgatin));
   }
 
   function ResetMyScores() {
@@ -946,7 +954,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
     });
     playSound(resets);
   }
-
+  // console.log(display);
   return (
     <Card
       // maxWidth="sm"
@@ -1174,6 +1182,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
           value={display}
           onChange={(event, newValue) => {
             setDisplay(newValue);
+            localStorage.setItem("statofNavgatin", JSON.stringify(newValue));
           }}
         >
           <BottomNavigationAction label=" العبادات" icon={<MosqueIcon />} />

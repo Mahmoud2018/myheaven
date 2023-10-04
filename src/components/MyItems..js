@@ -162,7 +162,7 @@ export default function MyItems() {
         >
           {data.map((obj) => {
             return (
-              <Item item xs={2} style={{ borderRadius: "20px" }}>
+              <Item item xs={2} style={{ borderRadius: "20px" }} key={obj.id}>
                 <img
                   src={obj.pic}
                   style={{ width: 80, height: 80 }}

@@ -25,30 +25,43 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import ArticleIcon from "@mui/icons-material/Article";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 // import QuranAudioPlayer from "./QuranAudioPlayer";
-
+let statofDisplsy = JSON.parse(localStorage.getItem("statofDisplsy"));
+let statofselect = JSON.parse(localStorage.getItem("statofselect"));
 function Quran() {
-  const [selectedItem, setSelectedItem] = useState(0);
-  const [display, setDisplay] = useState(1);
+  const [selectedItem, setSelectedItem] = useState(
+    statofselect === null ? 0 : statofselect
+  );
+  const [display, setDisplay] = useState(
+    statofDisplsy === null ? 1 : statofDisplsy
+  );
   const [quraa, setquraa] = useState("ar.alafasy");
   const [isPlaying, setIsPlaying] = useState(false);
 
+  console.log(display);
+  console.log(selectedItem);
   function suralistOpene() {
     setDisplay(1);
+    localStorage.setItem("statofDisplsy", JSON.stringify(1));
   }
 
   function TafseerOpen() {
     setDisplay(3);
+    localStorage.setItem("statofDisplsy", JSON.stringify(3));
   }
 
   const TafeserShow = (itemId) => {
     setSelectedItem(itemId);
     setDisplay(4);
+    localStorage.setItem("statofDisplsy", JSON.stringify(4));
+    localStorage.setItem("statofselect", JSON.stringify(itemId));
   };
 
   const ShowQuran = (itemId) => {
     const selected = QuranData.find((item) => item.id === itemId);
     setSelectedItem(selected);
     setDisplay(2);
+    localStorage.setItem("statofDisplsy", JSON.stringify(2));
+    localStorage.setItem("statofselect", JSON.stringify(selected));
   };
 
   const filterAya = TafseerData.filter((item) => item.number == selectedItem);
