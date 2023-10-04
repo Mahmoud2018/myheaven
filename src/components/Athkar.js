@@ -24,14 +24,24 @@ import { red } from "@mui/material/colors";
 import { green } from "@mui/material/colors";
 import { yellow } from "@mui/material/colors";
 
+let statofAthkar = JSON.parse(localStorage.getItem("statofAthkar"));
+let timeOfAthkar = JSON.parse(localStorage.getItem("timeOfAthkar"));
+let titel = JSON.parse(localStorage.getItem("titel"));
+let Conten = JSON.parse(localStorage.getItem("Conten"));
+
 export default function Athkar() {
-  const [AthkarData, setAthkarData] = useState([]);
-  const [modelTitel, setmodelTitel] = useState([]);
+  const [AthkarData, setAthkarData] = useState(Conten === null ? [] : Conten);
+  const [modelTitel, setmodelTitel] = useState(titel);
   const [modelContent, setmodelContent] = useState([]);
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [num, setnumb] = useState(0);
-  const [display, setDisplay] = useState(0);
+  const [display, setDisplay] = useState(
+    statofAthkar === null ? 0 : statofAthkar
+  );
+  const [time, setTime] = useState(
+    timeOfAthkar === null ? false : timeOfAthkar
+  );
   const Alsbah = AthkarAlsbah.map((item, index) => `${index + 1}- ${item}`);
   const Almsaa = AthkarAlmsaa.map((item, index) => `${index + 1}- ${item}`);
   const Alsbahnumbers = Alsbahnumber.map((item) => {
@@ -48,13 +58,19 @@ export default function Athkar() {
       setAthkarData(Alsbah);
       setnumb(Alsbahnumbers);
       setCurrentPage(0);
+      setTime(true);
+      localStorage.setItem("titel", JSON.stringify("أذكار الصباح"));
+      localStorage.setItem("Conten", JSON.stringify(Alsbah));
     } else {
       setDisplay(1);
       setmodelTitel("أذكار المساء");
       setAthkarData(Almsaa);
       setnumb(Almsanumbers);
       setCurrentPage(0);
+      setTime(false);
     }
+    localStorage.setItem("statofAthkar", JSON.stringify(1));
+    localStorage.setItem("timeOfAthkar", JSON.stringify(time));
   }
 
   const handleNextPage = () => {
@@ -107,6 +123,7 @@ export default function Athkar() {
 
   function AthkarlistOpene() {
     setDisplay(0);
+    localStorage.setItem("statofAthkar", JSON.stringify(0));
   }
 
   return (
