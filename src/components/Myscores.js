@@ -6,6 +6,7 @@ import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Unstable_Grid2";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -123,6 +124,30 @@ export default function Myscores({ score, tree, Plam, Box, home, castle }) {
           قصر
         </Typography>
       </Item>
+      {/* <Item item xs={1}>
+        <Button>
+          {" "}
+          <img
+            src={"present.gif"}
+            alt="Logo"
+            style={{ width: 30, height: 30 }}
+          />
+          <Typography
+            color="primary"
+            style={{ fontFamily: "Rocher", fontSize: 20 }}
+          >
+            <Typography color="primary" style={{ fontSize: 10 }}>
+              هدية
+            </Typography>
+            200
+          </Typography>
+          <img
+            src={"scores/1.png"}
+            style={{ width: 20, height: 20 }}
+            alt="Logo"
+          />
+        </Button>
+      </Item> */}
     </Grid>
   );
 }

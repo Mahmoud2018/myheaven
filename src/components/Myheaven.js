@@ -16,20 +16,19 @@ import { Data } from "./Data";
 import Myscores from "./Myscores";
 import MyItems from "./MyItems.";
 import Portfolio from "./Portfolio";
-import { AthkarAlsbah } from "./Data";
-import { AthkarAlmsaa } from "./Data";
-import { Alsbahnumber } from "./Data";
-import { Almsanumber } from "./Data";
+
 import Slide from "@mui/material/Slide";
 import Info from "./Info";
 import Alawrad from "./Alawrad";
 import Avatar from "@mui/material/Avatar";
 import LinearProgress from "@mui/material/LinearProgress";
 import Container from "@mui/material/Container";
-import { useHistory } from "react-router-dom";
+
 import Quran from "./Quran";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import Athkar from "./Athkar";
+
 // ICONS
 
 import OutletIcon from "@mui/icons-material/Outlet";
@@ -53,6 +52,7 @@ import Brightness1OutlinedIcon from "@mui/icons-material/Brightness1Outlined";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import ReceiptIcon from "@mui/icons-material/Receipt";
+import ArticleIcon from "@mui/icons-material/Article";
 
 // Components
 import { DataContext } from "../contexts/DataContext";
@@ -117,24 +117,11 @@ const Myheaven = ({ activationInterval = H20 }) => {
   const [modelTitel, setmodelTitel] = useState([]);
   const [modelContent, setmodelContent] = useState([]);
   const [modelstate, setmodelstate] = useState(false);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [AthkarData, setAthkarData] = useState([]);
   const [infomodel, setinfomodel] = useState(false);
-  const [count, setCount] = useState(0);
-  const [num, setnumb] = useState(0);
   const [delet, setdelet] = useState(0);
 
   const [isActive, setIsActive] = useState(true);
   const [timeLeft, setTimeLeft] = useState(0);
-
-  const Alsbah = AthkarAlsbah.map((item, index) => `${index + 1}- ${item}`);
-  const Almsaa = AthkarAlmsaa.map((item, index) => `${index + 1}- ${item}`);
-  const Alsbahnumbers = Alsbahnumber.map((item) => {
-    return item;
-  });
-  const Almsanumbers = Almsanumber.map((item) => {
-    return item;
-  });
 
   /* Get data from localStorage */
   useEffect(() => {
@@ -149,76 +136,14 @@ const Myheaven = ({ activationInterval = H20 }) => {
   }, []);
 
   /* Athkar Model */
-  function AthkarOpen(time) {
-    if (time === true) {
-      setmodelContent("");
-      setmodelTitel("أذكار الصباح");
-      setAthkarData(Alsbah);
-      setnumb(Alsbahnumbers);
-      setmodelstate(true);
-      setCurrentPage(0);
-    } else {
-      setmodelContent("");
-      setmodelTitel("أذكار المساء");
-      setAthkarData(Almsaa);
-      setnumb(Almsanumbers);
-      setmodelstate(true);
-      setCurrentPage(0);
-    }
-    setdelet(0);
+  function AthkarOpen() {
+    setDisplay(3);
   }
 
-  const handleNextPage = () => {
-    Reset();
-    if (currentPage < AthkarData.length - 1) {
-      setCurrentPage(currentPage + 1);
-    }
-    if (currentPage < Alsbahnumbers.length - 1) {
-      setCurrentPage(currentPage + 1);
-    }
-    if (currentPage < Almsanumbers.length - 1) {
-      setCurrentPage(currentPage + 1);
-    } else {
-      // If we reach the end, loop back to the first page
-      setCurrentPage(0);
-    }
-  };
-
-  const plus = () => {
-    if (count == num[currentPage] - 1) {
-      setCount(count);
-      setCurrentPage(currentPage + 1);
-      setCount(0);
-    } else {
-      setCount(count + 1);
-    }
-  };
-
-  const minus = () => {
-    if (count === 0) {
-      setCount(0);
-    } else {
-      setCount(count - 1);
-    }
-  };
-
-  const Reset = () => {
-    setCount(0);
-  };
-
-  const handlePrevPage = () => {
-    if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
-    } else {
-      // If we are on the first page, go to the last page
-      setCurrentPage(AthkarData.length - 1);
-    }
-  };
   /*=== Athkar Model ===*/
 
   /* Delete score Model */
   function DeletscoreOpene() {
-    setAthkarData(0);
     setdelet(1);
     setmodelstate(true);
     setmodelTitel("حذف و تصفير جميع الأرصدة !!");
@@ -231,7 +156,6 @@ const Myheaven = ({ activationInterval = H20 }) => {
   /* Hadrth Model */
   function hadethOpene(taskId) {
     setdelet(0);
-    setAthkarData(0);
     tasks.map((obj) => (obj.id === taskId ? setmodelContent(obj.hadeth) : obj));
     setmodelstate(true);
     setmodelTitel("الحديث");
@@ -240,7 +164,6 @@ const Myheaven = ({ activationInterval = H20 }) => {
 
   /* Hadrth Model */
   function WredOpene(taskId) {
-    setAthkarData(0);
     tasks.map((obj) =>
       obj.id === taskId ? setmodelContent(<Alawrad />) : obj
     );
@@ -624,8 +547,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
             variant="contained"
             color="error"
           >
-            {/* تصفير جميع النقاط والبدء من جديد */}
-            Reset
+            البدء من جديد Reset
           </Button>
         </Paper>
 
@@ -702,12 +624,6 @@ const Myheaven = ({ activationInterval = H20 }) => {
               justifyContent="center"
               alignItems="center"
               color="#fff"
-              // style={{
-              //   display: "flex",
-              //   textAlign: "center",
-              //   justifyContent: "center",
-              //   alignItems: "center",
-              // }}
             >
               <Typography style={{ fontSize: 14 }}>
                 {task.titel}
@@ -739,7 +655,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
                 ) : null}
                 {task.tfser ? (
                   <IconButton
-                    onClick={() => TafseerOpen(task.id)}
+                    onClick={() => TafseerOpen()}
                     className="iconButton"
                     aria-label="delete"
                     style={{
@@ -753,7 +669,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
                 {/* Athkar ICON BUTTON */}
                 {task.Athkar ? (
                   <IconButton
-                    onClick={() => AthkarOpen(true)}
+                    onClick={() => AthkarOpen()}
                     className="iconButton"
                     aria-label="delete"
                     style={{
@@ -770,7 +686,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
                 {/* Athkar ICON BUTTON */}
                 {task.Athkar === false ? (
                   <IconButton
-                    onClick={() => AthkarOpen(false)}
+                    onClick={() => AthkarOpen()}
                     className="iconButton"
                     aria-label="delete"
                     style={{
@@ -970,12 +886,21 @@ const Myheaven = ({ activationInterval = H20 }) => {
       {display === 0 ? (
         [homePage, tabs, Lists]
       ) : display === 1 ? (
-        <MyItems />
+        <MyItems
+          score={score}
+          tree={tree}
+          Plam={Plam}
+          Box={Box}
+          home={home}
+          castle={castle}
+        />
       ) : display === 2 ? (
         <Quran />
-      ) : (
+      ) : display === 3 ? (
+        <Athkar />
+      ) : display === 4 ? (
         <Portfolio />
-      )}
+      ) : null}
       {/* {[homePage, tabs, Lists]} */}
 
       <CardContent
@@ -1009,101 +934,13 @@ const Myheaven = ({ activationInterval = H20 }) => {
                 textAlign="center"
                 justifyContent="center"
                 alignItems="center"
-                // flexDirection="row"
-                // style={{
-                //   display: "flex",
-                //   textAlign: "center",
-                //   justifyContent: "center",
-                //   alignItems: "center",
-                //   flexDirection: "row",
-                // }}
                 id="alert-dialog-slide-description"
               >
                 <Grid>
                   <Grid item xs={8}>
-                    <Typography style={{ fontFamily: "kitab", fontSize: 20 }}>
-                      {modelContent} {AthkarData[currentPage]}
+                    <Typography style={{ fontSize: 20 }}>
+                      {modelContent}
                     </Typography>
-                  </Grid>
-                  {AthkarData === 0 ? (
-                    []
-                  ) : (
-                    <Item
-                      item
-                      xs={1}
-                      style={{
-                        background: "red",
-                        color: "white",
-                        padding: 5,
-                        marginTop: 20,
-                        marginRight: 80,
-                      }}
-                    >
-                      <Typography> {num[currentPage]}</Typography>
-                      <Typography>
-                        {" "}
-                        {num[currentPage] <= 1 ? " مرة" : "مرات"}
-                      </Typography>
-                    </Item>
-                  )}
-
-                  <Grid
-                    style={{ marginTop: 10 }}
-                    item
-                    xs={8}
-                    container
-                    rowSpacing={2}
-                    display="flex"
-                    textAlign="center"
-                    justifyContent="center"
-                    alignItems="center"
-                    flexDirection="row"
-                  >
-                    {AthkarData === 0 ? (
-                      []
-                    ) : (
-                      <>
-                        <Typography
-                          style={{
-                            fontSize: 10,
-                            color: "red",
-                            marginBottom: 10,
-                          }}
-                        >
-                          سيتم الانتقال تلقائيا للذكر التالي عند اكتمال المرات
-                          المنجزة
-                        </Typography>
-                        <Item item xs={1}>
-                          <IconButton
-                            aria-label="plus"
-                            onClick={plus}
-                            // disabled={count == num[currentPage] ? true : null}
-                          >
-                            <AddIcon />
-                          </IconButton>
-                          <Item item xs={1}></Item>
-                          <IconButton aria-label="minus" onClick={minus}>
-                            <RemoveIcon />
-                          </IconButton>
-                        </Item>
-                        <Item item xs={1}>
-                          <IconButton aria-label="reste" onClick={Reset}>
-                            <ReplayIcon />
-                          </IconButton>
-                        </Item>
-                        <Item
-                          item
-                          xs={1}
-                          style={{
-                            background: "black",
-                            color: "white",
-                            padding: 8,
-                          }}
-                        >
-                          <Typography>{count + "  " + "المنجز"}</Typography>
-                        </Item>
-                      </>
-                    )}
                   </Grid>
                 </Grid>
               </DialogContentText>
@@ -1111,29 +948,6 @@ const Myheaven = ({ activationInterval = H20 }) => {
           </DialogContent>
 
           <DialogActions style={{ direction: "ltr" }}>
-            {AthkarData === 0 ? (
-              []
-            ) : (
-              <>
-                <Button
-                  variant="contained"
-                  onClick={handleNextPage}
-                  disabled={currentPage === 27}
-                >
-                  التالي
-                </Button>
-                <DialogContent>
-                  <Button
-                    variant="contained"
-                    onClick={handlePrevPage}
-                    disabled={currentPage === 0}
-                  >
-                    السابق
-                  </Button>
-                </DialogContent>
-              </>
-            )}
-
             {delet === 1 ? (
               <Button color="error" variant="contained" onClick={ResetMyScores}>
                 نعم
@@ -1191,6 +1005,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
             label=" القرآن و التفسير"
             icon={<MenuBookIcon />}
           />
+          <BottomNavigationAction label=" الأذكار" icon={<ArticleIcon />} />
           <BottomNavigationAction label="عن المطور" icon={<InfoIcon />} />
         </BottomNavigation>
       </Paper>

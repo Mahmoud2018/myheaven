@@ -8,6 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Box from "@mui/material/Box";
 import { AllQurra } from "./AllQurra";
+import Athkar from "./Athkar";
 import {
   Card,
   CardContent,
@@ -31,27 +32,28 @@ function Quran() {
   const [selectedItem, setSelectedItem] = useState(
     statofselect === null ? 0 : statofselect
   );
-  const [display, setDisplay] = useState(
+  const [displayQuran, setDisplayQuran] = useState(
     statofDisplsy === null ? 1 : statofDisplsy
   );
+
   const [quraa, setquraa] = useState("ar.alafasy");
   const [isPlaying, setIsPlaying] = useState(false);
 
-  console.log(display);
+  console.log(displayQuran);
   console.log(selectedItem);
   function suralistOpene() {
-    setDisplay(1);
+    setDisplayQuran(1);
     localStorage.setItem("statofDisplsy", JSON.stringify(1));
   }
 
   function TafseerOpen() {
-    setDisplay(3);
+    setDisplayQuran(3);
     localStorage.setItem("statofDisplsy", JSON.stringify(3));
   }
 
   const TafeserShow = (itemId) => {
     setSelectedItem(itemId);
-    setDisplay(4);
+    setDisplayQuran(4);
     localStorage.setItem("statofDisplsy", JSON.stringify(4));
     localStorage.setItem("statofselect", JSON.stringify(itemId));
   };
@@ -59,7 +61,7 @@ function Quran() {
   const ShowQuran = (itemId) => {
     const selected = QuranData.find((item) => item.id === itemId);
     setSelectedItem(selected);
-    setDisplay(2);
+    setDisplayQuran(2);
     localStorage.setItem("statofDisplsy", JSON.stringify(2));
     localStorage.setItem("statofselect", JSON.stringify(selected));
   };
@@ -89,7 +91,7 @@ function Quran() {
         فهرس التفسير
       </Button>
 
-      {display === 2 ? (
+      {displayQuran === 2 ? (
         <>
           <ReactAudioPlayer
             src={AudioUrl}
@@ -103,7 +105,7 @@ function Quran() {
         </>
       ) : null}
       <List aria-label="surahs">
-        {display === 1 ? (
+        {displayQuran === 1 ? (
           <Typography
             className="titel-text"
             style={{
@@ -118,7 +120,7 @@ function Quran() {
           </Typography>
         ) : null}
 
-        {display === 2 ? (
+        {displayQuran === 2 ? (
           <>
             <FormControl sx={{ m: 1, minWidth: 80 }} size="small">
               <InputLabel id="demo-simple-select-label">
@@ -155,7 +157,7 @@ function Quran() {
           </>
         ) : null}
 
-        {display === 3 ? (
+        {displayQuran === 3 ? (
           <Typography
             className="titel-text"
             style={{
@@ -170,7 +172,7 @@ function Quran() {
           </Typography>
         ) : null}
 
-        {display === 4 ? (
+        {displayQuran === 4 ? (
           <Typography
             className="titel-text"
             style={{
@@ -189,38 +191,32 @@ function Quran() {
           sx={{
             border: 3,
             borderColor: "primary.main",
-            // minWidth: 250,
-            // borderRadius: "20px",
           }}
           container
-          // maxWidth="sm"
           spacing={2}
           style={{
-            // width: 450,
-            // display: "flex",
             justifyContent: "center",
-            // alignItems: "center",
-            // flexDirection: "column",
-            // background: "green",
             padding: "5px",
             height:
-              display === 1
+              displayQuran === 1
                 ? "82vh"
-                : display === 3
+                : displayQuran === 3
                 ? "82vh"
-                : display === 4
+                : displayQuran === 4
+                ? "82vh"
+                : displayQuran === 5
                 ? "82vh"
                 : "66vh",
             borderRadius: "20px",
             overflow: "scroll",
           }}
         >
-          {display === 1
+          {displayQuran === 1
             ? QuranData.map((data) => (
                 <ListItem disablePadding key={data.id}>
                   <ListItemButton
                     style={{
-                      display: "flex",
+                      displayQuran: "flex",
                       // justifyContent: "center",
                       // alignItems: "center",
                       textAlign: "center",
@@ -262,7 +258,7 @@ function Quran() {
                 </ListItem>
               ))
             : null}
-          {display === 2 ? (
+          {displayQuran === 2 ? (
             <>
               <Typography
                 variant="string"
@@ -294,12 +290,12 @@ function Quran() {
             </>
           ) : null}
 
-          {display === 3
+          {displayQuran === 3
             ? QuranData.map((data) => (
                 <ListItem disablePadding key={data.id}>
                   <ListItemButton
                     style={{
-                      display: "flex",
+                      displayQuran: "flex",
                       // justifyContent: "center",
                       // alignItems: "center",
                       textAlign: "center",
@@ -340,7 +336,7 @@ function Quran() {
                 </ListItem>
               ))
             : null}
-          {display === 4
+          {displayQuran === 4
             ? filterAya.map((arItem) => (
                 <Typography
                   variant="string"

@@ -21,6 +21,7 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import AddIcon from "@mui/icons-material/Add";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import cash from "../Sounds/cash.mp3";
+import Myscores from "./Myscores";
 
 const Items = [
   { id: uuidv4(), Item: 0, pic: "Fruits/1.png", prise: 500 },
@@ -64,6 +65,17 @@ const Items = [
   { id: uuidv4(), Item: 0, pic: "Godis/4.png", prise: 1000 },
 ];
 
+const ItemScore = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  // marginLeft: theme.spacing(1),
+  borderRadius: "10px",
+  textAlign: "center",
+  // fontFamily: "BakbakOne",
+  color: theme.palette.text.secondary,
+}));
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -74,7 +86,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function MyItems() {
+export default function MyItems({ tree, Plam, Box, home, castle }) {
   const { score, setScore, showHideToast } = useContext(DataContext);
   const [data, setdata] = useState(() => {
     const savedItems = localStorage.getItem("items");
@@ -129,19 +141,126 @@ export default function MyItems() {
           fontFamily: "Rocher",
           fontSize: 30,
           // display: "flex",
+          marginTop: 15,
+          marginBottom: 15,
           // alignItems: "center",
         }}
         color="primary"
       >
         My Stor
       </Typography>
+      <Grid container spacing={2} style={{ fontWeight: "bold" }}>
+        <ItemScore itemScore xs={1}>
+          <img
+            src={"scores/1.png"}
+            style={{ width: 30, height: 30 }}
+            alt="Logo"
+          />
+          <Typography
+            color="primary"
+            style={{ fontFamily: "Rocher", fontSize: 20 }}
+          >
+            {score + 0}
+          </Typography>
+          <Typography color="primary" style={{ fontSize: 10 }}>
+            ذهب
+          </Typography>
+        </ItemScore>
+        <ItemScore itemScore xs={1}>
+          <img
+            src={"scores/2.png"}
+            style={{ width: 30, height: 30 }}
+            alt="Logo"
+          />
+          <Typography
+            color="primary"
+            style={{ fontFamily: "Rocher", fontSize: 20 }}
+          >
+            {tree + 0}
+          </Typography>
+          <Typography color="primary" style={{ fontSize: 10 }}>
+            شجرة
+          </Typography>
+        </ItemScore>
+
+        <ItemScore itemScore xs={1}>
+          <img
+            src={"scores/3.png"}
+            style={{ width: 30, height: 30 }}
+            alt="Logo"
+          />
+          <Typography
+            color="primary"
+            style={{ fontFamily: "Rocher", fontSize: 20 }}
+          >
+            {Plam + 0}
+          </Typography>
+          <Typography color="primary" style={{ fontSize: 10 }}>
+            نخلة
+          </Typography>
+        </ItemScore>
+
+        <ItemScore itemScore xs={1}>
+          <img
+            src={"scores/4.png"}
+            style={{ width: 30, height: 30 }}
+            alt="Logo"
+          />
+          <Typography
+            color="primary"
+            style={{ fontFamily: "Rocher", fontSize: 20 }}
+          >
+            {" "}
+            {Box + 0}
+          </Typography>
+          <Typography color="primary" style={{ fontSize: 10 }}>
+            كنز
+          </Typography>
+        </ItemScore>
+
+        <ItemScore itemScore xs={1}>
+          <img
+            src={"scores/5.png"}
+            style={{ width: 30, height: 30 }}
+            alt="Logo"
+          />
+          <Typography
+            color="primary"
+            style={{ fontFamily: "Rocher", fontSize: 20 }}
+          >
+            {home + 0}
+          </Typography>
+          <Typography color="primary" style={{ fontSize: 10 }}>
+            بيت
+          </Typography>
+        </ItemScore>
+
+        <ItemScore itemScore xs={1}>
+          {" "}
+          <img
+            src={"scores/6.png"}
+            style={{ width: 30, height: 30 }}
+            alt="Logo"
+          />
+          <Typography
+            color="primary"
+            style={{ fontFamily: "Rocher", fontSize: 20 }}
+          >
+            {castle + 0}
+          </Typography>
+          <Typography color="primary" style={{ fontSize: 10 }}>
+            قصر
+          </Typography>
+        </ItemScore>
+      </Grid>
       <Card
         // maxWidth="sm"
         style={{
           // width: 10,
           // background: "green",
-          maxHeight: "87vh",
+          maxHeight: "73vh",
           overflow: "scroll",
+          marginTop: 30,
         }}
         sx={{
           minWidth: 400,
