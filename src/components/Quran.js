@@ -203,7 +203,7 @@ function Quran() {
                 : displayQuran === 3
                 ? "82vh"
                 : displayQuran === 4
-                ? "82vh"
+                ? "80vh"
                 : displayQuran === 5
                 ? "82vh"
                 : "66vh",

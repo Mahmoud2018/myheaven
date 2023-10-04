@@ -28,14 +28,18 @@ let statofAthkar = JSON.parse(localStorage.getItem("statofAthkar"));
 let timeOfAthkar = JSON.parse(localStorage.getItem("timeOfAthkar"));
 let titel = JSON.parse(localStorage.getItem("titel"));
 let Conten = JSON.parse(localStorage.getItem("Conten"));
+let numbers = JSON.parse(localStorage.getItem("numbers"));
+let CurrentPage = JSON.parse(localStorage.getItem("CurrentPage"));
 
 export default function Athkar() {
   const [AthkarData, setAthkarData] = useState(Conten === null ? [] : Conten);
   const [modelTitel, setmodelTitel] = useState(titel);
   const [modelContent, setmodelContent] = useState([]);
   const [count, setCount] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [num, setnumb] = useState(0);
+  const [currentPage, setCurrentPage] = useState(
+    CurrentPage === null ? 0 : CurrentPage
+  );
+  const [num, setnumb] = useState(numbers === null ? 0 : numbers);
   const [display, setDisplay] = useState(
     statofAthkar === null ? 0 : statofAthkar
   );
@@ -61,6 +65,7 @@ export default function Athkar() {
       setTime(true);
       localStorage.setItem("titel", JSON.stringify("أذكار الصباح"));
       localStorage.setItem("Conten", JSON.stringify(Alsbah));
+      localStorage.setItem("numbers", JSON.stringify(Alsbahnumbers));
     } else {
       setDisplay(1);
       setmodelTitel("أذكار المساء");
@@ -68,6 +73,9 @@ export default function Athkar() {
       setnumb(Almsanumbers);
       setCurrentPage(0);
       setTime(false);
+      localStorage.setItem("titel", JSON.stringify("أذكار المساء"));
+      localStorage.setItem("Conten", JSON.stringify(Almsaa));
+      localStorage.setItem("numbers", JSON.stringify(Almsanumbers));
     }
     localStorage.setItem("statofAthkar", JSON.stringify(1));
     localStorage.setItem("timeOfAthkar", JSON.stringify(time));
@@ -85,8 +93,8 @@ export default function Athkar() {
       setCurrentPage(currentPage + 1);
     } else {
       // If we reach the end, loop back to the first page
-      setCurrentPage(0);
     }
+    localStorage.setItem("CurrentPage", JSON.stringify(currentPage));
   };
 
   const handlePrevPage = () => {
@@ -97,6 +105,7 @@ export default function Athkar() {
       // If we are on the first page, go to the last page
       setCurrentPage(AthkarData.length - 1);
     }
+    localStorage.setItem("CurrentPage", JSON.stringify(currentPage));
   };
 
   const plus = () => {
@@ -104,6 +113,7 @@ export default function Athkar() {
       setCount(count);
       setCurrentPage(currentPage + 1);
       setCount(0);
+      localStorage.setItem("CurrentPage", JSON.stringify(currentPage));
     } else {
       setCount(count + 1);
     }
