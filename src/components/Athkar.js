@@ -29,15 +29,13 @@ let timeOfAthkar = JSON.parse(localStorage.getItem("timeOfAthkar"));
 let titel = JSON.parse(localStorage.getItem("titel"));
 let Conten = JSON.parse(localStorage.getItem("Conten"));
 
-let namberlist = JSON.parse(localStorage.getItem("namberlist"));
-
 export default function Athkar() {
   const [AthkarData, setAthkarData] = useState(Conten === null ? [] : Conten);
   const [modelTitel, setmodelTitel] = useState(titel);
   const [modelContent, setmodelContent] = useState([]);
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
-  const [num, setnumb] = useState(  namberlist === null ? 0 : namberlist);
+  const [num, setnumb] = useState(0);
   const [display, setDisplay] = useState(
     statofAthkar === null ? 0 : statofAthkar
   );
@@ -63,7 +61,6 @@ export default function Athkar() {
       setTime(true);
       localStorage.setItem("titel", JSON.stringify("أذكار الصباح"));
       localStorage.setItem("Conten", JSON.stringify(Alsbah));
-localStorage.setItem("namberlist", JSON.stringify(Alsbahnumbers));
     } else {
       setDisplay(1);
       setmodelTitel("أذكار المساء");
@@ -74,7 +71,6 @@ localStorage.setItem("namberlist", JSON.stringify(Alsbahnumbers));
     }
     localStorage.setItem("statofAthkar", JSON.stringify(1));
     localStorage.setItem("timeOfAthkar", JSON.stringify(time));
-localStorage.setItem("namberlist", JSON.stringify(Almsaa));
   }
 
   const handleNextPage = () => {
