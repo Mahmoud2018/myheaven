@@ -37,9 +37,9 @@ export default function Athkar() {
   const [modelContent, setmodelContent] = useState([]);
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
-  const [num, setnumb] = useState(  statofAthkar === null ? 0 : statofAthkar);
+  const [num, setnumb] = useState(  namberlist === null ? 0 : namberlist);
   const [display, setDisplay] = useState(
-    namberlist === null ? 0 : namberlist
+    statofAthkar === null ? 0 : statofAthkar
   );
   const [time, setTime] = useState(
     timeOfAthkar === null ? false : timeOfAthkar
