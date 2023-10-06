@@ -641,9 +641,9 @@ const Myheaven = ({ activationInterval = H20 }) => {
                   </IconButton>
                 ) : null}
                 {/*== Wred ICON BUTTON ==*/}
-                {task.quran ? (
+                {/* {task.quran ? (
                   <IconButton
-                    onClick={() => quranOpene(task.id)}
+                    onClick={() => quranOpene()}
                     className="iconButton"
                     aria-label="delete"
                     style={{
@@ -652,8 +652,8 @@ const Myheaven = ({ activationInterval = H20 }) => {
                   >
                     <MenuBookIcon sx={{ color: "#00a152", fontSize: 30 }} />
                   </IconButton>
-                ) : null}
-                {task.tfser ? (
+                ) : null} */}
+                {/* {task.tfser ? (
                   <IconButton
                     onClick={() => TafseerOpen()}
                     className="iconButton"
@@ -664,7 +664,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
                   >
                     <ReceiptIcon sx={{ color: "#d500f9", fontSize: 30 }} />
                   </IconButton>
-                ) : null}
+                ) : null} */}
 
                 {/* Athkar ICON BUTTON */}
                 {task.Athkar ? (
@@ -836,12 +836,12 @@ const Myheaven = ({ activationInterval = H20 }) => {
 
   function quranOpene() {
     setDisplay(2);
-    localStorage.setItem("statofNavgatin", JSON.stringify(statofNavgatin));
+    localStorage.setItem("statofNavgatin", JSON.stringify(2));
   }
 
   function TafseerOpen() {
     setDisplay(2);
-    localStorage.setItem("statofNavgatin", JSON.stringify(statofNavgatin));
+    localStorage.setItem("statofNavgatin", JSON.stringify(2));
   }
 
   function ResetMyScores() {

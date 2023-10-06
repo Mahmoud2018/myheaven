@@ -8,6 +8,8 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Box from "@mui/material/Box";
 import { AllQurra } from "./AllQurra";
+import { Qurra } from "./Qurra";
+import { Test } from "./Test";
 import Athkar from "./Athkar";
 import {
   Card,
@@ -36,11 +38,12 @@ function Quran() {
     statofDisplsy === null ? 1 : statofDisplsy
   );
 
-  const [quraa, setquraa] = useState("ar.alafasy");
+  const [quraa, setquraa] = useState("https://server7.mp3quran.net/s_gmd/");
   const [isPlaying, setIsPlaying] = useState(false);
 
-  console.log(displayQuran);
-  console.log(selectedItem);
+  // console.log(displayQuran);
+  // console.log(selectedItem);
+
   function suralistOpene() {
     setDisplayQuran(1);
     localStorage.setItem("statofDisplsy", JSON.stringify(1));
@@ -67,11 +70,59 @@ function Quran() {
   };
 
   const filterAya = TafseerData.filter((item) => item.number == selectedItem);
-  const AudioUrl = `http://cdn.islamic.network/quran/audio-surah/128/${quraa}/${selectedItem.id}.mp3`;
+
+  function addLeadingZeros(number, length) {
+    const numberString = String(number);
+    const zerosToAdd = length - numberString.length;
+
+    if (zerosToAdd <= 0) {
+      return numberString;
+    }
+
+    const zeros = "0".repeat(zerosToAdd);
+    return zeros + numberString;
+  }
+
+  const result = addLeadingZeros(selectedItem.id, 3);
+  // console.log(result);
+
+  // console.log(quraa);
+
+  const AudioUrl = `${quraa}${result}.mp3`;
 
   const handleChange = (event) => {
     setquraa(event.target.value);
   };
+
+  // Function return obj insid obj and obj insid object of array
+  function GetObjects(arr) {
+    const result = [];
+    for (const item of arr) {
+      if (item.moshaf === null || item.moshaf === undefined) {
+        result.push({
+          name: item.name,
+          rwaia: null,
+          server: null, // You can set this to a default value if needed
+          surah_total: null, // You can set this to a default value if needed
+        });
+      } else {
+        for (const moshafItem of item.moshaf) {
+          result.push({
+            name: item.name,
+            rwaia:
+              moshafItem.rwaia === undefined ? "رواية اخرى" : moshafItem.rwaia,
+            server: moshafItem.server,
+            surah_total: moshafItem.surah_total,
+          });
+        }
+      }
+    }
+    return result;
+  }
+
+  const GetObject = GetObjects(Test);
+
+  const filteredQurra = Qurra.filter((qari) => qari.surah_total === 114);
 
   return (
     <>
@@ -133,10 +184,27 @@ function Quran() {
                 label="Age"
                 onChange={handleChange}
               >
-                {AllQurra.map((data) => {
+                {Qurra.map((data) => {
                   return (
-                    <MenuItem key={data.id} value={data.identifier}>
-                      {data.name}
+                    <MenuItem key={data.id} value={data.server}>
+                      <Typography
+                        variant="string"
+                        style={{
+                          fontFamily: "kitab",
+                          fontSize: 20,
+                        }}
+                        key={data.id}
+                      >
+                        {data.name + "  "}
+                        <span
+                          style={{
+                            color: "#fbc02d",
+                            fontSize: 12,
+                          }}
+                        >
+                          {"  " + data.rwaia}
+                        </span>
+                      </Typography>{" "}
                     </MenuItem>
                   );
                 })}

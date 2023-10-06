@@ -258,7 +258,7 @@ export default function MyItems({ tree, Plam, Box, home, castle }) {
         style={{
           // width: 10,
           // background: "green",
-          maxHeight: "73vh",
+          maxHeight: "72vh",
           overflow: "scroll",
           marginTop: 30,
         }}
