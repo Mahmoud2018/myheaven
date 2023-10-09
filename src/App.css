@@ -360,6 +360,19 @@
   height: 30px;
 }
 
+.tfseer {
+  display: flex;
+  /* padding: 2px; */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #4a3b04;
+  border-radius: 10px;
+  background: #20201f;
+  color: white;
+  /* height: 150px; */
+}
+
 /* Light Mode Styles */
 
 /* Dark Mode Styles */

@@ -69,7 +69,29 @@ function Quran() {
     localStorage.setItem("statofselect", JSON.stringify(selected));
   };
 
-  const filterAya = TafseerData.filter((item) => item.number == selectedItem);
+  const filterTafseer = TafseerData.filter(
+    (item) => item.number == selectedItem
+  );
+  const filterAya = QuranData.find((item) => item.id === selectedItem);
+
+  // console.log(filterTafseer);
+  // console.log(filterAya);
+
+  function addInfoToArray1(array1, array2) {
+    // Loop through each object in array1
+    for (let i = 0; i < array1.length; i++) {
+      // Add "name" and "ar" properties from array2
+      array1[i].name = array2.name;
+      array1[i].ar = array2.ar;
+
+      // Add "array" property from array2
+      array1[i].array = array2.array;
+    }
+  }
+
+  // Call the function to add the information to array1
+  addInfoToArray1(filterTafseer, filterAya);
+  console.log(filterTafseer);
 
   function addLeadingZeros(number, length) {
     const numberString = String(number);
@@ -84,45 +106,12 @@ function Quran() {
   }
 
   const result = addLeadingZeros(selectedItem.id, 3);
-  // console.log(result);
-
-  // console.log(quraa);
 
   const AudioUrl = `${quraa}${result}.mp3`;
 
   const handleChange = (event) => {
     setquraa(event.target.value);
   };
-
-  // Function return obj insid obj and obj insid object of array
-  function GetObjects(arr) {
-    const result = [];
-    for (const item of arr) {
-      if (item.moshaf === null || item.moshaf === undefined) {
-        result.push({
-          name: item.name,
-          rwaia: null,
-          server: null, // You can set this to a default value if needed
-          surah_total: null, // You can set this to a default value if needed
-        });
-      } else {
-        for (const moshafItem of item.moshaf) {
-          result.push({
-            name: item.name,
-            rwaia:
-              moshafItem.rwaia === undefined ? "رواية اخرى" : moshafItem.rwaia,
-            server: moshafItem.server,
-            surah_total: moshafItem.surah_total,
-          });
-        }
-      }
-    }
-    return result;
-  }
-
-  const GetObject = GetObjects(Test);
-
-  const filteredQurra = Qurra.filter((qari) => qari.surah_total === 114);
 
   return (
     <>
@@ -405,21 +394,31 @@ function Quran() {
               ))
             : null}
           {displayQuran === 4
-            ? filterAya.map((arItem) => (
-                <Typography
-                  variant="string"
-                  style={{ fontFamily: "kitab", fontSize: 18 }}
-                  key={arItem.id}
-                >
-                  <span
+            ? filterTafseer.map((arItem) => (
+                <>
+                  <Typography
+                    variant="string"
+                    style={{ fontFamily: "kitab", fontSize: 18 }}
                     key={arItem.id}
-                    style={{ paddingLeft: 10, paddingRight: 10 }}
-                    className="suraname"
                   >
-                    تفسير الآية رقم ﴿{arItem.aya}﴾
-                  </span>
-                  {arItem.text}
-                </Typography>
+                    <span
+                      key={arItem.id}
+                      // style={{ paddingLeft: 10, paddingRight: 10 }}
+                      className="suraname"
+                    >
+                      تفسير الآية رقم ﴿{arItem.aya}﴾
+                    </span>
+                    <span
+                      // key={arItem.id}
+                      // style={{ paddingLeft: 10, paddingRight: 10 }}
+                      className="tfseer"
+                    >
+                      {arItem.array[arItem.aya - 1].ar}
+                    </span>
+
+                    {arItem.text}
+                  </Typography>
+                </>
               ))
             : null}
         </CardContent>

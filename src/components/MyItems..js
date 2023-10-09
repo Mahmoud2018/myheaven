@@ -150,7 +150,7 @@ export default function MyItems({ tree, Plam, Box, home, castle }) {
         My Stor
       </Typography>
       <Grid container spacing={2} style={{ fontWeight: "bold" }}>
-        <ItemScore itemScore xs={1}>
+        <ItemScore xs={1}>
           <img
             src={"scores/1.png"}
             style={{ width: 30, height: 30 }}
@@ -166,7 +166,7 @@ export default function MyItems({ tree, Plam, Box, home, castle }) {
             ذهب
           </Typography>
         </ItemScore>
-        <ItemScore itemScore xs={1}>
+        <ItemScore xs={1}>
           <img
             src={"scores/2.png"}
             style={{ width: 30, height: 30 }}
@@ -183,7 +183,7 @@ export default function MyItems({ tree, Plam, Box, home, castle }) {
           </Typography>
         </ItemScore>
 
-        <ItemScore itemScore xs={1}>
+        <ItemScore xs={1}>
           <img
             src={"scores/3.png"}
             style={{ width: 30, height: 30 }}
@@ -200,7 +200,7 @@ export default function MyItems({ tree, Plam, Box, home, castle }) {
           </Typography>
         </ItemScore>
 
-        <ItemScore itemScore xs={1}>
+        <ItemScore xs={1}>
           <img
             src={"scores/4.png"}
             style={{ width: 30, height: 30 }}
@@ -218,7 +218,7 @@ export default function MyItems({ tree, Plam, Box, home, castle }) {
           </Typography>
         </ItemScore>
 
-        <ItemScore itemScore xs={1}>
+        <ItemScore xs={1}>
           <img
             src={"scores/5.png"}
             style={{ width: 30, height: 30 }}
@@ -235,7 +235,7 @@ export default function MyItems({ tree, Plam, Box, home, castle }) {
           </Typography>
         </ItemScore>
 
-        <ItemScore itemScore xs={1}>
+        <ItemScore xs={1}>
           {" "}
           <img
             src={"scores/6.png"}
