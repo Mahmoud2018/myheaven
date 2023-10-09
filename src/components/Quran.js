@@ -410,10 +410,10 @@ function Quran() {
                     </span>
                     <span
                       // key={arItem.id}
-                      // style={{ paddingLeft: 10, paddingRight: 10 }}
+                      style={{ padding: 10 }}
                       className="tfseer"
                     >
-                      {arItem.array[arItem.aya - 1].ar}
+                      ﴿ {arItem.array[arItem.aya - 1].ar} ﴾
                     </span>
 
                     {arItem.text}
