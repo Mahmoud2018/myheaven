@@ -149,7 +149,7 @@ export default function MyItems({ tree, Plam, Box, home, castle }) {
       >
         My Stor
       </Typography>
-      <Grid container spacing={2} style={{ fontWeight: "bold" }}>
+      <Grid container="true" spacing={2} style={{ fontWeight: "bold" }}>
         <ItemScore xs={1}>
           <img
             src={"scores/1.png"}
@@ -269,7 +269,7 @@ export default function MyItems({ tree, Plam, Box, home, castle }) {
         }}
       >
         <Grid
-          container
+          container="true"
           spacing={2}
           style={{
             display: "flex",
@@ -281,7 +281,12 @@ export default function MyItems({ tree, Plam, Box, home, castle }) {
         >
           {data.map((obj) => {
             return (
-              <Item item xs={2} style={{ borderRadius: "20px" }} key={obj.id}>
+              <Item
+                item="true"
+                xs={2}
+                style={{ borderRadius: "20px" }}
+                key={obj.id}
+              >
                 <img
                   src={obj.pic}
                   style={{ width: 80, height: 80 }}

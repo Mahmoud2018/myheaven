@@ -415,8 +415,8 @@ const Myheaven = ({ activationInterval = H20 }) => {
 
   const homePage = (
     <CardContent
-      container
-      // maxWidth="sm"
+      container="true"
+      key={1}
       spacing={2}
       style={{
         display: "flex",
@@ -571,6 +571,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
   );
   const tabs = (
     <ToggleButtonGroup
+      key={2}
       style={{ direction: "ltr", marginTop: "0px" }}
       value={displayedtasksType}
       exclusive
@@ -590,7 +591,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
 
   const Lists = (
     <Card
-      // maxWidth="sm"
+      key={3}
       style={{
         // marginTop: 0,
         maxHeight: "59vh",
@@ -601,14 +602,12 @@ const Myheaven = ({ activationInterval = H20 }) => {
       }}
       sx={{
         minWidth: 380,
-        // width: "100%"
-        // marginTop: 1,
       }}
     >
       {Alltasks.map((task) => (
         <Card
           key={task.id}
-          container
+          container="true"
           className="todoCard"
           sx={{
             background: "#212121",
@@ -616,7 +615,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
             marginTop: 1,
           }}
         >
-          <Grid container spacing={2}>
+          <Grid container="true" spacing={2}>
             <Grid
               xs={7}
               display="flex"
@@ -726,7 +725,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
               {/*== hadeth ICON BUTTON ==*/}
 
               {/* Points info  */}
-              <Stack direction="row" container spacing={1}>
+              <Stack direction="row" container="true" spacing={1}>
                 <Chip
                   label={task.points}
                   style={{
@@ -782,6 +781,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
                 {/*== Points icons == */}
               </Stack>
               {/* ==Points info==  */}
+
               {/* Counte ICON BUTTON */}
               <IconButton
                 onClick={() => counter(task.id)}
@@ -873,7 +873,6 @@ const Myheaven = ({ activationInterval = H20 }) => {
   // console.log(display);
   return (
     <Card
-      // maxWidth="sm"
       style={{
         width: 450,
         // background: "green",
@@ -901,92 +900,76 @@ const Myheaven = ({ activationInterval = H20 }) => {
       ) : display === 4 ? (
         <Portfolio />
       ) : null}
-      {/* {[homePage, tabs, Lists]} */}
 
-      <CardContent
-        container
-        // maxWidth="sm"
-        spacing={2}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          // background: "green",
-        }}
+      {/* info DIALOG */}
+      <Dialog
+        className="Dialog"
+        // maxWidth="md"
+        // onClose={AthkarClose}
+        style={{ direction: "rtl" }}
+        open={modelstate}
+        TransitionComponent={Transition}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
       >
-        {/* info DIALOG */}
-        <Dialog
-          className="Dialog"
-          // maxWidth="md"
-          // onClose={AthkarClose}
-          style={{ direction: "rtl" }}
-          open={modelstate}
-          TransitionComponent={Transition}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle>{modelTitel}</DialogTitle>
-          <DialogContent dividers>
-            <DialogContent style={{ padding: 0 }}>
-              <DialogContentText
-                display="flex"
-                textAlign="center"
-                justifyContent="center"
-                alignItems="center"
-                id="alert-dialog-slide-description"
-              >
-                <Grid>
-                  <Grid item xs={8}>
-                    <Typography style={{ fontSize: 20 }}>
-                      {modelContent}
-                    </Typography>
-                  </Grid>
+        <DialogTitle>{modelTitel}</DialogTitle>
+        <DialogContent dividers>
+          <DialogContent style={{ padding: 0 }}>
+            <DialogContentText
+              display="flex"
+              textAlign="center"
+              justifyContent="center"
+              alignItems="center"
+              id="alert-dialog-slide-description"
+            >
+              <Grid>
+                <Grid item="true" xs={8}>
+                  <Typography style={{ fontSize: 15 }}>
+                    {modelContent}
+                  </Typography>
                 </Grid>
-              </DialogContentText>
-            </DialogContent>
-          </DialogContent>
-
-          <DialogActions style={{ direction: "ltr" }}>
-            {delet === 1 ? (
-              <Button color="error" variant="contained" onClick={ResetMyScores}>
-                نعم
-              </Button>
-            ) : null}
-
-            <Button variant="contained" onClick={ModelClose}>
-              إغلاق
-            </Button>
-          </DialogActions>
-        </Dialog>
-        {/* === info DIALOG === */}
-
-        {/* info DIALOG */}
-        <Dialog
-          // maxWidth="md"
-          className="Dialog"
-          // onClose={infoModelClose}
-          style={{ direction: "rtl" }}
-          open={infomodel}
-          TransitionComponent={Transition}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle>شرح استخدام التطبيق </DialogTitle>
-
-          <DialogContent>
-            <DialogContentText id="alert-dialog-slide-description">
-              <Info />
+              </Grid>
             </DialogContentText>
           </DialogContent>
-          <DialogActions>
-            <Button onClick={ModelClose}>إغلاق</Button>
-          </DialogActions>
-        </Dialog>
-        {/* === info DIALOG === */}
-        {/* <NavigationBottom /> */}
-        {/* <Typography variant="body1" align="center"></Typography> */}
-      </CardContent>
+        </DialogContent>
+
+        <DialogActions style={{ direction: "ltr" }}>
+          {delet === 1 ? (
+            <Button color="error" variant="contained" onClick={ResetMyScores}>
+              نعم
+            </Button>
+          ) : null}
+
+          <Button variant="contained" onClick={ModelClose}>
+            إغلاق
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {/* === info DIALOG === */}
+
+      {/* info DIALOG */}
+      <Dialog
+        // maxWidth="md"
+        className="Dialog"
+        // onClose={infoModelClose}
+        style={{ direction: "rtl" }}
+        open={infomodel}
+        TransitionComponent={Transition}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle>شرح استخدام التطبيق </DialogTitle>
+
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            <Info />
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={ModelClose}>إغلاق</Button>
+        </DialogActions>
+      </Dialog>
+      {/* === info DIALOG === */}
       <Paper
         sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
         elevation={3}

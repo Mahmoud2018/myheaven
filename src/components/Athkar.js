@@ -164,7 +164,7 @@ export default function Athkar() {
           border: 3,
           borderColor: "primary.main",
         }}
-        container
+        container="true"
         spacing={2}
         style={{
           justifyContent: "center",

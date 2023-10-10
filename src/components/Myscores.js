@@ -21,8 +21,8 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Myscores({ score, tree, Plam, Box, home, castle }) {
   return (
-    <Grid container spacing={2} style={{ fontWeight: "bold" }}>
-      <Item item xs={1}>
+    <Grid container="true" spacing={2} style={{ fontWeight: "bold" }}>
+      <Item item="true" xs={1}>
         <img
           src={"scores/1.png"}
           style={{ width: 30, height: 30 }}
@@ -38,7 +38,7 @@ export default function Myscores({ score, tree, Plam, Box, home, castle }) {
           ذهب
         </Typography>
       </Item>
-      <Item item xs={1}>
+      <Item item="true" xs={1}>
         <img
           src={"scores/2.png"}
           style={{ width: 30, height: 30 }}
@@ -55,7 +55,7 @@ export default function Myscores({ score, tree, Plam, Box, home, castle }) {
         </Typography>
       </Item>
 
-      <Item item xs={1}>
+      <Item item="true" xs={1}>
         <img
           src={"scores/3.png"}
           style={{ width: 30, height: 30 }}
@@ -72,7 +72,7 @@ export default function Myscores({ score, tree, Plam, Box, home, castle }) {
         </Typography>
       </Item>
 
-      <Item item xs={1}>
+      <Item item="true" xs={1}>
         <img
           src={"scores/4.png"}
           style={{ width: 30, height: 30 }}
@@ -90,7 +90,7 @@ export default function Myscores({ score, tree, Plam, Box, home, castle }) {
         </Typography>
       </Item>
 
-      <Item item xs={1}>
+      <Item item="true" xs={1}>
         <img
           src={"scores/5.png"}
           style={{ width: 30, height: 30 }}
@@ -107,7 +107,7 @@ export default function Myscores({ score, tree, Plam, Box, home, castle }) {
         </Typography>
       </Item>
 
-      <Item item xs={1}>
+      <Item item="true" xs={1}>
         {" "}
         <img
           src={"scores/6.png"}
@@ -124,7 +124,7 @@ export default function Myscores({ score, tree, Plam, Box, home, castle }) {
           قصر
         </Typography>
       </Item>
-      {/* <Item item xs={1}>
+      {/* <Item item="true" xs={1}>
         <Button>
           {" "}
           <img

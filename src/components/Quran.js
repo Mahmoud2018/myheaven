@@ -30,6 +30,7 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 // import QuranAudioPlayer from "./QuranAudioPlayer";
 let statofDisplsy = JSON.parse(localStorage.getItem("statofDisplsy"));
 let statofselect = JSON.parse(localStorage.getItem("statofselect"));
+let statofQurra = JSON.parse(localStorage.getItem("statofQurra"));
 function Quran() {
   const [selectedItem, setSelectedItem] = useState(
     statofselect === null ? 0 : statofselect
@@ -38,7 +39,9 @@ function Quran() {
     statofDisplsy === null ? 1 : statofDisplsy
   );
 
-  const [quraa, setquraa] = useState("https://server7.mp3quran.net/s_gmd/");
+  const [quraa, setquraa] = useState(
+    statofQurra === null ? "https://server7.mp3quran.net/s_gmd/" : statofQurra
+  );
   const [isPlaying, setIsPlaying] = useState(false);
 
   // console.log(displayQuran);
@@ -91,7 +94,8 @@ function Quran() {
 
   // Call the function to add the information to array1
   addInfoToArray1(filterTafseer, filterAya);
-  console.log(filterTafseer);
+
+  // console.log(filterTafseer[0].id);
 
   function addLeadingZeros(number, length) {
     const numberString = String(number);
@@ -111,6 +115,7 @@ function Quran() {
 
   const handleChange = (event) => {
     setquraa(event.target.value);
+    localStorage.setItem("statofQurra", JSON.stringify(event.target.value));
   };
 
   return (
@@ -186,6 +191,7 @@ function Quran() {
                       >
                         {data.name + "  "}
                         <span
+                          key={data.id}
                           style={{
                             color: "#fbc02d",
                             fontSize: 12,
@@ -249,7 +255,7 @@ function Quran() {
             border: 3,
             borderColor: "primary.main",
           }}
-          container
+          container="true"
           spacing={2}
           style={{
             justifyContent: "center",
@@ -272,6 +278,7 @@ function Quran() {
             ? QuranData.map((data) => (
                 <ListItem disablePadding key={data.id}>
                   <ListItemButton
+                    // key={data.id}
                     style={{
                       displayQuran: "flex",
                       // justifyContent: "center",
@@ -282,6 +289,7 @@ function Quran() {
                     onClick={() => ShowQuran(data.id)}
                   >
                     <Typography
+                      key={data.id}
                       className="suraname"
                       style={{
                         fontFamily: "kitab",
@@ -395,30 +403,27 @@ function Quran() {
             : null}
           {displayQuran === 4
             ? filterTafseer.map((arItem) => (
-                <>
-                  <Typography
-                    variant="string"
-                    style={{ fontFamily: "kitab", fontSize: 18 }}
-                    key={arItem.id}
+                <Typography
+                  key={arItem.id}
+                  variant="string"
+                  style={{ fontFamily: "kitab", fontSize: 18 }}
+                >
+                  <span
+                    // style={{ paddingLeft: 10, paddingRight: 10 }}
+                    className="suraname"
                   >
-                    <span
-                      key={arItem.id}
-                      // style={{ paddingLeft: 10, paddingRight: 10 }}
-                      className="suraname"
-                    >
-                      تفسير الآية رقم ﴿{arItem.aya}﴾
-                    </span>
-                    <span
-                      // key={arItem.id}
-                      style={{ padding: 10 }}
-                      className="tfseer"
-                    >
-                      ﴿ {arItem.array[arItem.aya - 1].ar} ﴾
-                    </span>
+                    تفسير الآية رقم ﴿{arItem.aya}﴾
+                  </span>
+                  <span
+                    // key={arItem.id}
+                    style={{ padding: 10 }}
+                    className="tfseer"
+                  >
+                    ﴿ {arItem.array[arItem.aya - 1].ar} ﴾
+                  </span>
 
-                    {arItem.text}
-                  </Typography>
-                </>
+                  {arItem.text}
+                </Typography>
               ))
             : null}
         </CardContent>

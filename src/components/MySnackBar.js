@@ -22,7 +22,7 @@ export default function MySnackBar({ open, message, color }) {
     <div>
       <Stack spacing={2} sx={{ width: "100%" }}>
         <Snackbar
-          anchorOrigin={{ vertical: "Bottom", horizontal: "center" }}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
           open={open}
           autoHideDuration={6000}
           message="Note archived"
