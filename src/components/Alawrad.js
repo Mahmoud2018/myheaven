@@ -5,7 +5,7 @@ import Wred from "./Data";
 
 const renderArrayElements = () => {
   return Wred.map((element, index) => (
-    <Typography style={{ fontSize: 13 }}>
+    <Typography key={index} style={{ fontSize: 13 }}>
       <Divider style={{ color: "#5456454" }} />
       {index + 1}- {element}
       <Divider style={{ marginBottom: "20px", color: "#5456454" }} />

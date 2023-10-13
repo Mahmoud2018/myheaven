@@ -7,21 +7,13 @@ import Paper from "@mui/material/Paper";
 import { Card } from "@mui/material";
 import Container from "@mui/material/Container";
 import { DataContext } from "../contexts/DataContext";
-import Divider from "@mui/material/Divider";
+import { Darkmode } from "../App";
 
 // DIALOG IMPORTS
 import IconButton from "@mui/material/IconButton";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import AddBoxIcon from "@mui/icons-material/AddBox";
 import AddIcon from "@mui/icons-material/Add";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import cash from "../Sounds/cash.mp3";
-import Myscores from "./Myscores";
+import { useTheme } from "@mui/material/styles";
 
 const Items = [
   { id: uuidv4(), Item: 0, pic: "Fruits/1.png", prise: 500 },
@@ -93,6 +85,10 @@ export default function MyItems({ tree, Plam, Box, home, castle }) {
     const parsedItems = JSON.parse(savedItems);
     return parsedItems ? parsedItems : Items;
   });
+
+  const theme = useTheme();
+  let ms;
+  theme.palette.mode === "dark" ? (ms = "Light") : (ms = "Dark");
 
   const Cash = new Audio(cash);
 
@@ -250,6 +246,32 @@ export default function MyItems({ tree, Plam, Box, home, castle }) {
           </Typography>
           <Typography color="primary" style={{ fontSize: 10 }}>
             قصر
+          </Typography>
+        </ItemScore>
+
+        <ItemScore
+          item="true"
+          xs={1}
+          style={{
+            display: "flex",
+            textAlign: "center",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
+          <Darkmode style={{ width: 20, height: 20 }} />
+          <Typography
+            color="primary"
+            style={{ fontFamily: "Rocher", fontSize: 12 }}
+          >
+            {ms}
+          </Typography>
+          <Typography
+            color="primary"
+            style={{ fontFamily: "Rocher", fontSize: 12 }}
+          >
+            Mode
           </Typography>
         </ItemScore>
       </Grid>

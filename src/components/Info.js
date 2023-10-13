@@ -48,25 +48,25 @@ export default function Info() {
 
       <Item item="true" xs={1}>
         <img src={"Info/non-complet.png"} alt="Logo" />
-        <Typography style={{ fontFamily: "BakbakOne" }}></Typography>
+
         <Typography style={{ fontSize: 15 }}> العبادات الغير منجزة </Typography>
       </Item>
 
       <Item item="true" xs={1}>
         <img src={"Info/complet.png"} alt="Logo" />
-        <Typography style={{ fontFamily: "BakbakOne" }}></Typography>
+
         <Typography style={{ fontSize: 15 }}> العبادات المنجزة </Typography>
       </Item>
 
       <Item item="true" xs={1}>
         <img src={"Info/counter.png"} alt="Logo" />
-        <Typography style={{ fontFamily: "BakbakOne" }}></Typography>
+
         <Typography style={{ fontSize: 15 }}>إضافة نقطة فورية</Typography>
       </Item>
 
       <Item item="true" xs={1}>
         <img src={"Info/Alsbah.png"} alt="Logo" />
-        <Typography style={{ fontFamily: "BakbakOne" }}></Typography>
+
         <Typography style={{ fontSize: 15 }}>
           عند النقر تظهر أذكار الصباح
         </Typography>
@@ -74,7 +74,7 @@ export default function Info() {
 
       <Item item="true" xs={1}>
         <img src={"Info/Almsaa.png"} alt="Logo" />
-        <Typography style={{ fontFamily: "BakbakOne" }}></Typography>
+
         <Typography style={{ fontSize: 15 }}>
           عند النقر تظهر أذكار المساء
         </Typography>
@@ -82,28 +82,27 @@ export default function Info() {
 
       <Item item="true" xs={1}>
         <img src={"Info/Athkar.png"} alt="Logo" />
-        <Typography style={{ fontFamily: "BakbakOne" }}></Typography>
+
         <Typography style={{ fontSize: 15 }}>عند النقر يظهر الحديث </Typography>
       </Item>
 
       <Item item="true" xs={1}>
         <img src={"Info/earn.png"} alt="Logo" />
-        <Typography style={{ fontFamily: "BakbakOne" }}></Typography>
+
         <Typography style={{ fontSize: 15 }}>
-          {" "}
           عند النقر يجمع الذهب من العبادات المنجزة
         </Typography>
       </Item>
 
       <Item item="true" xs={1}>
         <img src={"Info/infoicon.gif"} alt="Logo" />
-        <Typography style={{ fontFamily: "BakbakOne" }}></Typography>
+
         <Typography style={{ fontSize: 15 }}>شرح استخدام التطبيق</Typography>
       </Item>
 
       <Item item="true" xs={1}>
         <img src={"Info/tasks.png"} alt="Logo" />
-        <Typography style={{ fontFamily: "BakbakOne" }}></Typography>
+
         <Typography style={{ fontSize: 15 }}>
           لمهام المنجزة والغير منجز{" "}
         </Typography>
@@ -111,7 +110,7 @@ export default function Info() {
 
       <Item item="true" xs={1}>
         <img src={"Info/present.png"} alt="Logo" />
-        <Typography style={{ fontFamily: "BakbakOne" }}></Typography>
+
         <Typography style={{ fontSize: 15 }}>متجر الجوائز</Typography>
       </Item>
 

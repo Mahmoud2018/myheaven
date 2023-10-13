@@ -19,6 +19,7 @@ import { Alsbahnumber } from "./Data";
 import { Almsanumber } from "./Data";
 import { Container, Divider } from "@mui/material";
 import Stack from "@mui/material/Stack";
+import { Darkmode } from "../App";
 
 import { red } from "@mui/material/colors";
 import { green } from "@mui/material/colors";
@@ -145,6 +146,13 @@ export default function Athkar() {
         onClick={AthkarlistOpene}
       >
         فهرس الأذكار
+      </Button>
+      <Button
+        style={{ width: 100, height: 35, fontSize: 10 }}
+        variant="outlined"
+      >
+        <Darkmode />
+        فاتح
       </Button>
       <Typography
         className="titel-text"

@@ -1,12 +1,10 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
+import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Unstable_Grid2";
 import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
+import { Darkmode } from "../App";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -19,7 +17,13 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+// console.log(theme);
+
 export default function Myscores({ score, tree, Plam, Box, home, castle }) {
+  const theme = useTheme();
+  let ms;
+  theme.palette.mode === "dark" ? (ms = "Light") : (ms = "Dark");
+
   return (
     <Grid container="true" spacing={2} style={{ fontWeight: "bold" }}>
       <Item item="true" xs={1}>
@@ -124,6 +128,32 @@ export default function Myscores({ score, tree, Plam, Box, home, castle }) {
           قصر
         </Typography>
       </Item>
+      <Item
+        item="true"
+        xs={1}
+        style={{
+          display: "flex",
+          textAlign: "center",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+        }}
+      >
+        <Darkmode style={{ width: 20, height: 20 }} />
+        <Typography
+          color="primary"
+          style={{ fontFamily: "Rocher", fontSize: 12 }}
+        >
+          {ms}
+        </Typography>
+        <Typography
+          color="primary"
+          style={{ fontFamily: "Rocher", fontSize: 12 }}
+        >
+          Mode
+        </Typography>
+      </Item>
+
       {/* <Item item="true" xs={1}>
         <Button>
           {" "}

@@ -70,61 +70,72 @@
 
 @font-face {
   font-family: BakbakOne;
+  font-display: auto;
   src: url("../public/fonts/BakbakOne-Regular.ttf");
   font-weight: normal;
 }
 
 @font-face {
   font-family: Alexandria;
+  font-display: auto;
   src: url("../public/fonts/Alexandria-Regular.ttf");
   font-weight: normal;
 }
 
 @font-face {
   font-family: Alexandria;
+  font-display: auto;
   src: url("../public/fonts/Alexandria-Bold.ttf");
   font-weight: bold;
 }
 
 @font-face {
   font-family: Alexandria;
+  font-display: auto;
   src: url("../public/fonts/Alexandria-Black.ttf");
   font-weight: 900;
 }
 
 @font-face {
   font-family: Alexandria;
+  font-display: auto;
   src: url("../public/fonts/Alexandria-Light.ttf");
   font-weight: 200;
 }
 
 @font-face {
   font-family: kitab;
+  font-display: auto;
   src: url("../public/fonts/Kitab\ Bold.ttf");
 }
 
 @font-face {
   font-family: qalam1;
+  font-display: auto;
   src: url("../public/fonts/W_qalam\ Regular.ttf");
 }
 
 @font-face {
   font-family: qalam2;
+  font-display: auto;
   src: url("../public/fonts/Al\ Qalam\ Quran\ Majeed\ Web\ Regular.ttf");
 }
 
 @font-face {
   font-family: othmani;
+  font-display: auto;
   src: url("../public/fonts/UthmanicHafs1\ Ver13.otf");
 }
 
 @font-face {
   font-family: droid;
+  font-display: auto;
   src: url("../public/fonts/ArbFONTS-Droid-Naskh-Regular.ttf");
 }
 
 @font-face {
   font-family: hafs;
+  font-display: auto;
   src: url("../public/fonts/HafsNastaleeq\ Ver10.otf");
 }
 /* =====// CUSTOM FONTS //====== */
@@ -338,7 +349,7 @@
 
 .suranumber {
   display: inline-flex;
-  width: 20px;
+  width: 28px;
   height: 30px;
   justify-content: center;
   align-items: center;

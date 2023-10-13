@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import QuranData from "./QuranData.json";
 import ReactAudioPlayer from "react-audio-player";
 import { TafseerData } from "./TafseerData";
@@ -6,11 +6,12 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import Box from "@mui/material/Box";
-import { AllQurra } from "./AllQurra";
+
 import { Qurra } from "./Qurra";
-import { Test } from "./Test";
-import Athkar from "./Athkar";
+
+import { Darkmode } from "../App";
+import { useTheme } from "@mui/material/styles";
+
 import {
   Card,
   CardContent,
@@ -43,7 +44,9 @@ function Quran() {
     statofQurra === null ? "https://server7.mp3quran.net/s_gmd/" : statofQurra
   );
   const [isPlaying, setIsPlaying] = useState(false);
-
+  const theme = useTheme();
+  let ms;
+  theme.palette.mode === "dark" ? (ms = "Light") : (ms = "Dark");
   // console.log(displayQuran);
   // console.log(selectedItem);
 
@@ -134,6 +137,13 @@ function Quran() {
         onClick={TafseerOpen}
       >
         فهرس التفسير
+      </Button>
+      <Button
+        style={{ width: 100, height: 35, fontSize: 10 }}
+        variant="outlined"
+      >
+        <Darkmode />
+        {ms}
       </Button>
 
       {displayQuran === 2 ? (
@@ -344,7 +354,12 @@ function Quran() {
                   >
                     {arItem.ar}
                     <span
-                      style={{ paddingLeft: 10, paddingRight: 10 }}
+                      style={{
+                        marginLeft: 10,
+                        marginRight: 10,
+                        fontFamily: "kitab",
+                        fontSize: 20,
+                      }}
                       className="suranumber"
                     >
                       ﴿{arItem.id}﴾

@@ -16,7 +16,6 @@ import { Data } from "./Data";
 import Myscores from "./Myscores";
 import MyItems from "./MyItems.";
 import Portfolio from "./Portfolio";
-
 import Slide from "@mui/material/Slide";
 import Info from "./Info";
 import Alawrad from "./Alawrad";
@@ -97,7 +96,7 @@ let H24 = 24 * 60 * 60 * 1000;
 let H20 = 20 * 60 * 60 * 1000;
 let M2 = 1 * 60 * 1000;
 
-const Myheaven = ({ activationInterval = H20 }) => {
+const Myheaven = ({ activationInterval = H20, theme }) => {
   const [tasks, setTasks] = useState(Data);
   const { score, setScore } = useContext(DataContext);
   const [tree, setTree] = useState(stordtree);
@@ -434,10 +433,11 @@ const Myheaven = ({ activationInterval = H20 }) => {
         castle={castle}
         Reset={ResetMyScores}
       />
+
       <Container
         direction="row"
         style={{
-          marginTop: 10,
+          marginTop: 30,
           marginBottom: 0,
           display: "flex",
           justifyContent: "center",
@@ -445,127 +445,115 @@ const Myheaven = ({ activationInterval = H20 }) => {
           // flexDirection: "column",
         }}
       >
-        <Paper
-          style={{
-            padding: 5,
-            marginLeft: 20,
-            marginTop: 5,
-            display: "flex",
-            fontSize: 10,
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-          }}
-        >
-          {isActive ? (
-            <>
-              <Typography
-                style={{
-                  // display: "flex",
-                  fontSize: 10,
-                  fontWeight: "bold",
-                  marginBottom: 5,
-                  // alignItems: "center",
-                }}
-              >
-                وقت جمع الذهب من العبادات المنجزة
-                <strong
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Grid item xs={6}>
+            {" "}
+            <Typography variant="h3" style={{ fontWeight: "bold" }}>
+              جنتي
+            </Typography>
+            <IconButton
+              onClick={infoOpene}
+              color="primary"
+              aria-label="add to shopping cart"
+            >
+              <InfoIcon fontSize="large" />
+            </IconButton>
+          </Grid>
+          <Grid item xs={6}>
+            {isActive ? (
+              <>
+                <Typography
                   style={{
-                    fontSize: 20,
-                    marginRight: 10,
+                    // display: "flex",
+                    fontSize: 10,
+                    fontWeight: "bold",
+                    marginBottom: 5,
+                    // alignItems: "center",
                   }}
                 >
-                  😍
-                </strong>
-              </Typography>
+                  وقت جمع الذهب من العبادات المنجزة
+                  <strong
+                    style={{
+                      fontSize: 20,
+                      marginRight: 10,
+                    }}
+                  >
+                    😍
+                  </strong>
+                </Typography>
 
-              <button
-                className="button"
-                onClick={handleButtonClick}
-                variant="contained"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  marginBottom: 5,
-                  fontWeight: "bold",
-                }}
-              >
-                إجمع الذهب
-                <img
-                  src={"scores/1.png"}
-                  style={{ width: 25, height: 25, marginRight: 10 }}
-                  alt="Logo"
+                <button
+                  className="button"
+                  onClick={handleButtonClick}
+                  variant="contained"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginBottom: 5,
+                    fontWeight: "bold",
+                  }}
+                >
+                  إجمع الذهب
+                  <img
+                    src={"scores/1.png"}
+                    style={{ width: 25, height: 25, marginRight: 10 }}
+                    alt="Logo"
+                  />
+                </button>
+              </>
+            ) : (
+              <>
+                <Typography
+                  style={{
+                    display: "flex",
+                    fontSize: 10,
+                    alignItems: "center",
+                  }}
+                >
+                  الوقت المتبقي لجمع الذهب
+                  <img
+                    src={"scores/1.png"}
+                    alt="Logo"
+                    style={{ width: 20, height: 20, marginRight: 6 }}
+                  />
+                </Typography>
+                <Typography
+                  style={{
+                    display: "flex",
+                    fontSize: 10,
+                    // marginBottom: 10,
+                    alignItems: "center",
+                    // direction: "ltr",
+                  }}
+                >
+                  <img
+                    src={"clock.gif"}
+                    alt="Logo"
+                    style={{ width: 40, height: 40, marginLeft: 2 }}
+                  />
+
+                  {formatTime(timeLeft)}
+                </Typography>
+
+                <LinearProgress
+                  style={{ width: "80%", marginTop: 2 }}
+                  variant="determinate"
+                  // value={(1 - timeLeft / (activationInterval * 1000)) * 100}
+                  value={(timeLeft / activationInterval) * 100}
                 />
-              </button>
-            </>
-          ) : (
-            <>
-              <Typography
-                style={{
-                  display: "flex",
-                  fontSize: 10,
-                  alignItems: "center",
-                }}
-              >
-                الوقت المتبقي لجمع الذهب
-                <img
-                  src={"scores/1.png"}
-                  alt="Logo"
-                  style={{ width: 20, height: 20, marginRight: 6 }}
-                />
-              </Typography>
-              <Typography
-                style={{
-                  display: "flex",
-                  fontSize: 10,
-                  // marginBottom: 10,
-                  alignItems: "center",
-                  // direction: "ltr",
-                }}
-              >
-                <img
-                  src={"clock.gif"}
-                  alt="Logo"
-                  style={{ width: 40, height: 40, marginLeft: 2 }}
-                />
-
-                {formatTime(timeLeft)}
-              </Typography>
-
-              <LinearProgress
-                style={{ width: "80%", marginTop: 2 }}
-                variant="determinate"
-                // value={(1 - timeLeft / (activationInterval * 1000)) * 100}
-                value={(timeLeft / activationInterval) * 100}
-              />
-            </>
-          )}
-          <Button
-            style={{ marginTop: 10, fontSize: 10 }}
-            size="small"
-            onClick={DeletscoreOpene}
-            variant="contained"
-            color="error"
-          >
-            البدء من جديد Reset
-          </Button>
-        </Paper>
-
-        <Typography variant="h3" style={{ fontWeight: "bold" }}>
-          جنتي
-        </Typography>
-
-        <IconButton
-          onClick={infoOpene}
-          color="primary"
-          aria-label="add to shopping cart"
-        >
-          <img
-            src={"Info/infoicon.gif"}
-            alt="Logo"
-            style={{ width: "70%", marginTop: 20 }}
-          />
-        </IconButton>
+              </>
+            )}
+            <Button
+              style={{ marginTop: 10, fontSize: 10 }}
+              size="small"
+              onClick={DeletscoreOpene}
+              variant="contained"
+              color="error"
+            >
+              البدء من جديد Reset
+            </Button>
+          </Grid>
+        </Grid>
       </Container>
     </CardContent>
   );
@@ -610,7 +598,7 @@ const Myheaven = ({ activationInterval = H20 }) => {
           container="true"
           className="todoCard"
           sx={{
-            background: "#212121",
+            background: theme.palette.mode === "dark" ? "#263238" : "#263238",
             // color: "white",
             marginTop: 1,
           }}
@@ -823,26 +811,15 @@ const Myheaven = ({ activationInterval = H20 }) => {
     </Card>
   );
 
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fbc02d",
-    ...theme.typography.body2,
-    borderRadius: "10px",
-    maxWidth: 100,
-    textAlign: "center",
-    fontFamily: "BakbakOne",
-    marginLeft: 10,
-    color: theme.palette.text.secondary,
-  }));
+  // function quranOpene() {
+  //   setDisplay(2);
+  //   localStorage.setItem("statofNavgatin", JSON.stringify(2));
+  // }
 
-  function quranOpene() {
-    setDisplay(2);
-    localStorage.setItem("statofNavgatin", JSON.stringify(2));
-  }
-
-  function TafseerOpen() {
-    setDisplay(2);
-    localStorage.setItem("statofNavgatin", JSON.stringify(2));
-  }
+  // function TafseerOpen() {
+  //   setDisplay(2);
+  //   localStorage.setItem("statofNavgatin", JSON.stringify(2));
+  // }
 
   function ResetMyScores() {
     setScore(0);
