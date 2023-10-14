@@ -854,7 +854,7 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
         width: 450,
         // background: "green",
         height: "100vh",
-        borderRadius: "20px",
+        // borderRadius: "20px",
       }}
       sx={{ minWidth: 250 }}
     >

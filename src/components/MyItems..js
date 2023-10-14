@@ -88,7 +88,7 @@ export default function MyItems({ tree, Plam, Box, home, castle }) {
 
   const theme = useTheme();
   let ms;
-  theme.palette.mode === "dark" ? (ms = "Light") : (ms = "Dark");
+  theme.palette.mode === "dark" ? (ms = "  الفاتح") : (ms = " الليلي");
 
   const Cash = new Audio(cash);
 
@@ -263,15 +263,15 @@ export default function MyItems({ tree, Plam, Box, home, castle }) {
           <Darkmode style={{ width: 20, height: 20 }} />
           <Typography
             color="primary"
-            style={{ fontFamily: "Rocher", fontSize: 12 }}
+            style={{ fontFamily: "BakbakOne", fontWeight: 600, fontSize: 12 }}
           >
-            {ms}
+            الضوء
           </Typography>
           <Typography
             color="primary"
-            style={{ fontFamily: "Rocher", fontSize: 12 }}
+            style={{ fontFamily: "BakbakOne", fontWeight: 600, fontSize: 12 }}
           >
-            Mode
+            {ms}
           </Typography>
         </ItemScore>
       </Grid>

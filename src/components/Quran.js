@@ -139,11 +139,10 @@ function Quran() {
         فهرس التفسير
       </Button>
       <Button
-        style={{ width: 100, height: 35, fontSize: 10 }}
+        style={{ width: 20, height: 35, fontSize: 10 }}
         variant="outlined"
       >
         <Darkmode />
-        {ms}
       </Button>
 
       {displayQuran === 2 ? (

@@ -22,7 +22,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Myscores({ score, tree, Plam, Box, home, castle }) {
   const theme = useTheme();
   let ms;
-  theme.palette.mode === "dark" ? (ms = "Light") : (ms = "Dark");
+  theme.palette.mode === "dark" ? (ms = "  الفاتح") : (ms = " الليلي");
 
   return (
     <Grid container="true" spacing={2} style={{ fontWeight: "bold" }}>
@@ -142,15 +142,15 @@ export default function Myscores({ score, tree, Plam, Box, home, castle }) {
         <Darkmode style={{ width: 20, height: 20 }} />
         <Typography
           color="primary"
-          style={{ fontFamily: "Rocher", fontSize: 12 }}
+          style={{ fontFamily: "BakbakOne", fontWeight: 600, fontSize: 12 }}
         >
-          {ms}
+          الضوء
         </Typography>
         <Typography
           color="primary"
-          style={{ fontFamily: "Rocher", fontSize: 12 }}
+          style={{ fontFamily: "BakbakOne", fontWeight: 600, fontSize: 12 }}
         >
-          Mode
+          {ms}
         </Typography>
       </Item>
 

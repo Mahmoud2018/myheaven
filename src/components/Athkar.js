@@ -20,7 +20,7 @@ import { Almsanumber } from "./Data";
 import { Container, Divider } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { Darkmode } from "../App";
-
+import { useTheme } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
 import { green } from "@mui/material/colors";
 import { yellow } from "@mui/material/colors";
@@ -55,6 +55,12 @@ export default function Athkar() {
   const Almsanumbers = Almsanumber.map((item) => {
     return item;
   });
+
+  const theme = useTheme();
+  let ms;
+  theme.palette.mode === "dark"
+    ? (ms = " الضوء الفاتح")
+    : (ms = "الضوء الليلي");
 
   function AthkarOpen(time) {
     if (time === true) {
@@ -148,11 +154,11 @@ export default function Athkar() {
         فهرس الأذكار
       </Button>
       <Button
-        style={{ width: 100, height: 35, fontSize: 10 }}
+        style={{ width: 140, height: 35, fontSize: 10 }}
         variant="outlined"
       >
         <Darkmode />
-        فاتح
+        {ms}
       </Button>
       <Typography
         className="titel-text"
