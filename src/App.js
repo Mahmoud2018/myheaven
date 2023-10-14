@@ -2,13 +2,15 @@ import "./App.css";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import Myheaven from "./components/Myheaven";
 import { DataContext } from "./contexts/DataContext";
-import { useState, useContext, createContext, useMemo } from "react";
+import { useState, useContext, createContext, useMemo, useEffect } from "react";
 import MySnackBar from "./components/MySnackBar";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import IconButton from "@mui/material/IconButton";
 
-const ColorModeContext = createContext({ toggleColorMode: () => {} });
+const ColorModeContext = createContext({
+  toggleColorMode: () => {},
+});
 
 export function Darkmode() {
   const theme = useTheme();
@@ -28,20 +30,32 @@ export function Darkmode() {
   );
 }
 
-let stordScore = 0;
-stordScore = JSON.parse(localStorage.getItem("score"));
-
+let stordScore = JSON.parse(localStorage.getItem("score"));
 function App() {
   const [open, setOpen] = useState(false);
-  const [score, setScore] = useState(stordScore);
+  const [score, setScore] = useState(stordScore === null ? 0 : stordScore);
   const [message, setmessage] = useState("");
   const [color, setcolor] = useState("");
 
   const [mode, setMode] = useState("light");
+
+  // Load mode from local storage on initial render
+  useEffect(() => {
+    const savedMode = localStorage.getItem("mode");
+    if (savedMode) {
+      setMode(savedMode);
+    }
+  }, []);
+
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+        setMode((prevMode) => {
+          const newMode = prevMode === "light" ? "dark" : "light";
+          // Save the new mode in local storage
+          localStorage.setItem("mode", newMode);
+          return newMode;
+        });
       },
     }),
     []
