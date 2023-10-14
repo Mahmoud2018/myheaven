@@ -40,6 +40,25 @@
   transition: all 0.2s !important;
 }
 
+.MuiPaper-root {
+  transition: all 0.5s ease-in-out;
+}
+.MuiPaper-elevation {
+  transition: all 0.5s ease-in-out;
+}
+.MuiPaper-rounded {
+  transition: all 0.5s ease-in-out;
+}
+.MuiPaper-elevation1 {
+  transition: all 0.5s ease-in-out;
+}
+.MuiCard-root {
+  transition: all 0.5s ease-in-out;
+}
+.css-1ni1nnj-MuiPaper-root-MuiCard-root {
+  transition: all 0.5s ease-in-out;
+}
+
 /* .iconButton:hover {
   color: #ef9a9a !important;
 
@@ -47,7 +66,7 @@
 
 .todoCard {
   transition: all 0.2s !important;
-  border-radius: 50px !important;
+  border-radius: 10px !important;
 }
 
 /* .Dialog{

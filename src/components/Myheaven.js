@@ -136,7 +136,7 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
 
   /* Athkar Model */
   function AthkarOpen() {
-    setDisplay(3);
+    setDisplay(2);
   }
 
   /*=== Athkar Model ===*/
@@ -862,6 +862,10 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
       {display === 0 ? (
         [homePage, tabs, Lists]
       ) : display === 1 ? (
+        <Quran />
+      ) : display === 2 ? (
+        <Athkar />
+      ) : display === 3 ? (
         <MyItems
           score={score}
           tree={tree}
@@ -870,10 +874,6 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
           home={home}
           castle={castle}
         />
-      ) : display === 2 ? (
-        <Quran />
-      ) : display === 3 ? (
-        <Athkar />
       ) : display === 4 ? (
         <Portfolio />
       ) : null}
@@ -960,12 +960,12 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
           }}
         >
           <BottomNavigationAction label=" العبادات" icon={<MosqueIcon />} />
-          <BottomNavigationAction label="شراء الجوائز" icon={<StoreIcon />} />
           <BottomNavigationAction
             label=" القرآن و التفسير"
             icon={<MenuBookIcon />}
           />
           <BottomNavigationAction label=" الأذكار" icon={<ArticleIcon />} />
+          <BottomNavigationAction label="شراء الجوائز" icon={<StoreIcon />} />
           <BottomNavigationAction label="عن المطور" icon={<InfoIcon />} />
         </BottomNavigation>
       </Paper>

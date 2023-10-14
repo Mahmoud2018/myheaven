@@ -4,8 +4,8 @@ import Myheaven from "./components/Myheaven";
 import { DataContext } from "./contexts/DataContext";
 import { useState, useContext, createContext, useMemo, useEffect } from "react";
 import MySnackBar from "./components/MySnackBar";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
+import Brightness2Icon from "@mui/icons-material/Brightness2";
+import LightModeIcon from "@mui/icons-material/LightMode";
 import IconButton from "@mui/material/IconButton";
 
 const ColorModeContext = createContext({
@@ -21,11 +21,7 @@ export function Darkmode() {
       onClick={colorMode.toggleColorMode}
       color="inherit"
     >
-      {theme.palette.mode === "dark" ? (
-        <Brightness7Icon />
-      ) : (
-        <Brightness4Icon />
-      )}
+      {theme.palette.mode === "dark" ? <LightModeIcon /> : <Brightness2Icon />}
     </IconButton>
   );
 }

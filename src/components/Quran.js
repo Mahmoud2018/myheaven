@@ -148,6 +148,7 @@ function Quran() {
       {displayQuran === 2 ? (
         <>
           <ReactAudioPlayer
+            style={{ marginTop: 2 }}
             src={AudioUrl}
             autoPlay={false}
             controls
@@ -420,7 +421,7 @@ function Quran() {
                 <Typography
                   key={arItem.id}
                   variant="string"
-                  style={{ fontFamily: "kitab", fontSize: 18 }}
+                  style={{ fontFamily: "kitab", fontSize: 18, marginTop: 2 }}
                 >
                   <span
                     // style={{ paddingLeft: 10, paddingRight: 10 }}
@@ -430,7 +431,7 @@ function Quran() {
                   </span>
                   <span
                     // key={arItem.id}
-                    style={{ padding: 10 }}
+                    style={{ padding: 10, marginTop: 2 }}
                     className="tfseer"
                   >
                     ﴿ {arItem.array[arItem.aya - 1].ar} ﴾
