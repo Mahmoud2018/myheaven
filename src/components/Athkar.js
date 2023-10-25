@@ -145,222 +145,178 @@ export default function Athkar() {
 
   return (
     <>
-      <div style={{ marginBottom: "5px" }}></div>
-      <Button
-        variant="outlined"
-        startIcon={<ArticleIcon style={{ marginLeft: 10 }} />}
-        onClick={AthkarlistOpene}
-      >
-        فهرس الأذكار
-      </Button>
-      <Button
-        style={{ width: 140, height: 35, fontSize: 10 }}
-        variant="outlined"
-      >
-        <Darkmode />
-        {ms}
-      </Button>
-      <Typography
-        className="titel-text"
-        style={{
-          color: "white",
-          fontFamily: "kitab",
-          fontWeight: "bold",
-          fontSize: 20,
-          marginTop: 10,
-          marginBottom: 10,
-        }}
-      >
-        ﴿ الأذكار ﴾
-      </Typography>
-      <CardContent
-        sx={{
-          border: 3,
-          borderColor: "primary.main",
-        }}
-        container="true"
-        spacing={2}
-        style={{
-          justifyContent: "center",
-          padding: "5px",
-          height: "82vh",
-          borderRadius: "20px",
-          overflow: "scroll",
-        }}
-      >
-        {display === 0 ? (
-          <>
-            <ListItem>
-              <ListItemButton onClick={() => AthkarOpen(true)}>
-                <Typography
-                  className="suraname"
-                  style={{
-                    fontFamily: "kitab",
-                    fontWeight: "bold",
-                    fontSize: 18,
-                    marginLeft: 10,
-                  }}
-                >
-                  ﴿⁠ 1 ﴾
-                </Typography>
-                <Typography
-                  // className="suraname"
-                  style={{ fontFamily: "kitab", fontSize: 20 }}
-                  // variant="body1"
-                  align="right"
-                >
-                  أذكار الصباح
-                </Typography>
-              </ListItemButton>
-            </ListItem>
-            <ListItem>
-              <ListItemButton onClick={() => AthkarOpen(false)}>
-                <Typography
-                  className="suraname"
-                  style={{
-                    fontFamily: "kitab",
-                    fontWeight: "bold",
-                    fontSize: 18,
-                    marginLeft: 10,
-                  }}
-                >
-                  ﴿⁠ 2 ﴾
-                </Typography>
-                <Typography
-                  // className="suraname"
-                  style={{ fontFamily: "kitab", fontSize: 20 }}
-                  // variant="body1"
-                  align="right"
-                >
-                  أذكار المساء
-                </Typography>
-              </ListItemButton>
-            </ListItem>
-          </>
-        ) : null}
-
-        {display === 1 ? (
-          <>
-            <CardContent style={{ height: "38vh" }}>
+      {display === 0 ? (
+        <>
+          <ListItem>
+            <ListItemButton onClick={() => AthkarOpen(true)}>
               <Typography
                 className="suraname"
-                style={{ fontFamily: "kitab", fontSize: 25 }}
-              >
-                ﴿ {modelTitel} ﴾
-              </Typography>
-              <Divider
                 style={{
-                  background: "#fbc02d",
-                  borderBottomWidth: "3px",
-                  marginBottom: 20,
-                  marginTop: 10,
+                  fontFamily: "kitab",
+                  fontWeight: "bold",
+                  fontSize: 18,
+                  marginLeft: 10,
                 }}
-              ></Divider>
-              <Typography style={{ fontFamily: "kitab", fontSize: 20 }}>
-                {modelContent} {AthkarData[currentPage]}
+              >
+                ﴿⁠ 1 ﴾
               </Typography>
-            </CardContent>
+              <Typography
+                // className="suraname"
+                style={{ fontFamily: "kitab", fontSize: 20 }}
+                // variant="body1"
+                align="right"
+              >
+                أذكار الصباح
+              </Typography>
+            </ListItemButton>
+          </ListItem>
+          <ListItem>
+            <ListItemButton onClick={() => AthkarOpen(false)}>
+              <Typography
+                className="suraname"
+                style={{
+                  fontFamily: "kitab",
+                  fontWeight: "bold",
+                  fontSize: 18,
+                  marginLeft: 10,
+                }}
+              >
+                ﴿⁠ 2 ﴾
+              </Typography>
+              <Typography
+                // className="suraname"
+                style={{ fontFamily: "kitab", fontSize: 20 }}
+                // variant="body1"
+                align="right"
+              >
+                أذكار المساء
+              </Typography>
+            </ListItemButton>
+          </ListItem>
+        </>
+      ) : null}
 
-            <CardContent
-              style={{
-                display: "flex",
-                textAlign: "center",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "row",
-              }}
+      {display === 1 ? (
+        <>
+          <CardContent style={{ height: "38vh" }}>
+            <Typography
+              className="suraname"
+              style={{ fontFamily: "kitab", fontSize: 25 }}
             >
-              <Typography
-                style={{
-                  background: red[800],
-                  color: "white",
-                  padding: 5,
-                  marginTop: 20,
-                  borderRadius: 50,
-                  width: "50%",
-                }}
-              >
-                {" "}
-                {num[currentPage]} {num[currentPage] <= 1 ? " مرة" : "مرات"}
-              </Typography>
-              <Typography
-                style={{
-                  background: "black",
-                  color: "white",
-                  padding: 5,
-                  marginTop: 20,
-                  borderRadius: 50,
-                  width: "50%",
-                }}
-              >
-                {count + "  " + "المنجز"}
-              </Typography>
-            </CardContent>
+              ﴿ {modelTitel} ﴾
+            </Typography>
+            <Divider
+              style={{
+                background: "#fbc02d",
+                borderBottomWidth: "3px",
+                marginBottom: 20,
+                marginTop: 10,
+              }}
+            ></Divider>
+            <Typography style={{ fontFamily: "kitab", fontSize: 20 }}>
+              {modelContent} {AthkarData[currentPage]}
+            </Typography>
+          </CardContent>
+
+          <CardContent
+            style={{
+              display: "flex",
+              textAlign: "center",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "row",
+            }}
+          >
             <Typography
               style={{
-                fontSize: 12,
-                color: "red",
-                marginBottom: 10,
+                background: red[800],
+                color: "white",
+                padding: 5,
+                marginTop: 20,
+                borderRadius: 50,
+                width: "50%",
               }}
             >
-              سيتم الانتقال تلقائيا للذكر التالي عند اكتمال المرات المنجزة
+              {" "}
+              {num[currentPage]} {num[currentPage] <= 1 ? " مرة" : "مرات"}
             </Typography>
-            <IconButton
-              className="button"
-              style={{ background: "black", color: "white", marginLeft: 10 }}
-              aria-label="plus"
-              onClick={plus}
-            >
-              <AddIcon />
-            </IconButton>
-            <IconButton
-              className="button"
-              style={{ background: "black", color: "white", marginLeft: 10 }}
-              aria-label="minus"
-              onClick={minus}
-            >
-              <RemoveIcon />
-            </IconButton>
-            <IconButton
-              className="button"
-              style={{ background: "#fbc02d", color: "white", marginLeft: 10 }}
-              aria-label="reste"
-              onClick={Reset}
-            >
-              <ReplayIcon />
-            </IconButton>
-
-            <Stack
-              direction="row"
-              spacing={2}
+            <Typography
               style={{
-                marginTop: 10,
-                display: "flex",
-                textAlign: "center",
-                justifyContent: "center",
-                alignItems: "center",
+                background: "black",
+                color: "white",
+                padding: 5,
+                marginTop: 20,
+                borderRadius: 50,
+                width: "50%",
               }}
             >
-              <Button
-                style={{ marginLeft: 20 }}
-                variant="contained"
-                onClick={handleNextPage}
-                disabled={currentPage === 27}
-              >
-                التالي
-              </Button>
+              {count + "  " + "المنجز"}
+            </Typography>
+          </CardContent>
+          <Typography
+            style={{
+              fontSize: 12,
+              color: "red",
+              marginBottom: 10,
+            }}
+          >
+            سيتم الانتقال تلقائيا للذكر التالي عند اكتمال المرات المنجزة
+          </Typography>
+          <IconButton
+            className="button"
+            style={{ background: "black", color: "white", marginLeft: 10 }}
+            aria-label="plus"
+            onClick={plus}
+          >
+            <AddIcon />
+          </IconButton>
+          <IconButton
+            className="button"
+            style={{ background: "black", color: "white", marginLeft: 10 }}
+            aria-label="minus"
+            onClick={minus}
+          >
+            <RemoveIcon />
+          </IconButton>
+          <IconButton
+            className="button"
+            style={{ background: "#fbc02d", color: "white", marginLeft: 10 }}
+            aria-label="reste"
+            onClick={Reset}
+          >
+            <ReplayIcon />
+          </IconButton>
 
-              <Button
-                variant="contained"
-                onClick={handlePrevPage}
-                disabled={currentPage === 0}
-              >
-                السابق
-              </Button>
-            </Stack>
-          </>
-        ) : null}
-      </CardContent>
+          <Stack
+            direction="row"
+            spacing={2}
+            style={{
+              marginTop: 10,
+              display: "flex",
+              textAlign: "center",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Button
+              style={{ marginLeft: 20 }}
+              variant="contained"
+              onClick={handleNextPage}
+              disabled={currentPage === 27}
+            >
+              التالي
+            </Button>
+
+            <Button
+              variant="contained"
+              onClick={handlePrevPage}
+              disabled={currentPage === 0}
+            >
+              السابق
+            </Button>
+          </Stack>
+        </>
+      ) : null}
     </>
   );
 }

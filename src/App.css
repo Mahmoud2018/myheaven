@@ -7,6 +7,15 @@
   pointer-events: none;
 }
 
+.Card-light {
+  box-shadow: -15px 15px 44px #c7c7c7, 15px -15px 44px #f9f9f9;
+  border-radius: 10px;
+}
+
+.Card-dark {
+  box-shadow: -5px 5px 20px #263238;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

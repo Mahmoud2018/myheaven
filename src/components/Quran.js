@@ -6,7 +6,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-
+import Athkar from "./Athkar";
 import { Qurra } from "./Qurra";
 
 import { Darkmode } from "../App";
@@ -58,6 +58,11 @@ function Quran() {
   function TafseerOpen() {
     setDisplayQuran(3);
     localStorage.setItem("statofDisplsy", JSON.stringify(3));
+  }
+
+  function AthkarOpen() {
+    setDisplayQuran(5);
+    localStorage.setItem("statofDisplsy", JSON.stringify(5));
   }
 
   const TafeserShow = (itemId) => {
@@ -125,18 +130,28 @@ function Quran() {
     <>
       <div style={{ marginBottom: "5px" }}></div>
       <Button
+        style={{ fontSize: 10 }}
         variant="outlined"
         startIcon={<MenuBookIcon style={{ marginLeft: 10 }} />}
         onClick={suralistOpene}
       >
-        فهرس القرآن
+        القرآن
       </Button>
       <Button
+        style={{ fontSize: 10 }}
         variant="outlined"
         startIcon={<ListAltIcon style={{ marginLeft: 10 }} />}
         onClick={TafseerOpen}
       >
-        فهرس التفسير
+        التفسير
+      </Button>
+      <Button
+        style={{ fontSize: 10 }}
+        variant="outlined"
+        startIcon={<ArticleIcon style={{ marginLeft: 10 }} />}
+        onClick={AthkarOpen}
+      >
+        الأذكار
       </Button>
       <Button
         style={{ width: 20, height: 35, fontSize: 10 }}
@@ -242,6 +257,21 @@ function Quran() {
             }}
           >
             ﴿ فهرس التفسير ﴾
+          </Typography>
+        ) : null}
+
+        {displayQuran === 5 ? (
+          <Typography
+            className="titel-text"
+            style={{
+              color: "white",
+              fontFamily: "kitab",
+              fontWeight: "bold",
+              fontSize: 20,
+              marginBottom: 10,
+            }}
+          >
+            ﴿ الأذكار ﴾
           </Typography>
         ) : null}
 
@@ -441,6 +471,7 @@ function Quran() {
                 </Typography>
               ))
             : null}
+          {displayQuran === 5 ? <Athkar /> : null}
         </CardContent>
       </List>
     </>

@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
-
 export const AllQurra = [
   {
     id: "3c7cc699-06cd-4609-bcd6-8b039d568f5b",

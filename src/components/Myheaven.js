@@ -22,7 +22,7 @@ import Alawrad from "./Alawrad";
 import Avatar from "@mui/material/Avatar";
 import LinearProgress from "@mui/material/LinearProgress";
 import Container from "@mui/material/Container";
-
+import Prayertime from "./Prayertimes";
 import Quran from "./Quran";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
@@ -70,6 +70,7 @@ import notdone from "../Sounds/notdone.mp3";
 import bell from "../Sounds/bell.mp3";
 import add from "../Sounds/add.mp3";
 import reset from "../Sounds/reset.mp3";
+import { Profiler } from "react";
 
 // let storageTodos = [];
 let stordtree = 0;
@@ -127,11 +128,9 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
     const storageTodos = JSON.parse(localStorage.getItem("todos"));
     if (storageTodos === null) {
       // Use === for comparison, not =
-      console.log("empty");
     } else {
       setTasks(storageTodos);
     }
-    console.log("Get Data by calling useEffect ");
   }, []);
 
   /* Athkar Model */
@@ -364,16 +363,12 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
   // filter all non completed tasks
 
   const completed = useMemo(() => {
-    console.log("calling completed");
-
     return tasks.filter((t) => {
       return t.isCompleted;
     });
   }, [tasks]);
 
   const notCompleted = useMemo(() => {
-    console.log("calling not completed");
-
     return tasks.filter((t) => {
       return !t.isCompleted;
     });
@@ -585,7 +580,6 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
         maxHeight: "59vh",
         // maxWidth: "60.5vh",
         // background: "green",
-
         overflow: "scroll",
       }}
       sx={{
@@ -854,7 +848,7 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
         width: 450,
         // background: "green",
         height: "100vh",
-        // borderRadius: "20px",
+        borderRadius: "20px",
       }}
       sx={{ minWidth: 250 }}
     >
@@ -864,7 +858,7 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
       ) : display === 1 ? (
         <Quran />
       ) : display === 2 ? (
-        <Athkar />
+        <Prayertime />
       ) : display === 3 ? (
         <MyItems
           score={score}
@@ -961,10 +955,13 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
         >
           <BottomNavigationAction label=" العبادات" icon={<MosqueIcon />} />
           <BottomNavigationAction
-            label=" القرآن و التفسير"
+            label="  القرآن والأذكار"
             icon={<MenuBookIcon />}
           />
-          <BottomNavigationAction label=" الأذكار" icon={<ArticleIcon />} />
+          <BottomNavigationAction
+            label=" أوقات الصلاة"
+            icon={<ArticleIcon />}
+          />
           <BottomNavigationAction label="شراء الجوائز" icon={<StoreIcon />} />
           <BottomNavigationAction label="عن المطور" icon={<InfoIcon />} />
         </BottomNavigation>

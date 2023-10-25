@@ -4035,3 +4035,12 @@ let array2 = {
     },
   ],
 };
+
+let array3 = {
+  Asr: "14:58",
+  Dhuhr: "12:45",
+  Fajr: "05:35",
+  "Isha'a": "19:29",
+  Maghrib: "17:38",
+  Sunrise: "07:42",
+};

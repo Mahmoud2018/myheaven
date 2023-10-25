@@ -96,7 +96,7 @@ function App() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              // background: "#191b1f",
+              background: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
               height: "100vh",
               direction: "rtl",
             }}
