@@ -41,17 +41,13 @@ export default function Prayer({ name, time, icon }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          borderRadius: "10px",
-          background: theme.palette.mode === "dark" ? "#263238" : "#fff",
+          // borderRadius: "10px",
+          // background: theme.palette.mode === "dark" ? "#263238" : "#fff",
         }}
       >
         <Grid xs={1}>{icon}</Grid>
         <Grid xs={2}>
-          <Typography
-            style={{ margin: "10px", color: "#fbc02d" }}
-            gutterBottom
-            variant="h6"
-          >
+          <Typography style={{ margin: "10px" }} gutterBottom variant="h6">
             {name}
           </Typography>
         </Grid>

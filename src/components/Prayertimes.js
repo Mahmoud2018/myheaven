@@ -26,6 +26,8 @@ import Brightness3Icon from "@mui/icons-material/Brightness3";
 import Brightness2Icon from "@mui/icons-material/Brightness2";
 import Brightness1Icon from "@mui/icons-material/Brightness1";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import FilterDramaIcon from "@mui/icons-material/FilterDrama";
+import LightModeIcon from "@mui/icons-material/LightMode";
 
 // DIALOG IMPORTS
 import IconButton from "@mui/material/IconButton";
@@ -407,9 +409,23 @@ export default function Prayertime() {
                   image={Imag[nextPrayerIndex].location}
                   title="green iguana"
                 >
-                  <div style={{ padding: 20 }}>
+                  <div
+                    style={{
+                      padding: 10,
+                      display: "flex",
+                      textAlign: "center",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                    }}
+                  >
                     <Typography
-                      style={{ fontFamily: "kitab" }}
+                      className="timeremaning"
+                      style={{
+                        fontSize: 18,
+                        fontWeight: 600,
+                        color: "#ff8f00",
+                      }}
                       gutterBottom
                       variant="h5"
                       component="div"
@@ -417,7 +433,7 @@ export default function Prayertime() {
                       متبقي حتى صلاة
                     </Typography>
                     <Typography
-                      style={{ color: "#fbc02d", fontFamily: "kitab" }}
+                      style={{ fontFamily: "kitab", marginTop: 30 }}
                       gutterBottom
                       variant="h3"
                       component="div"
@@ -425,7 +441,7 @@ export default function Prayertime() {
                       {prayersArray[nextPrayerIndex].displayName}
                     </Typography>
                     <Typography
-                      style={{ fontFamily: "BakbakOne" }}
+                      style={{ fontFamily: "BakbakOne", color: "#ff8f00" }}
                       gutterBottom
                       variant="h5"
                       component="div"
@@ -449,17 +465,30 @@ export default function Prayertime() {
                   }
                   title="green iguana"
                 >
-                  <div style={{ padding: 20 }}>
+                  <div
+                    style={{
+                      padding: 10,
+                      display: "flex",
+                      textAlign: "center",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                    }}
+                  >
                     <Typography
-                      style={{ fontFamily: "kitab" }}
+                      style={{
+                        fontSize: 20,
+                        fontWeight: 600,
+                        color: "#ff8f00",
+                      }}
                       gutterBottom
-                      variant="h5"
+                      // variant="h5"
                       component="div"
                     >
                       الآن وقت صلاة
                     </Typography>
                     <Typography
-                      style={{ color: "#fbc02d", fontFamily: "kitab" }}
+                      style={{ fontFamily: "kitab", marginTop: 30 }}
                       gutterBottom
                       variant="h3"
                       component="div"
@@ -471,6 +500,7 @@ export default function Prayertime() {
                       style={{
                         fontFamily: "BakbakOne",
                         direction: "ltr",
+                        color: "#ff8f00",
                       }}
                       gutterBottom
                       variant="h5"
@@ -493,42 +523,126 @@ export default function Prayertime() {
       </Box>
 
       <Box sx={{ width: "100%", marginTop: 3 }}>
-        <Grid className={ms} item="true" xs={12}>
+        <Grid
+          style={{
+            background:
+              nextPrayerIndex === 1 && ms == "Card-light"
+                ? "#ff8f00"
+                : nextPrayerIndex === 1 && ms == "Card-dark"
+                ? "#ff8f00"
+                : ms == "Card-dark"
+                ? "#263238"
+                : null,
+          }}
+          className={ms}
+          item="true"
+          xs={12}
+        >
           <Prayer
             name="الفجر "
             time={moment(timings.Fajr, "HH:mm").format("HH:mm a")}
-            icon={<Brightness1Icon />}
+            icon={<FilterDramaIcon />}
           />
         </Grid>
-        <Grid className={ms} item="true" xs={12}>
+        <Grid
+          style={{
+            background:
+              nextPrayerIndex === 2 && ms == "Card-light"
+                ? "#ff8f00"
+                : nextPrayerIndex === 2 && ms == "Card-dark"
+                ? "#ff8f00"
+                : ms == "Card-dark"
+                ? "#263238"
+                : null,
+          }}
+          className={ms}
+          item="true"
+          xs={12}
+        >
           <Prayer
             name="الشروق "
             time={moment(timings.Sunrise, "HH:mm").format("HH:mm a")}
-            icon={<Brightness1Icon />}
+            icon={<LightModeIcon />}
           />
         </Grid>
-        <Grid className={ms} item="true" xs={12}>
+        <Grid
+          style={{
+            background:
+              nextPrayerIndex === 3 && ms == "Card-light"
+                ? "#ff8f00"
+                : nextPrayerIndex === 3 && ms == "Card-dark"
+                ? "#ff8f00"
+                : ms == "Card-dark"
+                ? "#263238"
+                : null,
+          }}
+          className={ms}
+          item="true"
+          xs={12}
+        >
           <Prayer
             name="الظهر "
             time={moment(timings.Dhuhr, "HH:mm").format("HH:mm a")}
             icon={<Brightness7Icon />}
           />
         </Grid>
-        <Grid className={ms} item="true" xs={12}>
+        <Grid
+          style={{
+            background:
+              nextPrayerIndex === 4 && ms == "Card-light"
+                ? "#ff8f00"
+                : nextPrayerIndex === 4 && ms == "Card-dark"
+                ? "#ff8f00"
+                : ms == "Card-dark"
+                ? "#263238"
+                : null,
+          }}
+          className={ms}
+          item="true"
+          xs={12}
+        >
           <Prayer
             name="العصر "
             time={moment(timings.Asr, "HH:mm").format("HH:mm a")}
             icon={<Brightness5Icon />}
           />
         </Grid>
-        <Grid className={ms} item="true" xs={12}>
+        <Grid
+          style={{
+            background:
+              nextPrayerIndex === 5 && ms == "Card-light"
+                ? "#ff8f00"
+                : nextPrayerIndex === 5 && ms == "Card-dark"
+                ? "#ff8f00"
+                : ms == "Card-dark"
+                ? "#263238"
+                : null,
+          }}
+          className={ms}
+          item="true"
+          xs={12}
+        >
           <Prayer
             name="المغرب "
             time={moment(timings.Sunset, "HH:mm").format("HH:mm a")}
             icon={<Brightness6Icon />}
           />
         </Grid>
-        <Grid className={ms} item="true" xs={12}>
+        <Grid
+          style={{
+            background:
+              nextPrayerIndex === 0 && ms == "Card-light"
+                ? "#ff8f00"
+                : nextPrayerIndex === 0 && ms == "Card-dark"
+                ? "#ff8f00"
+                : ms == "Card-dark"
+                ? "#263238"
+                : null,
+          }}
+          className={ms}
+          item="true"
+          xs={12}
+        >
           <Prayer
             name="العشاء "
             time={moment(timings.Isha, "HH:mm").format("HH:mm a")}

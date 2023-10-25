@@ -9,11 +9,12 @@
 
 .Card-light {
   box-shadow: -15px 15px 44px #c7c7c7, 15px -15px 44px #f9f9f9;
-  border-radius: 10px;
+  border-radius: 40px;
 }
 
 .Card-dark {
   box-shadow: -5px 5px 20px #263238;
+  border-radius: 40px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -423,4 +424,12 @@
 .dark-mode button {
   background-color: #363636;
   color: #ffffff;
+}
+
+.timeremaning {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ff8f00;
+  stroke: #f8f8f8;
 }
