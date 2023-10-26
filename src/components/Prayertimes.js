@@ -75,10 +75,10 @@ export default function Prayertime() {
 
   const [remainingTime, setRemainingTime] = useState("");
   const [selectedCountry, setSelectedCountry] = useState(
-    statofcountry === null ? "اختر البلد" : statofcountry
+    statofcountry === null ? "" : statofcountry
   );
   const [selectedCity, setSelectedCity] = useState(
-    statofcity === null || undefined ? "اختر المدينة" : statofcity
+    statofcity === null || undefined ? "اختر موقعك" : statofcity
   );
   const [today, setToday] = useState("");
 
@@ -262,15 +262,10 @@ export default function Prayertime() {
             marginTop: 1,
           }}
         >
-          <Grid
-            className={ms}
-            item="true"
-            xs={12}
-            style={{ borderRadius: "10px", marginTop: 5 }}
-          >
+          <Grid className={ms} item="true" xs={12} style={{ marginTop: 5 }}>
             <Card
               style={{
-                // width: "100%",
+                borderRadius: "20px",
                 display: "flex",
                 textAlign: "center",
                 alignItems: "center",
@@ -327,21 +322,21 @@ export default function Prayertime() {
               </Grid>
             </Card>
           </Grid>
-          <Grid
-            className={ms}
-            style={{ marginTop: 20, marginBottom: 20 }}
-            item="true"
-            xs={12}
-          >
+          <Grid style={{ marginTop: 20, marginBottom: 20 }} item="true" xs={12}>
             <Stack direction="row" justifyContent={"center"}>
               {/* SELECT country */}
-              <FormControl style={{ width: "50%" }}>
-                <InputLabel id="country-label">
-                  <span>البلد</span>
+
+              <FormControl
+                variant="standard"
+                className={ms}
+                sx={{ m: 1, minWidth: 180 }}
+              >
+                <InputLabel id="demo-simple-select-filled-label">
+                  البلد
                 </InputLabel>
                 <Select
-                  labelId="country-label"
-                  id="demo-simple-select"
+                  labelId="demo-simple-select-standard-label"
+                  id="demo-simple-select-standard"
                   value={selectedCountry}
                   onChange={handleCountryChange}
                 >
@@ -364,16 +359,19 @@ export default function Prayertime() {
                 </Select>
               </FormControl>
               {/* SELECT country */}
-
               {/* SELECT CITY */}
-              <FormControl style={{ width: "50%" }}>
-                <InputLabel id="city-label">
-                  <span>المدينة</span>
+              <FormControl
+                variant="standard"
+                className={ms}
+                sx={{ m: 1, minWidth: 180 }}
+              >
+                <InputLabel id="demo-simple-select-filled-label">
+                  المدينة
                 </InputLabel>
+
                 <Select
-                  // style={{ color: "white" }}
-                  labelId="city-label"
-                  id="city-select"
+                  labelId="demo-simple-select-filled-label"
+                  id="demo-simple-select-filled"
                   value={selectedCity}
                   onChange={handleCityChange}
                 >
@@ -381,7 +379,15 @@ export default function Prayertime() {
                     (country) => country.Countryiso == selectedCountry
                   )?.cities.map((city) => (
                     <MenuItem value={city.name} key={city.id}>
-                      {city.name}
+                      <Typography
+                        variant="string"
+                        style={{
+                          fontSize: 20,
+                        }}
+                        key={city.id}
+                      >
+                        {city.name}
+                      </Typography>
                     </MenuItem>
                   ))}
                 </Select>
