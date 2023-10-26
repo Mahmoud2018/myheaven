@@ -31,13 +31,12 @@ let titel = JSON.parse(localStorage.getItem("titel"));
 let Conten = JSON.parse(localStorage.getItem("Conten"));
 let numbers = JSON.parse(localStorage.getItem("numbers"));
 let CurrentPage = JSON.parse(localStorage.getItem("CurrentPage"));
-let Count = JSON.parse(localStorage.getItem("Count"));
 
 export default function Athkar() {
   const [AthkarData, setAthkarData] = useState(Conten === null ? [] : Conten);
   const [modelTitel, setmodelTitel] = useState(titel);
   const [modelContent, setmodelContent] = useState([]);
-  const [count, setCount] = useState(Count === null ? 0 : Count);
+  const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(
     CurrentPage === null ? 0 : CurrentPage
   );
@@ -123,20 +122,16 @@ export default function Athkar() {
       setCurrentPage(currentPage + 1);
       setCount(0);
       localStorage.setItem("CurrentPage", JSON.stringify(currentPage));
-      localStorage.setItem("Count", JSON.stringify(count));
     } else {
       setCount(count + 1);
-      localStorage.setItem("Count", JSON.stringify(count + 1));
     }
   };
 
   const minus = () => {
     if (count === 0) {
       setCount(0);
-      localStorage.setItem("Count", JSON.stringify(count));
     } else {
       setCount(count - 1);
-      localStorage.setItem("Count", JSON.stringify(count - 1));
     }
   };
 

@@ -433,3 +433,11 @@
   color: #ff8f00;
   stroke: #f8f8f8;
 }
+
+.prayericonW {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.prayericonD {
+  color: rgba(255, 255, 255, 0.7);
+}

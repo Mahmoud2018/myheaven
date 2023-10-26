@@ -27,7 +27,7 @@ import Quran from "./Quran";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Athkar from "./Athkar";
-
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 // ICONS
 
 import OutletIcon from "@mui/icons-material/Outlet";
@@ -842,6 +842,10 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
     playSound(resets);
   }
   // console.log(display);
+
+  let ms;
+  theme.palette.mode === "dark" ? (ms = "prayericonD") : (ms = "prayericonW");
+
   return (
     <Card
       style={{
@@ -960,7 +964,7 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
           />
           <BottomNavigationAction
             label=" أوقات الصلاة"
-            icon={<ArticleIcon />}
+            icon={<AccessTimeIcon />}
           />
           <BottomNavigationAction label="شراء الجوائز" icon={<StoreIcon />} />
           <BottomNavigationAction label="عن المطور" icon={<InfoIcon />} />
