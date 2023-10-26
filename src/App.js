@@ -25,6 +25,7 @@ export function Darkmode() {
     </IconButton>
   );
 }
+let statofAthkar = JSON.parse(localStorage.getItem("statofAthkar"));
 
 let stordScore = JSON.parse(localStorage.getItem("score"));
 function App() {
@@ -32,7 +33,9 @@ function App() {
   const [score, setScore] = useState(stordScore === null ? 0 : stordScore);
   const [message, setmessage] = useState("");
   const [color, setcolor] = useState("");
-
+  const [display, setDisplay] = useState(
+    statofAthkar === null ? 0 : statofAthkar
+  );
   const [mode, setMode] = useState("light");
 
   // Load mode from local storage on initial render
@@ -89,7 +92,9 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <MySnackBar open={open} message={message} color={color} />
-        <DataContext.Provider value={{ showHideToast, score, setScore }}>
+        <DataContext.Provider
+          value={{ showHideToast, score, setScore, display, setDisplay }}
+        >
           <div
             className="App"
             style={{

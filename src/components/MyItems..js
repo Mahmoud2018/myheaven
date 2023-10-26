@@ -13,6 +13,7 @@ import { Darkmode } from "../App";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 import cash from "../Sounds/cash.mp3";
+import wrong from "../Sounds/wrong.mp3";
 import { useTheme } from "@mui/material/styles";
 
 const Items = [
@@ -91,6 +92,7 @@ export default function MyItems({ tree, Plam, Box, home, castle }) {
   theme.palette.mode === "dark" ? (ms = "  الفاتح") : (ms = " الليلي");
 
   const Cash = new Audio(cash);
+  const Wrong = new Audio(wrong);
 
   const playSound = (effect) => {
     effect.loop = false;
@@ -109,6 +111,7 @@ export default function MyItems({ tree, Plam, Box, home, castle }) {
           return updatedItems;
         } else if (obj.id === taskId && score < obj.prise) {
           showHideToast(" ليس لديك ذهب كافي", "warning");
+          playSound(Wrong);
         }
         return obj;
       })

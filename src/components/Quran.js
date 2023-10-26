@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import QuranData from "./QuranData.json";
 import ReactAudioPlayer from "react-audio-player";
 import { TafseerData } from "./TafseerData";
@@ -8,6 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Athkar from "./Athkar";
 import { Qurra } from "./Qurra";
+import { DataContext } from "../contexts/DataContext";
 
 import { Darkmode } from "../App";
 import { useTheme } from "@mui/material/styles";
@@ -39,6 +40,7 @@ function Quran() {
   const [displayQuran, setDisplayQuran] = useState(
     statofDisplsy === null ? 1 : statofDisplsy
   );
+  const { display, setDisplay } = useContext(DataContext);
 
   const [quraa, setquraa] = useState(
     statofQurra === null ? "https://server7.mp3quran.net/s_gmd/" : statofQurra
@@ -62,7 +64,9 @@ function Quran() {
 
   function AthkarOpen() {
     setDisplayQuran(5);
+    setDisplay(0);
     localStorage.setItem("statofDisplsy", JSON.stringify(5));
+    // localStorage.setItem("statofAthkar", JSON.stringify(5));
   }
 
   const TafeserShow = (itemId) => {

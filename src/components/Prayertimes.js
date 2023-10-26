@@ -227,6 +227,8 @@ export default function Prayertime() {
   ];
 
   const SalatTime = [
+    { time: moment(timings.Fajr, "HH:mm").format("HH:mm a") },
+    { time: moment(timings.Sunris, "HH:mm").format("HH:mm a") },
     { time: moment(timings.Dhuhr, "HH:mm").format("HH:mm a") },
     { time: moment(timings.Asr, "HH:mm").format("HH:mm a") },
     { time: moment(timings.Sunset, "HH:mm").format("HH:mm a") },
@@ -242,6 +244,7 @@ export default function Prayertime() {
     ? (modetext = " الضوء الفاتح")
     : (modetext = "الضوء الليلي");
 
+  let timeNow = nextPrayerIndex - 1;
   return (
     <Container
     // maxWidth="sm"
@@ -309,7 +312,7 @@ export default function Prayertime() {
                 <Typography
                   style={{
                     color: "#fbc02d",
-                    fontSize: 20,
+                    fontSize: 28,
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
@@ -319,7 +322,7 @@ export default function Prayertime() {
                 >
                   {selectedCity}
                   {/* {console.log(selectedCity.name)} */}
-                  <LocationOnIcon style={{ width: 40, height: 40 }} />
+                  <LocationOnIcon style={{ width: 35, height: 35 }} />
                 </Typography>
               </Grid>
             </Card>
@@ -460,9 +463,7 @@ export default function Prayertime() {
               <Card className={ms} sx={{ width: "50%", borderRadius: "10px" }}>
                 <CardMedia
                   sx={{ height: 200 }}
-                  image={
-                    Imag[nextPrayerIndex - 1]?.location || Imag[5].location
-                  }
+                  image={Imag[timeNow]?.location || Imag[5].location}
                   title="green iguana"
                 >
                   <div
@@ -493,7 +494,7 @@ export default function Prayertime() {
                       variant="h3"
                       component="div"
                     >
-                      {prayersArray[nextPrayerIndex - 1]?.displayName ||
+                      {prayersArray[timeNow]?.displayName ||
                         prayersArray[4].displayName}
                     </Typography>
                     <Typography
@@ -506,8 +507,7 @@ export default function Prayertime() {
                       variant="h5"
                       component="div"
                     >
-                      {SalatTime[nextPrayerIndex - 1]?.time ||
-                        SalatTime[0].time}
+                      {SalatTime[timeNow]?.time || SalatTime[5].time}
                     </Typography>
                   </div>
                 </CardMedia>
@@ -526,9 +526,9 @@ export default function Prayertime() {
         <Grid
           style={{
             background:
-              nextPrayerIndex === 1 && ms == "Card-light"
+              timeNow === 0 && ms == "Card-light"
                 ? "#ff8f00"
-                : nextPrayerIndex === 1 && ms == "Card-dark"
+                : timeNow === 0 && ms == "Card-dark"
                 ? "#ff8f00"
                 : ms == "Card-dark"
                 ? "#263238"
@@ -547,9 +547,9 @@ export default function Prayertime() {
         <Grid
           style={{
             background:
-              nextPrayerIndex === 2 && ms == "Card-light"
+              timeNow === 1 && ms == "Card-light"
                 ? "#ff8f00"
-                : nextPrayerIndex === 2 && ms == "Card-dark"
+                : timeNow === 1 && ms == "Card-dark"
                 ? "#ff8f00"
                 : ms == "Card-dark"
                 ? "#263238"
@@ -568,9 +568,9 @@ export default function Prayertime() {
         <Grid
           style={{
             background:
-              nextPrayerIndex === 3 && ms == "Card-light"
+              nextPrayerIndex === 2 && ms == "Card-light"
                 ? "#ff8f00"
-                : nextPrayerIndex === 3 && ms == "Card-dark"
+                : nextPrayerIndex === 2 && ms == "Card-dark"
                 ? "#ff8f00"
                 : ms == "Card-dark"
                 ? "#263238"
@@ -589,9 +589,9 @@ export default function Prayertime() {
         <Grid
           style={{
             background:
-              nextPrayerIndex === 4 && ms == "Card-light"
+              nextPrayerIndex === 3 && ms == "Card-light"
                 ? "#ff8f00"
-                : nextPrayerIndex === 4 && ms == "Card-dark"
+                : nextPrayerIndex === 3 && ms == "Card-dark"
                 ? "#ff8f00"
                 : ms == "Card-dark"
                 ? "#263238"
@@ -610,9 +610,9 @@ export default function Prayertime() {
         <Grid
           style={{
             background:
-              nextPrayerIndex === 5 && ms == "Card-light"
+              nextPrayerIndex === 4 && ms == "Card-light"
                 ? "#ff8f00"
-                : nextPrayerIndex === 5 && ms == "Card-dark"
+                : nextPrayerIndex === 4 && ms == "Card-dark"
                 ? "#ff8f00"
                 : ms == "Card-dark"
                 ? "#263238"

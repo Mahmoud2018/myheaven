@@ -135,7 +135,7 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
 
   /* Athkar Model */
   function AthkarOpen() {
-    setDisplay(2);
+    setDisplay(1);
   }
 
   /*=== Athkar Model ===*/

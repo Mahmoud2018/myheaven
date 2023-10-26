@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
 import { styled } from "@mui/material/styles";
@@ -24,29 +24,31 @@ import { useTheme } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
 import { green } from "@mui/material/colors";
 import { yellow } from "@mui/material/colors";
+import { DataContext } from "../contexts/DataContext";
 
-let statofAthkar = JSON.parse(localStorage.getItem("statofAthkar"));
 let timeOfAthkar = JSON.parse(localStorage.getItem("timeOfAthkar"));
 let titel = JSON.parse(localStorage.getItem("titel"));
 let Conten = JSON.parse(localStorage.getItem("Conten"));
 let numbers = JSON.parse(localStorage.getItem("numbers"));
 let CurrentPage = JSON.parse(localStorage.getItem("CurrentPage"));
+let Count = JSON.parse(localStorage.getItem("Count"));
 
 export default function Athkar() {
   const [AthkarData, setAthkarData] = useState(Conten === null ? [] : Conten);
   const [modelTitel, setmodelTitel] = useState(titel);
   const [modelContent, setmodelContent] = useState([]);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(Count === null ? 0 : Count);
   const [currentPage, setCurrentPage] = useState(
     CurrentPage === null ? 0 : CurrentPage
   );
   const [num, setnumb] = useState(numbers === null ? 0 : numbers);
-  const [display, setDisplay] = useState(
-    statofAthkar === null ? 0 : statofAthkar
-  );
+
   const [time, setTime] = useState(
     timeOfAthkar === null ? false : timeOfAthkar
   );
+
+  const { display, setDisplay } = useContext(DataContext);
+
   const Alsbah = AthkarAlsbah.map((item, index) => `${index + 1}- ${item}`);
   const Almsaa = AthkarAlmsaa.map((item, index) => `${index + 1}- ${item}`);
   const Alsbahnumbers = Alsbahnumber.map((item) => {
@@ -101,7 +103,7 @@ export default function Athkar() {
     } else {
       // If we reach the end, loop back to the first page
     }
-    localStorage.setItem("CurrentPage", JSON.stringify(currentPage));
+    localStorage.setItem("CurrentPage", JSON.stringify(currentPage + 1));
   };
 
   const handlePrevPage = () => {
@@ -112,7 +114,7 @@ export default function Athkar() {
       // If we are on the first page, go to the last page
       setCurrentPage(AthkarData.length - 1);
     }
-    localStorage.setItem("CurrentPage", JSON.stringify(currentPage));
+    localStorage.setItem("CurrentPage", JSON.stringify(currentPage - 1));
   };
 
   const plus = () => {
@@ -121,16 +123,20 @@ export default function Athkar() {
       setCurrentPage(currentPage + 1);
       setCount(0);
       localStorage.setItem("CurrentPage", JSON.stringify(currentPage));
+      localStorage.setItem("Count", JSON.stringify(count));
     } else {
       setCount(count + 1);
+      localStorage.setItem("Count", JSON.stringify(count + 1));
     }
   };
 
   const minus = () => {
     if (count === 0) {
       setCount(0);
+      localStorage.setItem("Count", JSON.stringify(count));
     } else {
       setCount(count - 1);
+      localStorage.setItem("Count", JSON.stringify(count - 1));
     }
   };
 
@@ -139,6 +145,7 @@ export default function Athkar() {
   };
 
   function AthkarlistOpene() {
+    alert("hi form Athkar");
     setDisplay(0);
     localStorage.setItem("statofAthkar", JSON.stringify(0));
   }
