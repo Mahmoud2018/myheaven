@@ -46,8 +46,7 @@ import Select from "@mui/material/Select";
 import axios from "axios";
 import moment from "moment";
 import { useForkRef } from "@mui/material";
-import "moment/dist/locale/ar-dz";
-moment.locale("ar");
+import "moment/min/locales";
 
 let statofcountry = JSON.parse(localStorage.getItem("statofcountry"));
 let statofcity = JSON.parse(localStorage.getItem("statofcity"));
@@ -112,26 +111,40 @@ export default function Prayertime() {
     return `${newHours}:${newMinutes}`;
   };
 
-  const getTimings = async () => {
-    // console.log("calling the api");
-    const response = await axios.get(
-      `https://api.aladhan.com/v1/timingsByCity?country=${selectedCountry}&city=${selectedCity}`
-    );
-
-    const timings = response.data.data.timings;
-    const updatedTimings = { ...timings };
-    // Add minutes to specific prayer timings
-    updatedTimings.Sunrise = addMinutes(timings.Sunrise, 0);
-    updatedTimings.Fajr = addMinutes(timings.Fajr, 30);
-    updatedTimings.Dhuhr = addMinutes(timings.Dhuhr, 5);
-    updatedTimings.Asr = addMinutes(timings.Asr, -2);
-    updatedTimings.Sunset = addMinutes(timings.Sunset, 3);
-    updatedTimings.Isha = addMinutes(timings.Isha, -57);
-    setTimings(timings);
-  };
+  let cancelAxios = null;
 
   useEffect(() => {
-    getTimings();
+    axios
+      .get(
+        `https://api.aladhan.com/v1/timingsByCity?country=${selectedCountry}&city=${selectedCity}`,
+        {
+          cancelToken: new axios.CancelToken((c) => {
+            cancelAxios = c;
+          }),
+        }
+      )
+      .then(function (response) {
+        // handle success
+        const timings = response.data.data.timings;
+        const updatedTimings = { ...timings };
+        // Add minutes to specific prayer timings
+        updatedTimings.Sunrise = addMinutes(timings.Sunrise, 0);
+        updatedTimings.Fajr = addMinutes(timings.Fajr, 30);
+        updatedTimings.Dhuhr = addMinutes(timings.Dhuhr, 5);
+        updatedTimings.Asr = addMinutes(timings.Asr, -2);
+        updatedTimings.Sunset = addMinutes(timings.Sunset, 3);
+        updatedTimings.Isha = addMinutes(timings.Isha, -57);
+        setTimings(timings);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+
+    return () => {
+      console.log("canceling");
+      cancelAxios();
+    };
   }, [selectedCity]);
 
   useEffect(() => {
@@ -141,7 +154,7 @@ export default function Prayertime() {
     }, 1000);
 
     const t = moment();
-    setToday(t.format("Do MMMM YYYY | HH:mm a"));
+    setToday(t.locale("ar").format("Do MMMM YYYY | HH:mm a"));
 
     return () => {
       clearInterval(interval);
@@ -322,10 +335,9 @@ export default function Prayertime() {
               </Grid>
             </Card>
           </Grid>
-          <Grid style={{ marginTop: 20, marginBottom: 20 }} item="true" xs={12}>
+          <Grid style={{ marginTop: 5, marginBottom: 5 }} item="true" xs={12}>
             <Stack direction="row" justifyContent={"center"}>
               {/* SELECT country */}
-
               <FormControl
                 variant="standard"
                 className={ms}
@@ -359,6 +371,7 @@ export default function Prayertime() {
                 </Select>
               </FormControl>
               {/* SELECT country */}
+
               {/* SELECT CITY */}
               <FormControl
                 variant="standard"
@@ -414,7 +427,7 @@ export default function Prayertime() {
                 }}
               >
                 <CardMedia
-                  sx={{ height: 200 }}
+                  sx={{ height: 180 }}
                   image={Imag[nextPrayerIndex].location}
                   title="green iguana"
                 >
@@ -468,7 +481,7 @@ export default function Prayertime() {
 
               <Card className={ms} sx={{ width: "50%", borderRadius: "10px" }}>
                 <CardMedia
-                  sx={{ height: 200 }}
+                  sx={{ height: 180 }}
                   image={Imag[timeNow]?.location || Imag[5].location}
                   title="green iguana"
                 >
@@ -528,134 +541,146 @@ export default function Prayertime() {
         </Grid>
       </Box>
 
-      <Box sx={{ width: "100%", marginTop: 3 }}>
-        <Grid
-          style={{
-            background:
-              timeNow === 0 && ms == "Card-light"
-                ? "#ff8f00"
-                : timeNow === 0 && ms == "Card-dark"
-                ? "#ff8f00"
-                : ms == "Card-dark"
-                ? "#263238"
-                : null,
-          }}
-          className={ms}
-          item="true"
-          xs={12}
-        >
-          <Prayer
-            name="الفجر "
-            time={moment(timings.Fajr, "HH:mm").format("HH:mm a")}
-            icon={<FilterDramaIcon />}
-          />
-        </Grid>
-        <Grid
-          style={{
-            background:
-              timeNow === 1 && ms == "Card-light"
-                ? "#ff8f00"
-                : timeNow === 1 && ms == "Card-dark"
-                ? "#ff8f00"
-                : ms == "Card-dark"
-                ? "#263238"
-                : null,
-          }}
-          className={ms}
-          item="true"
-          xs={12}
-        >
-          <Prayer
-            name="الشروق "
-            time={moment(timings.Sunrise, "HH:mm").format("HH:mm a")}
-            icon={<LightModeIcon />}
-          />
-        </Grid>
-        <Grid
-          style={{
-            background:
-              nextPrayerIndex === 2 && ms == "Card-light"
-                ? "#ff8f00"
-                : nextPrayerIndex === 2 && ms == "Card-dark"
-                ? "#ff8f00"
-                : ms == "Card-dark"
-                ? "#263238"
-                : null,
-          }}
-          className={ms}
-          item="true"
-          xs={12}
-        >
-          <Prayer
-            name="الظهر "
-            time={moment(timings.Dhuhr, "HH:mm").format("HH:mm a")}
-            icon={<Brightness7Icon />}
-          />
-        </Grid>
-        <Grid
-          style={{
-            background:
-              nextPrayerIndex === 3 && ms == "Card-light"
-                ? "#ff8f00"
-                : nextPrayerIndex === 3 && ms == "Card-dark"
-                ? "#ff8f00"
-                : ms == "Card-dark"
-                ? "#263238"
-                : null,
-          }}
-          className={ms}
-          item="true"
-          xs={12}
-        >
-          <Prayer
-            name="العصر "
-            time={moment(timings.Asr, "HH:mm").format("HH:mm a")}
-            icon={<Brightness5Icon />}
-          />
-        </Grid>
-        <Grid
-          style={{
-            background:
-              nextPrayerIndex === 4 && ms == "Card-light"
-                ? "#ff8f00"
-                : nextPrayerIndex === 4 && ms == "Card-dark"
-                ? "#ff8f00"
-                : ms == "Card-dark"
-                ? "#263238"
-                : null,
-          }}
-          className={ms}
-          item="true"
-          xs={12}
-        >
-          <Prayer
-            name="المغرب "
-            time={moment(timings.Sunset, "HH:mm").format("HH:mm a")}
-            icon={<Brightness6Icon />}
-          />
-        </Grid>
-        <Grid
-          style={{
-            background:
-              nextPrayerIndex === 0 && ms == "Card-light"
-                ? "#ff8f00"
-                : nextPrayerIndex === 0 && ms == "Card-dark"
-                ? "#ff8f00"
-                : ms == "Card-dark"
-                ? "#263238"
-                : null,
-          }}
-          className={ms}
-          item="true"
-          xs={12}
-        >
-          <Prayer
-            name="العشاء "
-            time={moment(timings.Isha, "HH:mm").format("HH:mm a")}
-            icon={<Brightness2Icon />}
-          />
-        </Grid>
-      </Box>
+      <Card
+        key={3}
+        style={{
+          borderRadius: 20,
+          maxHeight: "50vh",
+          overflow: "scroll",
+        }}
+        sx={{
+          minWidth: 200,
+        }}
+      >
+        <Box sx={{ width: "100%", marginTop: 3 }}>
+          <Grid
+            style={{
+              background:
+                timeNow === 0 && ms == "Card-light"
+                  ? "#ff8f00"
+                  : timeNow === 0 && ms == "Card-dark"
+                  ? "#ff8f00"
+                  : ms == "Card-dark"
+                  ? "#263238"
+                  : null,
+            }}
+            className={ms}
+            item="true"
+            xs={12}
+          >
+            <Prayer
+              name="الفجر "
+              time={moment(timings.Fajr, "HH:mm").format("HH:mm a")}
+              icon={<FilterDramaIcon />}
+            />
+          </Grid>
+          <Grid
+            style={{
+              background:
+                timeNow === 1 && ms == "Card-light"
+                  ? "#ff8f00"
+                  : timeNow === 1 && ms == "Card-dark"
+                  ? "#ff8f00"
+                  : ms == "Card-dark"
+                  ? "#263238"
+                  : null,
+            }}
+            className={ms}
+            item="true"
+            xs={12}
+          >
+            <Prayer
+              name="الشروق "
+              time={moment(timings.Sunrise, "HH:mm").format("HH:mm a")}
+              icon={<LightModeIcon />}
+            />
+          </Grid>
+          <Grid
+            style={{
+              background:
+                nextPrayerIndex === 2 && ms == "Card-light"
+                  ? "#ff8f00"
+                  : nextPrayerIndex === 2 && ms == "Card-dark"
+                  ? "#ff8f00"
+                  : ms == "Card-dark"
+                  ? "#263238"
+                  : null,
+            }}
+            className={ms}
+            item="true"
+            xs={12}
+          >
+            <Prayer
+              name="الظهر "
+              time={moment(timings.Dhuhr, "HH:mm").format("HH:mm a")}
+              icon={<Brightness7Icon />}
+            />
+          </Grid>
+          <Grid
+            style={{
+              background:
+                nextPrayerIndex === 3 && ms == "Card-light"
+                  ? "#ff8f00"
+                  : nextPrayerIndex === 3 && ms == "Card-dark"
+                  ? "#ff8f00"
+                  : ms == "Card-dark"
+                  ? "#263238"
+                  : null,
+            }}
+            className={ms}
+            item="true"
+            xs={12}
+          >
+            <Prayer
+              name="العصر "
+              time={moment(timings.Asr, "HH:mm").format("HH:mm a")}
+              icon={<Brightness5Icon />}
+            />
+          </Grid>
+          <Grid
+            style={{
+              background:
+                nextPrayerIndex === 4 && ms == "Card-light"
+                  ? "#ff8f00"
+                  : nextPrayerIndex === 4 && ms == "Card-dark"
+                  ? "#ff8f00"
+                  : ms == "Card-dark"
+                  ? "#263238"
+                  : null,
+            }}
+            className={ms}
+            item="true"
+            xs={12}
+          >
+            <Prayer
+              name="المغرب "
+              time={moment(timings.Sunset, "HH:mm").format("HH:mm a")}
+              icon={<Brightness6Icon />}
+            />
+          </Grid>
+          <Grid
+            style={{
+              background:
+                nextPrayerIndex === 0 && ms == "Card-light"
+                  ? "#ff8f00"
+                  : nextPrayerIndex === 0 && ms == "Card-dark"
+                  ? "#ff8f00"
+                  : ms == "Card-dark"
+                  ? "#263238"
+                  : null,
+            }}
+            className={ms}
+            item="true"
+            xs={12}
+          >
+            <Prayer
+              name="العشاء "
+              time={moment(timings.Isha, "HH:mm").format("HH:mm a")}
+              icon={<Brightness2Icon />}
+            />
+          </Grid>
+        </Box>
+      </Card>
     </Container>
   );
 }
