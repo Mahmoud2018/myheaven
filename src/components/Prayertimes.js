@@ -444,29 +444,22 @@ export default function Prayertime() {
                     <Typography
                       className="timeremaning"
                       style={{
-                        fontSize: 18,
+                        fontSize: 15,
                         fontWeight: 600,
                         color: "#ff8f00",
                       }}
-                      gutterBottom
-                      variant="h5"
-                      component="div"
                     >
                       متبقي حتى صلاة
                     </Typography>
                     <Typography
                       style={{ fontFamily: "kitab", marginTop: 30 }}
-                      gutterBottom
                       variant="h3"
-                      component="div"
                     >
                       {prayersArray[nextPrayerIndex].displayName}
                     </Typography>
                     <Typography
                       style={{ fontFamily: "BakbakOne", color: "#ff8f00" }}
-                      gutterBottom
                       variant="h5"
-                      component="div"
                     >
                       {remainingTime}
                     </Typography>
@@ -497,21 +490,16 @@ export default function Prayertime() {
                   >
                     <Typography
                       style={{
-                        fontSize: 20,
+                        fontSize: 15,
                         fontWeight: 600,
                         color: "#ff8f00",
                       }}
-                      gutterBottom
-                      // variant="h5"
-                      component="div"
                     >
                       الآن وقت صلاة
                     </Typography>
                     <Typography
                       style={{ fontFamily: "kitab", marginTop: 30 }}
-                      gutterBottom
                       variant="h3"
-                      component="div"
                     >
                       {prayersArray[timeNow]?.displayName ||
                         prayersArray[4].displayName}
@@ -522,9 +510,7 @@ export default function Prayertime() {
                         direction: "ltr",
                         color: "#ff8f00",
                       }}
-                      gutterBottom
                       variant="h5"
-                      component="div"
                     >
                       {SalatTime[timeNow]?.time || SalatTime[5].time}
                     </Typography>
