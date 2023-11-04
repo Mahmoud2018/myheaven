@@ -454,7 +454,16 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
               <InfoIcon fontSize="large" />
             </IconButton>
           </Grid>
-          <Grid item xs={6}>
+          <Grid
+            item
+            xs={6}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
             {isActive ? (
               <>
                 <Typography

@@ -134,7 +134,7 @@ export default function Prayertime() {
         updatedTimings.Asr = addMinutes(timings.Asr, -2);
         updatedTimings.Sunset = addMinutes(timings.Sunset, 3);
         updatedTimings.Isha = addMinutes(timings.Isha, -57);
-        setTimings(timings);
+        setTimings(updatedTimings);
       })
       .catch(function (error) {
         // handle error
@@ -531,7 +531,7 @@ export default function Prayertime() {
         key={3}
         style={{
           borderRadius: 20,
-          maxHeight: "50vh",
+          maxHeight: "55vh",
           overflow: "scroll",
         }}
         sx={{
