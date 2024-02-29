@@ -3,13 +3,11 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Unstable_Grid2";
 import { green } from "@mui/material/colors";
-import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Chip from "@mui/material/Chip";
 import { Data } from "./Data";
@@ -26,11 +24,9 @@ import Prayertime from "./Prayertimes";
 import Quran from "./Quran";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import Athkar from "./Athkar";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-// ICONS
 
-import OutletIcon from "@mui/icons-material/Outlet";
+// ICONS
 import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
 import AddReactionIcon from "@mui/icons-material/AddReaction";
@@ -40,18 +36,8 @@ import StoreIcon from "@mui/icons-material/Store";
 import SpeakerNotesIcon from "@mui/icons-material/SpeakerNotes";
 import Brightness7SharpIcon from "@mui/icons-material/Brightness7Sharp";
 import Brightness2SharpIcon from "@mui/icons-material/Brightness2Sharp";
-import ReplayIcon from "@mui/icons-material/Replay";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import CheckIcon from "@mui/icons-material/Check";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import CircleIcon from "@mui/icons-material/Circle";
 import Brightness1OutlinedIcon from "@mui/icons-material/Brightness1Outlined";
-import ListAltIcon from "@mui/icons-material/ListAlt";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
-import ReceiptIcon from "@mui/icons-material/Receipt";
-import ArticleIcon from "@mui/icons-material/Article";
 
 // Components
 import { DataContext } from "../contexts/DataContext";
@@ -70,7 +56,6 @@ import notdone from "../Sounds/notdone.mp3";
 import bell from "../Sounds/bell.mp3";
 import add from "../Sounds/add.mp3";
 import reset from "../Sounds/reset.mp3";
-import { Profiler } from "react";
 
 // let storageTodos = [];
 let stordtree = 0;
@@ -561,6 +546,7 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
       </Container>
     </CardContent>
   );
+
   const tabs = (
     <ToggleButtonGroup
       key={2}
@@ -814,15 +800,6 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
     </Card>
   );
 
-  // function quranOpene() {
-  //   setDisplay(2);
-  //   localStorage.setItem("statofNavgatin", JSON.stringify(2));
-  // }
-
-  // function TafseerOpen() {
-  //   setDisplay(2);
-  //   localStorage.setItem("statofNavgatin", JSON.stringify(2));
-  // }
 
   function ResetMyScores() {
     setScore(0);

@@ -25,6 +25,8 @@ import { red } from "@mui/material/colors";
 import { green } from "@mui/material/colors";
 import { yellow } from "@mui/material/colors";
 import { DataContext } from "../contexts/DataContext";
+import Albakara from "./Albakara"
+
 
 let timeOfAthkar = JSON.parse(localStorage.getItem("timeOfAthkar"));
 let titel = JSON.parse(localStorage.getItem("titel"));
@@ -43,7 +45,7 @@ export default function Athkar() {
   const [num, setnumb] = useState(numbers === null ? 0 : numbers);
 
   const [time, setTime] = useState(
-    timeOfAthkar === null ? false : timeOfAthkar
+    timeOfAthkar === null ? 0 : timeOfAthkar
   );
 
   const { display, setDisplay } = useContext(DataContext);
@@ -64,28 +66,38 @@ export default function Athkar() {
     : (ms = "الضوء الليلي");
 
   function AthkarOpen(time) {
-    if (time === true) {
+    if (time === 1) {
       setDisplay(1);
       setmodelTitel("أذكار الصباح");
       setAthkarData(Alsbah);
       setnumb(Alsbahnumbers);
       setCurrentPage(0);
-      setTime(true);
+      setTime(0);
       localStorage.setItem("titel", JSON.stringify("أذكار الصباح"));
       localStorage.setItem("Conten", JSON.stringify(Alsbah));
       localStorage.setItem("numbers", JSON.stringify(Alsbahnumbers));
-    } else {
+      localStorage.setItem("statofAthkar", JSON.stringify(1));
+    } else if (time === 2)  {
       setDisplay(1);
       setmodelTitel("أذكار المساء");
       setAthkarData(Almsaa);
       setnumb(Almsanumbers);
       setCurrentPage(0);
-      setTime(false);
+      setTime(0);
       localStorage.setItem("titel", JSON.stringify("أذكار المساء"));
       localStorage.setItem("Conten", JSON.stringify(Almsaa));
       localStorage.setItem("numbers", JSON.stringify(Almsanumbers));
+      localStorage.setItem("statofAthkar", JSON.stringify(1));
+    } else {
+      setDisplay(2);
+      setmodelTitel(" حفظ سورة البقرة في 50 يوم");
+      localStorage.setItem("titel", JSON.stringify(" حفظ سورة البقرة في 50 يوم"));
+      localStorage.setItem("statofAthkar", JSON.stringify(2));
+
     }
-    localStorage.setItem("statofAthkar", JSON.stringify(1));
+
+
+
     localStorage.setItem("timeOfAthkar", JSON.stringify(time));
   }
 
@@ -150,7 +162,7 @@ export default function Athkar() {
       {display === 0 ? (
         <>
           <ListItem>
-            <ListItemButton onClick={() => AthkarOpen(true)}>
+            <ListItemButton onClick={() => AthkarOpen(1)}>
               <Typography
                 className="suraname"
                 style={{
@@ -172,8 +184,9 @@ export default function Athkar() {
               </Typography>
             </ListItemButton>
           </ListItem>
+
           <ListItem>
-            <ListItemButton onClick={() => AthkarOpen(false)}>
+            <ListItemButton onClick={() => AthkarOpen(2)}>
               <Typography
                 className="suraname"
                 style={{
@@ -195,6 +208,31 @@ export default function Athkar() {
               </Typography>
             </ListItemButton>
           </ListItem>
+
+          <ListItem>
+            <ListItemButton onClick={() => AthkarOpen(false)}>
+              <Typography
+                className="suraname"
+                style={{
+                  fontFamily: "kitab",
+                  fontWeight: "bold",
+                  fontSize: 18,
+                  marginLeft: 10,
+                }}
+              >
+                ﴿⁠ 3 ﴾
+              </Typography>
+              <Typography
+                // className="suraname"
+                style={{ fontFamily: "kitab", fontSize: 20 }}
+                // variant="body1"
+                align="right"
+              >
+                 حفظ سورة البقرة في 50 يوم
+              </Typography>
+            </ListItemButton>
+          </ListItem>
+
         </>
       ) : null}
 
@@ -264,6 +302,7 @@ export default function Athkar() {
           >
             سيتم الانتقال تلقائيا للذكر التالي عند اكتمال المرات المنجزة
           </Typography>
+
           <IconButton
             className="button"
             style={{ background: "black", color: "white", marginLeft: 10 }}
@@ -272,6 +311,7 @@ export default function Athkar() {
           >
             <AddIcon />
           </IconButton>
+
           <IconButton
             className="button"
             style={{ background: "black", color: "white", marginLeft: 10 }}
@@ -280,6 +320,7 @@ export default function Athkar() {
           >
             <RemoveIcon />
           </IconButton>
+
           <IconButton
             className="button"
             style={{ background: "#fbc02d", color: "white", marginLeft: 10 }}
@@ -317,6 +358,31 @@ export default function Athkar() {
               السابق
             </Button>
           </Stack>
+        </>
+      ) : null}
+
+      {display === 2 ? (
+        <>
+          <CardContent style={{ height: "38vh" }}>
+            <Typography
+              className="suraname"
+              style={{ fontFamily: "kitab", fontSize: 25 }}
+            >
+              ﴿ {modelTitel} ﴾
+            </Typography>
+            <Divider
+              style={{
+                background: "#fbc02d",
+                borderBottomWidth: "3px",
+                marginBottom: 20,
+                marginTop: 10,
+              }}
+            ></Divider>
+            <Typography style={{ fontFamily: "kitab", fontSize: 20 }}>
+              {modelContent}
+              <Albakara />
+            </Typography>
+          </CardContent>
         </>
       ) : null}
     </>
