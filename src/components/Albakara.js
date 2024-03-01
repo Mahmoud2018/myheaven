@@ -253,8 +253,9 @@ const Albakara = () => {
                 style={{
                   // background: "#fbc02d",
                   color: "white",
-                  fontSize: "20px",
+                  fontSize: task.num === "مراجعة السابق" ? "15px" :"20px",
                   fontFamily: "BakbakOne",
+                  fontWeight: "bold"
                 }}
             />
 

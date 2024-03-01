@@ -363,7 +363,7 @@ export default function Athkar() {
 
       {display === 2 ? (
         <>
-          <CardContent style={{ height: "38vh" }}>
+          <CardContent style={{padding: 0}}>
             <Typography
               className="suraname"
               style={{ fontFamily: "kitab", fontSize: 25 }}
