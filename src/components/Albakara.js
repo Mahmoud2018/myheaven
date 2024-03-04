@@ -206,10 +206,10 @@ const Albakara = () => {
       key={3}
       style={{
         // marginTop: 0,
-        maxHeight: "97vh",
+        maxHeight: "65vh",
         // maxWidth: "60.5vh",
         // background: "green",
-        overflow: "scroll",
+        // overflow: "scroll",
       }}
       sx={{
         minWidth: 380,
@@ -330,7 +330,7 @@ const Albakara = () => {
   return (
     <Card
       style={{
-        width: 450,
+        // width: 450,
         // background: "green",
         height: "100vh",
         borderRadius: "20px",
