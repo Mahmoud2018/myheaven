@@ -206,7 +206,7 @@ const Albakara = () => {
       key={3}
       style={{
         // marginTop: 0,
-        maxHeight: "65vh",
+        maxHeight: "86vh",
         // maxWidth: "60.5vh",
         // background: "green",
         // overflow: "scroll",

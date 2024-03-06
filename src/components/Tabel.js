@@ -57,7 +57,6 @@ export const Tabel = [
   {id: uuidv4(),titel: " اليوم  54", num: "٢٨٦-٢٨٣",isCompleted: false, test: false , good: " جيد", bad: " بحاجة تثبيت"},
   {id: uuidv4(),titel: " اليوم  55", num: "مراجعة السابق",isCompleted: false, test: false , good: " جيد", bad: " بحاجة تثبيت"},
 
-
 ]
 
 
