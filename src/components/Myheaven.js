@@ -12,7 +12,7 @@ import Paper from "@mui/material/Paper";
 import Chip from "@mui/material/Chip";
 import { Data } from "./Data";
 import Myscores from "./Myscores";
-import MyItems from "./MyItems.";
+import MyItems from "./MyItems";
 import Portfolio from "./Portfolio";
 import Slide from "@mui/material/Slide";
 import Info from "./Info";
@@ -800,6 +800,9 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
     </Card>
   );
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
 
   function ResetMyScores() {
     setScore(0);
@@ -811,6 +814,7 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
     setmodelstate(false);
     setIsActive(true);
     localStorage.removeItem("todos");
+    refreshPage();
 
     // Save score on local storage
     const stateMappings = [
