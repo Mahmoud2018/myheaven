@@ -205,30 +205,6 @@ export default function Athkar() {
               </Typography>
             </ListItemButton>
           </ListItem>
-
-          <ListItem>
-            <ListItemButton onClick={() => AthkarOpen(false)}>
-              <Typography
-                className="suraname"
-                style={{
-                  fontFamily: "kitab",
-                  fontWeight: "bold",
-                  fontSize: 18,
-                  marginLeft: 10,
-                }}
-              >
-                ﴿⁠ 3 ﴾
-              </Typography>
-              <Typography
-                // className="suraname"
-                style={{ fontFamily: "kitab", fontSize: 20 }}
-                // variant="body1"
-                align="right"
-              >
-                حفظ سورة البقرة في 50 يوم
-              </Typography>
-            </ListItemButton>
-          </ListItem>
         </>
       ) : null}
 
