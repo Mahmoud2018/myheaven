@@ -25,8 +25,7 @@ import { red } from "@mui/material/colors";
 import { green } from "@mui/material/colors";
 import { yellow } from "@mui/material/colors";
 import { DataContext } from "../contexts/DataContext";
-import Albakara from "./Albakara"
-
+import Albakara from "./Albakara";
 
 let timeOfAthkar = JSON.parse(localStorage.getItem("timeOfAthkar"));
 let titel = JSON.parse(localStorage.getItem("titel"));
@@ -44,9 +43,7 @@ export default function Athkar() {
   );
   const [num, setnumb] = useState(numbers === null ? 0 : numbers);
 
-  const [time, setTime] = useState(
-    timeOfAthkar === null ? 0 : timeOfAthkar
-  );
+  const [time, setTime] = useState(timeOfAthkar === null ? 0 : timeOfAthkar);
 
   const { display, setDisplay } = useContext(DataContext);
 
@@ -77,7 +74,7 @@ export default function Athkar() {
       localStorage.setItem("Conten", JSON.stringify(Alsbah));
       localStorage.setItem("numbers", JSON.stringify(Alsbahnumbers));
       localStorage.setItem("statofAthkar", JSON.stringify(1));
-    } else if (time === 2)  {
+    } else if (time === 2) {
       setDisplay(1);
       setmodelTitel("أذكار المساء");
       setAthkarData(Almsaa);
@@ -91,12 +88,12 @@ export default function Athkar() {
     } else {
       setDisplay(2);
       setmodelTitel(" حفظ سورة البقرة في 50 يوم");
-      localStorage.setItem("titel", JSON.stringify(" حفظ سورة البقرة في 50 يوم"));
+      localStorage.setItem(
+        "titel",
+        JSON.stringify(" حفظ سورة البقرة في 50 يوم")
+      );
       localStorage.setItem("statofAthkar", JSON.stringify(2));
-
     }
-
-
 
     localStorage.setItem("timeOfAthkar", JSON.stringify(time));
   }
@@ -228,11 +225,10 @@ export default function Athkar() {
                 // variant="body1"
                 align="right"
               >
-                 حفظ سورة البقرة في 50 يوم
+                حفظ سورة البقرة في 50 يوم
               </Typography>
             </ListItemButton>
           </ListItem>
-
         </>
       ) : null}
 
@@ -363,7 +359,7 @@ export default function Athkar() {
 
       {display === 2 ? (
         <>
-          <CardContent style={{padding: 0}}>
+          <CardContent style={{ padding: 0 }}>
             <Typography
               className="suraname"
               style={{ fontFamily: "kitab", fontSize: 25 }}
