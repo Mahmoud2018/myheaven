@@ -825,7 +825,7 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
     setIsActive(true);
     localStorage.removeItem("todos");
     localStorage.removeItem("lastActivation");
-    // refreshPage();
+    refreshPage();
 
     // Save score on local storage
     const stateMappings = [
