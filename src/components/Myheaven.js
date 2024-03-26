@@ -438,6 +438,16 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
             >
               <InfoIcon fontSize="large" />
             </IconButton>
+            <Typography
+              style={{
+                color: "#fbc02d",
+                fontWeight: "bold",
+                fontSize: 10,
+                marginTop: 1,
+              }}
+            >
+              شرح التطبيق
+            </Typography>
           </Grid>
           <Grid
             item

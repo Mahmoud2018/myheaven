@@ -3,6 +3,7 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Unstable_Grid2";
 import Paper from "@mui/material/Paper";
+import InfoIcon from "@mui/icons-material/Info";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -64,7 +65,7 @@ export default function Info() {
         <Typography style={{ fontSize: 15 }}>إضافة نقطة فورية</Typography>
       </Item>
 
-      <Item item="true" xs={1}>
+      {/* <Item item="true" xs={1}>
         <img src={"Info/Alsbah.png"} alt="Logo" />
 
         <Typography style={{ fontSize: 15 }}>
@@ -78,7 +79,7 @@ export default function Info() {
         <Typography style={{ fontSize: 15 }}>
           عند النقر تظهر أذكار المساء
         </Typography>
-      </Item>
+      </Item> */}
 
       <Item item="true" xs={1}>
         <img src={"Info/Athkar.png"} alt="Logo" />
@@ -95,7 +96,7 @@ export default function Info() {
       </Item>
 
       <Item item="true" xs={1}>
-        <img src={"Info/infoicon.gif"} alt="Logo" />
+        <InfoIcon color="primary" fontSize="large" />
 
         <Typography style={{ fontSize: 15 }}>شرح استخدام التطبيق</Typography>
       </Item>
@@ -108,11 +109,11 @@ export default function Info() {
         </Typography>
       </Item>
 
-      <Item item="true" xs={1}>
+      {/* <Item item="true" xs={1}>
         <img src={"Info/present.png"} alt="Logo" />
 
         <Typography style={{ fontSize: 15 }}>متجر الجوائز</Typography>
-      </Item>
+      </Item> */}
 
       <Item item="true" xs={1}>
         <Typography style={{ fontSize: 12 }}>
