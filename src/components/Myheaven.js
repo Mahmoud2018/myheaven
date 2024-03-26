@@ -645,7 +645,7 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
                 {/* Athkar ICON BUTTON */}
                 {task.Athkar ? (
                   <IconButton
-                    onClick={() => AthkarOpen()}
+                    // onClick={() => AthkarOpen()}
                     className="iconButton"
                     aria-label="delete"
                     style={{
@@ -662,7 +662,7 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
                 {/* Athkar ICON BUTTON */}
                 {task.Athkar === false ? (
                   <IconButton
-                    onClick={() => AthkarOpen()}
+                    // onClick={() => AthkarOpen()}
                     className="iconButton"
                     aria-label="delete"
                     style={{
@@ -814,7 +814,8 @@ const Myheaven = ({ activationInterval = H20, theme }) => {
     setmodelstate(false);
     setIsActive(true);
     localStorage.removeItem("todos");
-    refreshPage();
+    localStorage.removeItem("lastActivation");
+    // refreshPage();
 
     // Save score on local storage
     const stateMappings = [
